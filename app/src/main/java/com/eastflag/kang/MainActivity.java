@@ -11,6 +11,7 @@ import android.util.Log;
 import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxCallback;
 import com.androidquery.callback.AjaxStatus;
+import com.eastflag.kang.fragment.MainFragment;
 import com.eastflag.kang.fragment.PasswordFragment;
 
 import org.json.JSONException;
@@ -33,6 +34,10 @@ public class MainActivity extends Activity {
 
         mAq = new AQuery(this);
         mFm = getFragmentManager();
+
+        //메인 프래그먼트 노출
+        mFragment = new MainFragment();
+        mFm.beginTransaction().replace(R.id.container, mFragment).commitAllowingStateLoss();
 
         getIntro();
 
