@@ -6,7 +6,7 @@
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="#FFDDDDDD">
+        android:background="#AAFFFF00">
         <ImageView
             android:id="@+id/logoImg"
             android:layout_width="30dp" android:layout_height="30dp"
@@ -18,19 +18,19 @@
             android:layout_width="wrap_content" android:layout_height="wrap_content"
             android:layout_toRightOf="@id/logoImg" android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"
-            android:text="총무" android:textSize="18sp" android:textStyle="bold"/>
+            android:text="총무" android:textSize="20sp" android:textStyle="bold"/>
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/logoText" android:layout_centerVertical="true"
+            android:layout_centerInParent="true"
             android:layout_marginLeft="20dp"
             android:text="환영합니다" android:textSize="22sp" android:textStyle="bold"/>
-        <TextView
+<!--        <TextView
             android:id="@+id/btnName"
             android:layout_width="wrap_content" android:layout_height="wrap_content"
             android:layout_alignParentRight="true" android:layout_centerVertical="true"
             android:layout_marginRight="5dp"
-            android:text="010-3010-1482"/>
+            android:text="010-3010-1482"/>-->
     </RelativeLayout>
 
     <FrameLayout

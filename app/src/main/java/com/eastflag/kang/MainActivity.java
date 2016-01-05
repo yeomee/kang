@@ -11,8 +11,11 @@ import android.util.Log;
 import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxCallback;
 import com.androidquery.callback.AjaxStatus;
+import com.eastflag.kang.fragment.Fragment010;
 import com.eastflag.kang.fragment.MainFragment;
-import com.eastflag.kang.fragment.PasswordFragment;
+import com.eastflag.kang.fragment.Fragment001;
+import com.eastflag.kang.utils.PreferenceUtil;
+import com.eastflag.kang.utils.Util;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -73,9 +76,10 @@ public class MainActivity extends Activity {
 
         Log.d("LDK", "url:" + url);
         Map<String, Object> params = new HashMap<String, Object>();
-        params.put("pn", "01067009100"); //전화번호
-        params.put("paid", "androidid001"); //안드로이드 아이디
-        params.put("pm", "47000673"); //폰모델
+        params.put("pn", Util.getMdn(this)); //전화번호
+        params.put("paid", Util.getAndroidId(this)); //안드로이드 아이디
+        params.put("pm", Util.getDeviceName()); //폰모델
+        Log.d("LDK", params.toString());
 
         mAq.ajax(url, params, JSONObject.class, new AjaxCallback<JSONObject>(){
             @Override
@@ -89,11 +93,16 @@ public class MainActivity extends Activity {
                     //데이터 존재하지 않음
                     if(object.getInt("result") == 0) {
                         String value = object.getString("value");
-                        if ("001".equals(value)) {
+                        if("000".equals(value)) {
+                            PreferenceUtil.getInstance(MainActivity.this).putToken(object.getString("token"));
+                            //010 모임 리스트 화면 이동
+                            mFragment = new Fragment010();
+                            mFm.beginTransaction().replace(R.id.container, mFragment).commitAllowingStateLoss();
+                        } else if ("001".equals(value)) {
                             //이용 비번 등록 화면
                         } else if ("002".equals(value)) {
                             //이용 비번 확인 화면
-                            mFragment = new PasswordFragment();
+                            mFragment = new Fragment001();
                             mFm.beginTransaction().replace(R.id.container, mFragment).addToBackStack(null).commitAllowingStateLoss();
                         }
                     }

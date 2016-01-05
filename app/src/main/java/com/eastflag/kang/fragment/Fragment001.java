@@ -1,8 +1,6 @@
 package com.eastflag.kang.fragment;
 
-import android.app.Activity;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.util.Log;
@@ -16,7 +14,7 @@ import com.eastflag.kang.R;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class PasswordFragment extends Fragment {
+public class Fragment001 extends Fragment {
 
     private View mView;
     @Bind(R.id.input11) TextView input11;
@@ -39,14 +37,14 @@ public class PasswordFragment extends Fragment {
     private int mCount;
     private StringBuffer mInput = new StringBuffer();
 
-    public PasswordFragment() {
+    public Fragment001() {
         // Required empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.fragment_password, container, false);
+        mView = inflater.inflate(R.layout.fragment_001, container, false);
         mView.findViewById(R.id.reInput).setVisibility(View.GONE);
 
         ButterKnife.bind(this, mView);
@@ -121,6 +119,9 @@ public class PasswordFragment extends Fragment {
             input13.setBackgroundColor(mInput.length() >= 3 ? Color.BLACK : 0xFF996622);
             input14.setBackgroundColor(mInput.length() >= 4 ? Color.BLACK : 0xFF996622);
 
+            if(mInput.length() == 4) {
+
+            }
         }
     };
 

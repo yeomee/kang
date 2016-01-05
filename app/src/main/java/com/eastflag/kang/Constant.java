@@ -7,4 +7,5 @@ public final class Constant {
     public static final String HOST = "http://api.strongkang.com:1337";
 
     public static final String API_INTRO= "/intro.asp";
+    public static final String API_010 = "/moim/moim.asp";
 }
