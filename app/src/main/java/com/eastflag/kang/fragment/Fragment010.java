@@ -63,8 +63,8 @@ public class Fragment010 extends Fragment {
         title = (TextView) mView.findViewById(R.id.F010_title);
         mListView = (ListView) mView.findViewById(R.id.listView);
 
-        Adaptor010 mAdaptor010 = new Adaptor010(getActivity(), mMoimList);
-        mListView.setAdapter(mAdaptor010);
+        mAdaptor = new Adaptor010(getActivity(), mMoimList);
+        mListView.setAdapter(mAdaptor);
 
         getMain();
 
