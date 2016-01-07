@@ -7,6 +7,8 @@ import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxCallback;
@@ -23,6 +25,9 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 
 public class MainActivity extends Activity {
 
@@ -30,13 +35,26 @@ public class MainActivity extends Activity {
     private Fragment mFragment;
     private FragmentManager mFm;
 
+    @Bind(R.id.menu1) Button mMenu1;
+    @Bind(R.id.menu2) Button mMenu2;
+    @Bind(R.id.menu3) Button mMenu3;
+    @Bind(R.id.menu4) Button mMenu4;
+    @Bind(R.id.menu5) Button mMenu5;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        ButterKnife.bind(this);
         mAq = new AQuery(this);
         mFm = getFragmentManager();
+
+        mMenu1.setOnClickListener(mMenuClick);
+        mMenu2.setOnClickListener(mMenuClick);
+        mMenu3.setOnClickListener(mMenuClick);
+        mMenu4.setOnClickListener(mMenuClick);
+        mMenu5.setOnClickListener(mMenuClick);
 
         //메인 프래그먼트 노출
         mFragment = new MainFragment();
@@ -112,7 +130,36 @@ public class MainActivity extends Activity {
                 }
             }
         });
-
     }
+
+    View.OnClickListener mMenuClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            mMenu1.setSelected(false);
+            mMenu2.setSelected(false);
+            mMenu3.setSelected(false);
+            mMenu4.setSelected(false);
+            mMenu5.setSelected(false);
+            switch(v.getId()) {
+                case R.id.menu1:
+                    mMenu1.setSelected(true);
+                    break;
+                case R.id.menu2:
+                    mMenu2.setSelected(true);
+                    break;
+                case R.id.menu3:
+                    mMenu3.setSelected(true);
+                    break;
+                case R.id.menu4:
+                    mMenu4.setSelected(true);
+                    break;
+                case R.id.menu5:
+                    mMenu5.setSelected(true);
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
 
 }

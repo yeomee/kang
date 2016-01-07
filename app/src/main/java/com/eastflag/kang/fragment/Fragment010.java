@@ -41,11 +41,8 @@ public class Fragment010 extends Fragment {
     private AQuery mAq;
     private ArrayList<MoimVO> mMoimList = new ArrayList<MoimVO>();
 
-//    @Bind(R.id.F010_title) TextView title;
-//    @Bind(R.id.listView) ListView mListView;
-
-    TextView title;
-    ListView mListView;
+    @Bind(R.id.F010_title) TextView title;
+    @Bind(R.id.listView) ListView mListView;
 
     private Adaptor010 mAdaptor;
 
@@ -59,9 +56,7 @@ public class Fragment010 extends Fragment {
                              Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_010, container, false);
         mAq = new AQuery(mView);
-        //ButterKnife.bind(this, mView);
-        title = (TextView) mView.findViewById(R.id.F010_title);
-        mListView = (ListView) mView.findViewById(R.id.listView);
+        ButterKnife.bind(this, mView);
 
         mAdaptor = new Adaptor010(getActivity(), mMoimList);
         mListView.setAdapter(mAdaptor);

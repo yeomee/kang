@@ -60,7 +60,8 @@ public class Adaptor010 extends BaseAdapter {
 
         holder.number.setText(String.valueOf(position +1));
         holder.title.setText(mMoimList.get(position).getMn());
-        holder.chongmu.setText(mMoimList.get(position).getAdm_mb());
+        holder.chongmu.setText("총무 ");
+        holder.chongmu.append(mMoimList.get(position).getAdm_mb());
 
         return convertView;
     }

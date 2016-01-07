@@ -38,4 +38,30 @@
         android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1">
     </FrameLayout>
 
+    <LinearLayout
+        android:id="@+id/menu"
+        android:orientation="horizontal"
+        android:layout_width="match_parent" android:layout_height="40dp">
+        <Button
+            android:id="@+id/menu1"
+            style="@style/Main_Menu"
+            android:text="홈" />
+        <Button
+            android:id="@+id/menu2"
+            style="@style/Main_Menu"
+            android:text="모임등록" />
+        <Button
+            android:id="@+id/menu3"
+            style="@style/Main_Menu"
+            android:text="공지사항" />
+        <Button
+            android:id="@+id/menu4"
+            style="@style/Main_Menu"
+            android:text="도움말" />
+        <Button
+            android:id="@+id/menu5"
+            style="@style/Main_Menu"
+            android:text="불편신고" />
+    </LinearLayout>
+
 </LinearLayout>
