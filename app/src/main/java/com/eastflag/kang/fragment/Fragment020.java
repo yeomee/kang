@@ -3,12 +3,13 @@ package com.eastflag.kang.fragment;
 
 import android.os.Bundle;
 import android.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxCallback;
@@ -24,29 +25,23 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class Fragment010 extends Fragment {
+public class Fragment020 extends Fragment {
 
     private View mView;
     private AQuery mAq;
-    private ArrayList<MoimVO> mMoimList = new ArrayList<MoimVO>();
 
-    @Bind(R.id.F010_title) TextView title;
-    @Bind(R.id.listView) ListView mListView;
+    @Bind(R.id.moim_name) EditText moim_name;
+    @Bind(R.id.admin_name) EditText adm_name;
+    @Bind(R.id.admin_email) EditText adm_email;
+    @Bind(R.id.submit) Button submit;
 
-    private Adaptor010 mAdaptor;
-
-    public Fragment010() {
+    public Fragment020() {
         // Required empty public constructor
     }
 
@@ -54,26 +49,44 @@ public class Fragment010 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.fragment_010, container, false);
+        mView = inflater.inflate(R.layout.fragment_020, container, false);
         mAq = new AQuery(mView);
         ButterKnife.bind(this, mView);
 
-        mAdaptor = new Adaptor010(getActivity(), mMoimList);
-        mListView.setAdapter(mAdaptor);
-
-        getMain();
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                submit();
+            }
+        });
 
         return mView;
     }
 
-    private void getMain() {
-        String url = Constant.HOST + Constant.API_010;
+    private void submit() {
+        String url = Constant.HOST + Constant.API_020;
+
+        if(TextUtils.isEmpty(moim_name.getText())) {
+            Util.showToast(getActivity(), "모임 제목을 입력하세요");
+            return;
+        }
+        if(TextUtils.isEmpty(adm_name.getText())) {
+            Util.showToast(getActivity(), "관리자 이름을 입력하세요");
+            return;
+        }
+        if(TextUtils.isEmpty(adm_email.getText())) {
+            Util.showToast(getActivity(), "관리자 이메일을 입력하세요");
+            return;
+        }
 
         Log.d("LDK", "url:" + url);
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("pn", Util.getMdn(getActivity())); //전화번호
         params.put("paid", Util.getAndroidId(getActivity())); //안드로이드 아이디
         params.put("token", PreferenceUtil.getInstance(getActivity()).getToken()); //폰모델
+        params.put("m_name", moim_name.getText().toString());
+        params.put("adm_name", adm_name.getText().toString());
+        params.put("adm_email", adm_email.getText().toString());
         Log.d("LDK", params.toString());
 
         mAq.ajax(url, params, JSONObject.class, new AjaxCallback<JSONObject>(){
@@ -87,22 +100,7 @@ public class Fragment010 extends Fragment {
                     Log.d("LDK", object.toString(1));
                     //데이터 존재하지 않음
                     if(object.getInt("result") == 0) {
-                        String scname_msg = object.getString("scname_msg");
-                        title.setText(scname_msg);
-                        JSONArray array = object.getJSONArray("value");
-                        for(int i=0; i < array.length(); ++i) {
-                            MoimVO moim = new MoimVO();
-                            JSONObject json = array.getJSONObject(i);
-                            moim.setM_id(json.getString("m_id"));
-                            moim.setMn(json.getString("mn"));
-                            moim.setAdm_mb(json.getString("adm_mb"));
-                            moim.setMy_position(json.getString("my_position"));
-                            moim.setAdm_yn(json.getString("adm_yn"));
-                            moim.setM_status(json.getString("m_status"));
-                            mMoimList.add(moim);
-                        }
-                        mAdaptor.setData(mMoimList);
-                        mAdaptor.notifyDataSetChanged();
+
                     }
 
                 } catch (JSONException e) {

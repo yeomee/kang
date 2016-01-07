@@ -5,6 +5,7 @@ import android.os.Build;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.widget.Toast;
 
 /**
  * Created by eastflag on 2016-01-05.
@@ -52,5 +53,16 @@ public final class Util {
             phrase += c;
         }
         return phrase;
+    }
+
+    private static Toast m_toast = null;
+    public static void showToast(Context context, String text) {
+        if (m_toast == null) {
+            m_toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
+        }
+        m_toast.setText(text);
+        m_toast.setDuration(Toast.LENGTH_SHORT);
+
+        m_toast.show();
     }
 }
