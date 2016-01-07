@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.androidquery.AQuery;
@@ -14,6 +15,7 @@ import com.androidquery.callback.AjaxCallback;
 import com.androidquery.callback.AjaxStatus;
 import com.eastflag.kang.Constant;
 import com.eastflag.kang.R;
+import com.eastflag.kang.adapter.Adaptor010;
 import com.eastflag.kang.dto.MoimVO;
 import com.eastflag.kang.utils.PreferenceUtil;
 import com.eastflag.kang.utils.Util;
@@ -37,9 +39,15 @@ public class Fragment010 extends Fragment {
 
     private View mView;
     private AQuery mAq;
-    private List<MoimVO> mMoimList = new ArrayList<MoimVO>();
+    private ArrayList<MoimVO> mMoimList = new ArrayList<MoimVO>();
 
-    @Bind(R.id.F010_title) TextView title;
+//    @Bind(R.id.F010_title) TextView title;
+//    @Bind(R.id.listView) ListView mListView;
+
+    TextView title;
+    ListView mListView;
+
+    private Adaptor010 mAdaptor;
 
     public Fragment010() {
         // Required empty public constructor
@@ -51,7 +59,12 @@ public class Fragment010 extends Fragment {
                              Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_010, container, false);
         mAq = new AQuery(mView);
-        ButterKnife.bind(this, mView);
+        //ButterKnife.bind(this, mView);
+        title = (TextView) mView.findViewById(R.id.F010_title);
+        mListView = (ListView) mView.findViewById(R.id.listView);
+
+        Adaptor010 mAdaptor010 = new Adaptor010(getActivity(), mMoimList);
+        mListView.setAdapter(mAdaptor010);
 
         getMain();
 
@@ -63,9 +76,12 @@ public class Fragment010 extends Fragment {
 
         Log.d("LDK", "url:" + url);
         Map<String, Object> params = new HashMap<String, Object>();
-        params.put("pn", Util.getMdn(getActivity())); //전화번호
+/*        params.put("pn", Util.getMdn(getActivity())); //전화번호
         params.put("paid", Util.getAndroidId(getActivity())); //안드로이드 아이디
-        params.put("token", PreferenceUtil.getInstance(getActivity()).getToken()); //폰모델
+        params.put("token", PreferenceUtil.getInstance(getActivity()).getToken()); //폰모델*/
+        params.put("pn", "01067009100"); //전화번호
+        params.put("paid", "androidid001"); //안드로이드 아이디
+        params.put("token", "47000673");
         Log.d("LDK", params.toString());
 
         mAq.ajax(url, params, JSONObject.class, new AjaxCallback<JSONObject>(){
@@ -93,6 +109,8 @@ public class Fragment010 extends Fragment {
                             moim.setM_status(json.getString("m_status"));
                             mMoimList.add(moim);
                         }
+                        mAdaptor.setData(mMoimList);
+                        mAdaptor.notifyDataSetChanged();
                     }
 
                 } catch (JSONException e) {

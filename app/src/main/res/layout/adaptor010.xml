@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content" android:layout_height="50dp">
+
+        <TextView
+            android:id="@+id/number"
+            android:layout_width="40dp" android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="22" android:textSize="16dp" />
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content" android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="국제초등학교동창회" android:textSize="16dp" android:textColor="#FF0000FF"/>
+        <TextView
+            android:id="@+id/chongmu"
+            android:layout_width="wrap_content" android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:gravity="center_vertical"
+            android:text="총무 홍길동" android:textSize="16dp" />
+    </LinearLayout>
+
+</LinearLayout>
