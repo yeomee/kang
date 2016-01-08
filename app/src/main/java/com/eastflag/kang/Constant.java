@@ -9,4 +9,5 @@ public final class Constant {
     public static final String API_INTRO= "/intro.asp";
     public static final String API_010 = "/moim/moim.asp";
     public static final String API_020 = "/moim/moim_i.asp ";
+    public static final String API_012 = "/member/member.asp";
 }
