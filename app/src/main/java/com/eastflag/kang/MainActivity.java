@@ -14,6 +14,7 @@ import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxCallback;
 import com.androidquery.callback.AjaxStatus;
 import com.eastflag.kang.fragment.Fragment010;
+import com.eastflag.kang.fragment.Fragment020;
 import com.eastflag.kang.fragment.MainFragment;
 import com.eastflag.kang.fragment.Fragment001;
 import com.eastflag.kang.utils.PreferenceUtil;
@@ -114,6 +115,7 @@ public class MainActivity extends Activity {
                         if("000".equals(value)) {
                             PreferenceUtil.getInstance(MainActivity.this).putToken(object.getString("token"));
                             //010 모임 리스트 화면 이동
+                            mMenu1.setSelected(true);
                             mFragment = new Fragment010();
                             mFm.beginTransaction().replace(R.id.container, mFragment).commitAllowingStateLoss();
                         } else if ("001".equals(value)) {
@@ -143,9 +145,13 @@ public class MainActivity extends Activity {
             switch(v.getId()) {
                 case R.id.menu1:
                     mMenu1.setSelected(true);
+                    mFragment = new Fragment010();
+                    mFm.beginTransaction().replace(R.id.container, mFragment).commitAllowingStateLoss();
                     break;
                 case R.id.menu2:
                     mMenu2.setSelected(true);
+                    mFragment = new Fragment020();
+                    mFm.beginTransaction().replace(R.id.container, mFragment).commitAllowingStateLoss();
                     break;
                 case R.id.menu3:
                     mMenu3.setSelected(true);
