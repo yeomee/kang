@@ -61,7 +61,7 @@ public class Adaptor012 extends BaseAdapter {
 
         holder.number.setText(String.valueOf(position + 1));
         holder.name.setText(mMemberList.get(position).getMb_name());
-        holder.position.setText(mMemberList.get(position).getMb_position());
+        holder.position.setText(mMemberList.get(position).getMy_position());
 
         return convertView;
     }

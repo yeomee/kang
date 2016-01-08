@@ -7,15 +7,33 @@ public class MemberVO {
     private String pn; // 폰넘버
     private String paid; // 폰 안드로이드 아이디
     private String m_id; // 모임 id
+    private String mb_id; // 회원 id
     private String mb_name; // 회원 이름
-    private String mb_position; // 회원 직위
+    private String my_position; // 회원 직위
     private String mb_pn; // 회원 폰넘버
     private String mb_add; // 회원 주소
     private String mb_enter_ymd; // 회원 가입일
     private String mb_action; // 회원 활동내역
+    private String admin_yn;
 
     public String getPn() {
         return pn;
+    }
+
+    public String getMb_id() {
+        return mb_id;
+    }
+
+    public void setMb_id(String mb_id) {
+        this.mb_id = mb_id;
+    }
+
+    public String getAdmin_yn() {
+        return admin_yn;
+    }
+
+    public void setAdmin_yn(String admin_yn) {
+        this.admin_yn = admin_yn;
     }
 
     public void setPn(String pn) {
@@ -46,12 +64,12 @@ public class MemberVO {
         this.mb_name = mb_name;
     }
 
-    public String getMb_position() {
-        return mb_position;
+    public String getMy_position() {
+        return my_position;
     }
 
-    public void setMb_position(String mb_position) {
-        this.mb_position = mb_position;
+    public void setMy_position(String my_position) {
+        this.my_position = my_position;
     }
 
     public String getMb_pn() {

@@ -103,15 +103,12 @@ public class Fragment110 extends Fragment {
                             MemberVO member = new MemberVO();
                             JSONObject json = array.getJSONObject(i);
 
-                            member.setPn(json.getString("pn"));
-                            member.setPaid(json.getString("paid"));
-                            member.setM_id(json.getString("m_id"));
-                            member.setMb_name(json.getString("mb_name"));
-                            member.setMb_position(json.getString("mb_position"));
                             member.setMb_pn(json.getString("mb_pn"));
-                            member.setMb_add(json.getString("mb_add"));
-                            member.setMb_enter_ymd(json.getString("mb_enter_ymd"));
-                            member.setMb_action(json.getString("mb_action"));
+                            member.setMy_position(json.getString("my_position"));
+                            member.setMb_id(json.getString("mb_id"));
+                            member.setMb_name(json.getString("mb_name"));
+                            member.setM_id(json.getString("m_id"));
+                            member.setAdmin_yn(json.getString("adm_yn"));
 
                             mMemberList.add(member);
                         }
