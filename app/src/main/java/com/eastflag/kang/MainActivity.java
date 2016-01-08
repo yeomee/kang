@@ -177,6 +177,7 @@ public class MainActivity extends Activity {
     View.OnClickListener mMenuClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            KangApplication.sApp.soundButton();
             hideSubMenu();
             mMenu1.setSelected(false);
             mMenu2.setSelected(false);
@@ -214,6 +215,7 @@ public class MainActivity extends Activity {
     View.OnClickListener mSubMenuClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            KangApplication.sApp.soundButton();
             switch(v.getId()) {
                 case R.id.submenu1:
                     showSubMenu(1);
