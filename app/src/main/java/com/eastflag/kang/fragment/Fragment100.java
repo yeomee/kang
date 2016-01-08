@@ -15,6 +15,7 @@ import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxCallback;
 import com.androidquery.callback.AjaxStatus;
 import com.eastflag.kang.Constant;
+import com.eastflag.kang.MainActivity;
 import com.eastflag.kang.R;
 import com.eastflag.kang.adapter.Adaptor010;
 import com.eastflag.kang.dto.MoimVO;
@@ -27,16 +28,15 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * A simple {@link Fragment} subclass.
+ * 홈화면: 모임리스트
  */
-public class Fragment010 extends Fragment {
+public class Fragment100 extends Fragment {
 
     private View mView;
     private AQuery mAq;
@@ -47,7 +47,7 @@ public class Fragment010 extends Fragment {
 
     private Adaptor010 mAdaptor;
 
-    public Fragment010() {
+    public Fragment100() {
         // Required empty public constructor
     }
 
@@ -55,7 +55,7 @@ public class Fragment010 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.fragment_010, container, false);
+        mView = inflater.inflate(R.layout.fragment_100, container, false);
         mAq = new AQuery(mView);
         ButterKnife.bind(this, mView);
 
@@ -67,8 +67,9 @@ public class Fragment010 extends Fragment {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ((MainActivity) getActivity()).showSubMenu(1);
                 String m_id = mMoimList.get(position).getM_id();
-                getActivity().getFragmentManager().beginTransaction().replace(R.id.container, new Fragment012(m_id)).commitAllowingStateLoss();
+                getActivity().getFragmentManager().beginTransaction().replace(R.id.container, new Fragment110(m_id)).commitAllowingStateLoss();
             }
         });
 

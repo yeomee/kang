@@ -10,6 +10,20 @@
         android:gravity="center_vertical|left" android:background="#AA6DCFFF"
         android:textSize="14sp" android:text="우리 모임의 구성원 입니다."/>
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent" android:layout_height="40dp">
+        <TextView
+            android:id="@+id/moim_title"
+            android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content"
+            android:text="모임제목" android:textAppearance="?android:attr/textAppearanceMedium" />
+        <Button
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="모임 등록"
+            android:id="@+id/reg_moim" android:textAppearance="?android:attr/textAppearanceMedium"/>
+    </LinearLayout>
+
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

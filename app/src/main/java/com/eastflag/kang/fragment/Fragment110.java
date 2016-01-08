@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -32,9 +33,9 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * A simple {@link Fragment} subclass.
+ * 회원 : 회원 리스트 조회화면
  */
-public class Fragment012 extends Fragment {
+public class Fragment110 extends Fragment {
 
     private View mView;
     private AQuery mAq;
@@ -42,28 +43,31 @@ public class Fragment012 extends Fragment {
 
     @Bind(R.id.title) TextView title;
     @Bind(R.id.listView) ListView mListView;
+    @Bind(R.id.reg_moim) View reg_moim;
 
     private Adaptor012 mAdaptor;
     private String m_id;
 
-    public Fragment012() {
+    public Fragment110() {
         // Required empty public constructor
     }
 
     @SuppressLint("ValidFragment")
-    public Fragment012(String m_id) {
+    public Fragment110(String m_id) {
         this.m_id = m_id;
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.fragment_012, container, false);
+        mView = inflater.inflate(R.layout.fragment_110, container, false);
         mAq = new AQuery(mView);
         ButterKnife.bind(this, mView);
 
         mAdaptor = new Adaptor012(getActivity(), mMemberList);
         mListView.setAdapter(mAdaptor);
+
+        reg_moim.setOnClickListener(mClick);
 
         getMain();
 
@@ -78,13 +82,10 @@ public class Fragment012 extends Fragment {
         params.put("pn", Util.getMdn(getActivity())); //전화번호
         params.put("paid", Util.getAndroidId(getActivity())); //안드로이드 아이디
         params.put("token", PreferenceUtil.getInstance(getActivity()).getToken()); //폰모델*/
-/*        params.put("pn", "01067009100"); //전화번호
-        params.put("paid", "androidid001"); //안드로이드 아이디
-        params.put("token", "47000673");*/
         params.put("m_id", m_id);
         Log.d("LDK", params.toString());
 
-        mAq.ajax(url, params, JSONObject.class, new AjaxCallback<JSONObject>(){
+        mAq.ajax(url, params, JSONObject.class, new AjaxCallback<JSONObject>() {
             @Override
             public void callback(String url, JSONObject object, AjaxStatus status) {
                 try {
@@ -94,11 +95,11 @@ public class Fragment012 extends Fragment {
                     }
                     Log.d("LDK", object.toString(1));
                     //데이터 존재하지 않음
-                    if(object.getInt("result") == 0) {
+                    if (object.getInt("result") == 0) {
                         String scname_msg = object.getString("scname_msg");
                         title.setText(scname_msg);
                         JSONArray array = object.getJSONArray("value");
-                        for(int i=0; i < array.length(); ++i) {
+                        for (int i = 0; i < array.length(); ++i) {
                             MemberVO member = new MemberVO();
                             JSONObject json = array.getJSONObject(i);
 
@@ -123,7 +124,16 @@ public class Fragment012 extends Fragment {
                 }
             }
         });
-
     }
 
+    View.OnClickListener mClick = new View.OnClickListener(){
+        @Override
+        public void onClick(View v) {
+            switch(v.getId()) {
+                case R.id.reg_moim:
+                    getFragmentManager().beginTransaction().replace(R.id.container, new Fragment111()).commitAllowingStateLoss();
+                    break;
+            }
+        }
+    };
 }

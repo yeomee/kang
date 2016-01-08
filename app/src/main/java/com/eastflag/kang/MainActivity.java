@@ -13,11 +13,12 @@ import android.widget.Button;
 import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxCallback;
 import com.androidquery.callback.AjaxStatus;
-import com.eastflag.kang.fragment.Fragment010;
-import com.eastflag.kang.fragment.Fragment012;
-import com.eastflag.kang.fragment.Fragment020;
+import com.eastflag.kang.fragment.Fragment100;
+import com.eastflag.kang.fragment.Fragment110;
+import com.eastflag.kang.fragment.Fragment120;
+import com.eastflag.kang.fragment.Fragment200;
 import com.eastflag.kang.fragment.MainFragment;
-import com.eastflag.kang.fragment.Fragment001;
+import com.eastflag.kang.fragment.Fragment020;
 import com.eastflag.kang.utils.PreferenceUtil;
 import com.eastflag.kang.utils.Util;
 
@@ -43,6 +44,15 @@ public class MainActivity extends Activity {
     @Bind(R.id.menu4) Button mMenu4;
     @Bind(R.id.menu5) Button mMenu5;
 
+    @Bind(R.id.submenu) View mSubmenu;
+    @Bind(R.id.submenu1) Button submenu1;
+    @Bind(R.id.submenu2) Button submenu2;
+    @Bind(R.id.submenu3) Button submenu3;
+    @Bind(R.id.submenu4) Button submenu4;
+    @Bind(R.id.submenu5) Button submenu5;
+    @Bind(R.id.submenu6) Button submenu6;
+    @Bind(R.id.submenu7) Button submenu7;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +67,14 @@ public class MainActivity extends Activity {
         mMenu3.setOnClickListener(mMenuClick);
         mMenu4.setOnClickListener(mMenuClick);
         mMenu5.setOnClickListener(mMenuClick);
+
+        submenu1.setOnClickListener(mSubMenuClick);
+        submenu2.setOnClickListener(mSubMenuClick);
+        submenu3.setOnClickListener(mSubMenuClick);
+        submenu4.setOnClickListener(mSubMenuClick);
+        submenu5.setOnClickListener(mSubMenuClick);
+        submenu6.setOnClickListener(mSubMenuClick);
+        submenu7.setOnClickListener(mSubMenuClick);
 
         //메인 프래그먼트 노출
         mFragment = new MainFragment();
@@ -101,7 +119,7 @@ public class MainActivity extends Activity {
         params.put("pm", Util.getDeviceName()); //폰모델
         Log.d("LDK", params.toString());
 
-        mAq.ajax(url, params, JSONObject.class, new AjaxCallback<JSONObject>(){
+        mAq.ajax(url, params, JSONObject.class, new AjaxCallback<JSONObject>() {
             @Override
             public void callback(String url, JSONObject object, AjaxStatus status) {
                 try {
@@ -111,19 +129,19 @@ public class MainActivity extends Activity {
                     }
                     Log.d("LDK", object.toString(1));
                     //데이터 존재하지 않음
-                    if(object.getInt("result") == 0) {
+                    if (object.getInt("result") == 0) {
                         String value = object.getString("value");
-                        if("000".equals(value)) {
+                        if ("000".equals(value)) {
                             PreferenceUtil.getInstance(MainActivity.this).putToken(object.getString("token"));
                             //010 모임 리스트 화면 이동
                             mMenu1.setSelected(true);
-                            mFragment = new Fragment010();
+                            mFragment = new Fragment100();
                             mFm.beginTransaction().replace(R.id.container, mFragment).commitAllowingStateLoss();
                         } else if ("001".equals(value)) {
                             //이용 비번 등록 화면
                         } else if ("002".equals(value)) {
                             //이용 비번 확인 화면
-                            mFragment = new Fragment001();
+                            mFragment = new Fragment020();
                             mFm.beginTransaction().replace(R.id.container, mFragment).addToBackStack(null).commitAllowingStateLoss();
                         }
                     }
@@ -135,9 +153,31 @@ public class MainActivity extends Activity {
         });
     }
 
+    public void showSubMenu(int selected) {
+        mSubmenu.setVisibility(View.VISIBLE);
+
+        submenu1.setSelected(false);
+        submenu2.setSelected(false);
+        switch(selected) {
+            case 1:
+                submenu1.setSelected(true);
+                break;
+            case 2:
+                submenu2.setSelected(true);
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void hideSubMenu() {
+        mSubmenu.setVisibility(View.GONE);
+    }
+
     View.OnClickListener mMenuClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            hideSubMenu();
             mMenu1.setSelected(false);
             mMenu2.setSelected(false);
             mMenu3.setSelected(false);
@@ -146,12 +186,12 @@ public class MainActivity extends Activity {
             switch(v.getId()) {
                 case R.id.menu1:
                     mMenu1.setSelected(true);
-                    mFragment = new Fragment010();
+                    mFragment = new Fragment100();
                     mFm.beginTransaction().replace(R.id.container, mFragment).commitAllowingStateLoss();
                     break;
                 case R.id.menu2:
                     mMenu2.setSelected(true);
-                    mFragment = new Fragment020();
+                    mFragment = new Fragment200();
                     mFm.beginTransaction().replace(R.id.container, mFragment).commitAllowingStateLoss();
                     break;
                 case R.id.menu3:
@@ -162,10 +202,28 @@ public class MainActivity extends Activity {
                     break;
                 case R.id.menu5:
                     mMenu5.setSelected(true);
-                    mFragment = new Fragment012();
+                    mFragment = new Fragment110();
                     mFm.beginTransaction().replace(R.id.container, mFragment).commitAllowingStateLoss();
                     break;
                 default:
+                    break;
+            }
+        }
+    };
+
+    View.OnClickListener mSubMenuClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch(v.getId()) {
+                case R.id.submenu1:
+                    showSubMenu(1);
+                    mFragment = new Fragment110();
+                    mFm.beginTransaction().replace(R.id.container, mFragment).commitAllowingStateLoss();
+                    break;
+                case R.id.submenu2:
+                    showSubMenu(2);
+                    mFragment = new Fragment120();
+                    mFm.beginTransaction().replace(R.id.container, mFragment).commitAllowingStateLoss();
                     break;
             }
         }

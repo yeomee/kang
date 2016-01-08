@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content">
+    <LinearLayout
+        android:id="@+id/submenu"
+        android:orientation="horizontal"
+        android:layout_width="match_parent" android:layout_height="38dp">
+        <Button
+            android:id="@+id/submenu1"
+            style="@style/Main_Menu"
+            android:text="회원"
+            android:onClick="subMenuClick"/>
+        <Button
+            android:id="@+id/submenu2"
+            style="@style/Main_Menu"
+            android:text="회칙"
+            android:onClick="subMenuClick"/>
+        <Button
+            android:id="@+id/submenu3"
+            style="@style/Main_Menu"
+            android:text="회계"
+            android:onClick="subMenuClick"/>
+        <Button
+            android:id="@+id/submenu4"
+            style="@style/Main_Menu"
+            android:text="투표" />
+        <Button
+            android:id="@+id/submenu5"
+            style="@style/Main_Menu"
+            android:text="문자" />
+        <Button
+            android:id="@+id/submenu6"
+            style="@style/Main_Menu"
+            android:text="쪽지" />
+        <Button
+            android:id="@+id/submenu7"
+            style="@style/Main_Menu"
+            android:text="나는" />
+    </LinearLayout>
+</LinearLayout>
