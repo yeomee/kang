@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content" android:layout_height="50dp">
+
+        <TextView
+            android:id="@+id/tv_Num"
+            android:layout_width="40dp" android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="22" android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/tv_Name"
+            android:layout_width="wrap_content" android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="홍길동" android:textSize="16dp"/>
+
+        <TextView
+            android:id="@+id/tv_position"
+            android:layout_width="wrap_content" android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:gravity="center_vertical"
+            android:text="총무" android:textSize="16dp" />
+
+        <ImageView
+            android:id="@+id/ic_phone"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            />
+
+        <ImageView
+            android:id="@+id/ic_sms"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            />
+
+        <ImageView
+            android:id="@+id/ic_memberInfo"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>
