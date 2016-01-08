@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -41,7 +42,7 @@ public class Fragment010 extends Fragment {
     private AQuery mAq;
     private ArrayList<MoimVO> mMoimList = new ArrayList<MoimVO>();
 
-    @Bind(R.id.F010_title) TextView title;
+    @Bind(R.id.title) TextView title;
     @Bind(R.id.listView) ListView mListView;
 
     private Adaptor010 mAdaptor;
@@ -62,6 +63,14 @@ public class Fragment010 extends Fragment {
         mListView.setAdapter(mAdaptor);
 
         getMain();
+
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String m_id = mMoimList.get(position).getM_id();
+                getActivity().getFragmentManager().beginTransaction().replace(R.id.container, new Fragment012(m_id)).commitAllowingStateLoss();
+            }
+        });
 
         return mView;
     }

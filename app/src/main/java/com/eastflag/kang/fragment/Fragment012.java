@@ -1,5 +1,6 @@
 package com.eastflag.kang.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +17,8 @@ import com.eastflag.kang.Constant;
 import com.eastflag.kang.R;
 import com.eastflag.kang.adapter.Adaptor012;
 import com.eastflag.kang.dto.MemberVO;
+import com.eastflag.kang.utils.PreferenceUtil;
+import com.eastflag.kang.utils.Util;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,13 +40,19 @@ public class Fragment012 extends Fragment {
     private AQuery mAq;
     private ArrayList<MemberVO> mMemberList = new ArrayList<MemberVO>();
 
-    @Bind(R.id.F010_title) TextView title;
+    @Bind(R.id.title) TextView title;
     @Bind(R.id.listView) ListView mListView;
 
     private Adaptor012 mAdaptor;
+    private String m_id;
 
     public Fragment012() {
         // Required empty public constructor
+    }
+
+    @SuppressLint("ValidFragment")
+    public Fragment012(String m_id) {
+        this.m_id = m_id;
     }
 
 
@@ -66,13 +75,13 @@ public class Fragment012 extends Fragment {
 
         Log.d("LDK", "url:" + url);
         Map<String, Object> params = new HashMap<String, Object>();
-/*        params.put("pn", Util.getMdn(getActivity())); //전화번호
+        params.put("pn", Util.getMdn(getActivity())); //전화번호
         params.put("paid", Util.getAndroidId(getActivity())); //안드로이드 아이디
         params.put("token", PreferenceUtil.getInstance(getActivity()).getToken()); //폰모델*/
-        params.put("pn", "01067009100"); //전화번호
+/*        params.put("pn", "01067009100"); //전화번호
         params.put("paid", "androidid001"); //안드로이드 아이디
-        params.put("token", "47000673");
-        params.put("m_id", "3541265");
+        params.put("token", "47000673");*/
+        params.put("m_id", m_id);
         Log.d("LDK", params.toString());
 
         mAq.ajax(url, params, JSONObject.class, new AjaxCallback<JSONObject>(){

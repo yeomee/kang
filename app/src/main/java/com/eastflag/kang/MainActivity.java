@@ -14,6 +14,7 @@ import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxCallback;
 import com.androidquery.callback.AjaxStatus;
 import com.eastflag.kang.fragment.Fragment010;
+import com.eastflag.kang.fragment.Fragment012;
 import com.eastflag.kang.fragment.Fragment020;
 import com.eastflag.kang.fragment.MainFragment;
 import com.eastflag.kang.fragment.Fragment001;
@@ -161,6 +162,8 @@ public class MainActivity extends Activity {
                     break;
                 case R.id.menu5:
                     mMenu5.setSelected(true);
+                    mFragment = new Fragment012();
+                    mFm.beginTransaction().replace(R.id.container, mFragment).commitAllowingStateLoss();
                     break;
                 default:
                     break;
