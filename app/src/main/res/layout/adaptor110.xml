@@ -25,15 +25,17 @@
             android:gravity="center_vertical"
             android:text="총무" android:textSize="16dp" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/ic_phone"
             android:layout_width="wrap_content" android:layout_height="wrap_content"
-            />
+            android:layout_marginLeft="10dp"
+            android:src="@android:drawable/ic_menu_call" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/ic_sms"
             android:layout_width="wrap_content" android:layout_height="wrap_content"
-            />
+            android:layout_marginLeft="10dp"
+            android:src="@android:drawable/ic_dialog_email" />
 
         <ImageView
             android:id="@+id/ic_memberInfo"
@@ -41,5 +43,7 @@
             />
 
     </LinearLayout>
+
+
 
 </LinearLayout>

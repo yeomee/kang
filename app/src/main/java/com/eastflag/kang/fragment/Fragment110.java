@@ -127,7 +127,7 @@ public class Fragment110 extends Fragment {
         public void onClick(View v) {
             switch(v.getId()) {
                 case R.id.reg_moim:
-                    getFragmentManager().beginTransaction().replace(R.id.container, new Fragment111()).commitAllowingStateLoss();
+                    getFragmentManager().beginTransaction().replace(R.id.container, new Fragment111(m_id)).commitAllowingStateLoss();
                     break;
             }
         }

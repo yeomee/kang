@@ -1,9 +1,12 @@
 package com.eastflag.kang.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.eastflag.kang.R;
@@ -17,6 +20,26 @@ import java.util.ArrayList;
 public class Adaptor110 extends BaseAdapter {
     private Context mContext;
     private ArrayList<MemberVO> mMemberList;
+
+    View.OnClickListener mBtnClick = new View.OnClickListener() {
+
+        @Override
+        public void onClick(View v) {
+            Intent intent;
+
+            switch (v.getId()) {
+                case R.id.ic_phone:
+                    intent = new Intent();
+                    intent.setAction(Intent.ACTION_DIAL);
+                    intent.setData(Uri.parse("tel:010-6415-1871"));
+                    //startActivity(intent);
+                    break;
+
+                case R.id.ic_sms :
+                    break;
+            }
+        }
+    };
 
     public Adaptor110(Context mContext, ArrayList<MemberVO> mMemberList) {
         this.mContext = mContext;
@@ -52,6 +75,12 @@ public class Adaptor110 extends BaseAdapter {
             holder.number = (TextView) convertView.findViewById(R.id.tv_Num);
             holder.name = (TextView) convertView.findViewById(R.id.tv_Name);
             holder.position = (TextView) convertView.findViewById(R.id.tv_position);
+
+            ImageButton btnPhone = (ImageButton) convertView.findViewById(R.id.ic_phone);
+            ImageButton btnSms = (ImageButton) convertView.findViewById(R.id.ic_sms);
+
+            btnPhone.setOnClickListener(mBtnClick);
+            btnSms.setOnClickListener(mBtnClick);
 
             convertView.setTag(holder);
         }
