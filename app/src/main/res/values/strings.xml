@@ -7,4 +7,14 @@
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="s020_note">모임등록은 회원중 누구나 등록할 수 있습니다.\n모임을 등록하게 되면 등록한 사람은 자동으로 시스템에서 관리자로 인식하게 되고 그 모임의 회원관리, 회비관리, 회칙관리, 투표관리 등 모든 권한을 갖게 되고 최종적으로 등록한 모임을 폐지(삭제)할 수도 있습니다. 본 화면에서는 모임이름과 본인 이름만 등록하고 나머지 부문 즉, 회원등록, 회비등록, 회칙등록 등은 홈>모임리스트에서 해당 모임을 터치하여 입력할 수 있습니다.</string>
+
+
+    <string name="position_prompt">직책 선택</string>
+
+    <string-array name="position_arrays">
+        <item>회장</item>
+        <item>총무</item>
+        <item>회원</item>
+    </string-array>
+
 </resources>

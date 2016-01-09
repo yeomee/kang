@@ -28,7 +28,7 @@
                     android:text="이름"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
                 <EditText
-                    android:id="@+id/name"
+                    android:id="@+id/mb_name"
                     android:layout_width="match_parent"
                     android:background="@drawable/bg_edit_text"
                     android:layout_weight="1" />
@@ -43,9 +43,11 @@
                     android:text="직책"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
                 <Spinner
-                    android:id="@+id/position"
+                    android:id="@+id/mb_position"
                     android:layout_width="match_parent"
-                />
+                    android:spinnerMode="dropdown"
+                    android:prompt="@string/position_prompt"
+                    android:entries="@array/position_arrays" />
             </TableRow>
 
             <TableRow
@@ -59,7 +61,7 @@
                     android:text="전화번호"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
                 <EditText
-                    android:id="@+id/telNum"
+                    android:id="@+id/mb_pn"
                     android:background="@drawable/bg_edit_text"
                     android:layout_weight="1" />
             </TableRow>
@@ -75,7 +77,7 @@
                     android:text="주소"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
                 <EditText
-                    android:id="@+id/addr"
+                    android:id="@+id/mb_add"
                     android:background="@drawable/bg_edit_text"
                     android:layout_weight="1" />
             </TableRow>
@@ -91,9 +93,10 @@
                     android:text="회원가입일"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
                 <EditText
-                    android:id="@+id/admin_email"
+                    android:id="@+id/mb_enter_ymd"
                     android:background="@drawable/bg_edit_text"
                     android:layout_weight="1" />
+
             </TableRow>
 
             <TableRow
@@ -107,13 +110,15 @@
                     android:text="회원활동내역"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
                 <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/mb_action"
+                    android:layout_width="0dp"
                     android:inputType="textMultiLine"
                     android:ems="10"
-                    android:id="@+id/editText"
-                    android:layout_gravity="center_horizontal"
                     android:background="@drawable/bg_edit_text"
+                    android:lines="5"
+                    android:minLines="3"
+                    android:scrollbars="vertical"
+                    android:layout_weight="1"
                     />
             </TableRow>
 
@@ -125,10 +130,7 @@
             android:layout_width="wrap_content" android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:padding="15dp"
-            android:text="모임 등록" />
-
-
-
+            android:text="회원 등록" />
 
     </LinearLayout>
 

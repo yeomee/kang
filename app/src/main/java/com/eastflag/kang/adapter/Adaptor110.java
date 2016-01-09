@@ -14,11 +14,11 @@ import java.util.ArrayList;
 /**
  * Created by oyg on 2016-01-07.
  */
-public class Adaptor012 extends BaseAdapter {
+public class Adaptor110 extends BaseAdapter {
     private Context mContext;
     private ArrayList<MemberVO> mMemberList;
 
-    public Adaptor012(Context mContext, ArrayList<MemberVO> mMemberList) {
+    public Adaptor110(Context mContext, ArrayList<MemberVO> mMemberList) {
         this.mContext = mContext;
         this.mMemberList = mMemberList;
     }
@@ -47,7 +47,7 @@ public class Adaptor012 extends BaseAdapter {
         ViewHolder holder;
         if(convertView == null) {
             holder = new ViewHolder();
-            convertView = View.inflate(mContext, R.layout.adaptor012, null);
+            convertView = View.inflate(mContext, R.layout.adaptor110, null);
 
             holder.number = (TextView) convertView.findViewById(R.id.tv_Num);
             holder.name = (TextView) convertView.findViewById(R.id.tv_Name);

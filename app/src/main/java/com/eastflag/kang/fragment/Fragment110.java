@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -16,7 +15,7 @@ import com.androidquery.callback.AjaxCallback;
 import com.androidquery.callback.AjaxStatus;
 import com.eastflag.kang.Constant;
 import com.eastflag.kang.R;
-import com.eastflag.kang.adapter.Adaptor012;
+import com.eastflag.kang.adapter.Adaptor110;
 import com.eastflag.kang.dto.MemberVO;
 import com.eastflag.kang.utils.PreferenceUtil;
 import com.eastflag.kang.utils.Util;
@@ -45,7 +44,7 @@ public class Fragment110 extends Fragment {
     @Bind(R.id.listView) ListView mListView;
     @Bind(R.id.reg_moim) View reg_moim;
 
-    private Adaptor012 mAdaptor;
+    private Adaptor110 mAdaptor;
     private String m_id;
 
     public Fragment110() {
@@ -64,7 +63,7 @@ public class Fragment110 extends Fragment {
         mAq = new AQuery(mView);
         ButterKnife.bind(this, mView);
 
-        mAdaptor = new Adaptor012(getActivity(), mMemberList);
+        mAdaptor = new Adaptor110(getActivity(), mMemberList);
         mListView.setAdapter(mAdaptor);
 
         reg_moim.setOnClickListener(mClick);
@@ -75,7 +74,7 @@ public class Fragment110 extends Fragment {
     }
 
     private void getMain() {
-        String url = Constant.HOST + Constant.API_012;
+        String url = Constant.HOST + Constant.API_110;
 
         Log.d("LDK", "url:" + url);
         Map<String, Object> params = new HashMap<String, Object>();
