@@ -64,7 +64,7 @@ public class Fragment200 extends Fragment {
     }
 
     private void submit() {
-        String url = Constant.HOST + Constant.API_020;
+        String url = Constant.HOST + Constant.API_200;
 
         if(TextUtils.isEmpty(moim_name.getText())) {
             Util.showToast(getActivity(), "모임 제목을 입력하세요");

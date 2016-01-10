@@ -17,7 +17,7 @@ import com.androidquery.callback.AjaxStatus;
 import com.eastflag.kang.Constant;
 import com.eastflag.kang.MainActivity;
 import com.eastflag.kang.R;
-import com.eastflag.kang.adapter.Adaptor010;
+import com.eastflag.kang.adapter.Adaptor100;
 import com.eastflag.kang.dto.MoimVO;
 import com.eastflag.kang.utils.PreferenceUtil;
 import com.eastflag.kang.utils.Util;
@@ -45,7 +45,7 @@ public class Fragment100 extends Fragment {
     @Bind(R.id.title) TextView title;
     @Bind(R.id.listView) ListView mListView;
 
-    private Adaptor010 mAdaptor;
+    private Adaptor100 mAdaptor;
 
     public Fragment100() {
         // Required empty public constructor
@@ -59,7 +59,7 @@ public class Fragment100 extends Fragment {
         mAq = new AQuery(mView);
         ButterKnife.bind(this, mView);
 
-        mAdaptor = new Adaptor010(getActivity(), mMoimList);
+        mAdaptor = new Adaptor100(getActivity(), mMoimList);
         mListView.setAdapter(mAdaptor);
 
         getMain();

@@ -3,6 +3,8 @@
     <color name="transparent">#00000000</color>
     <color name="white">#FFF0F0F0</color>
     <color name="orange">#FFFF7127</color>
-    <color name="gold">#FFFEA942</color>
+    <color name="gold">#FEA942</color>
     <color name="yellow">#FFF0F000</color>
+    <color name="green">#32A844</color>
+    <color name="red">#F04B50</color>
 </resources>

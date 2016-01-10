@@ -9,10 +9,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.androidquery.AQuery;
+import com.androidquery.callback.AjaxCallback;
+import com.androidquery.callback.AjaxStatus;
+import com.eastflag.kang.Constant;
 import com.eastflag.kang.R;
+import com.eastflag.kang.dto.MoimVO;
+import com.eastflag.kang.utils.PreferenceUtil;
+import com.eastflag.kang.utils.Util;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * 비밀번호 입력화면
@@ -24,18 +39,8 @@ public class Fragment020 extends Fragment {
     @Bind(R.id.input12) TextView input12;
     @Bind(R.id.input13) TextView input13;
     @Bind(R.id.input14) TextView input14;
-    @Bind(R.id.btn1) TextView btn1;
-    @Bind(R.id.btn2) TextView btn2;
-    @Bind(R.id.btn3) TextView btn3;
-    @Bind(R.id.btn4) TextView btn4;
-    @Bind(R.id.btn5) TextView btn5;
-    @Bind(R.id.btn6) TextView btn6;
-    @Bind(R.id.btn7) TextView btn7;
-    @Bind(R.id.btn8) TextView btn8;
-    @Bind(R.id.btn9) TextView btn9;
-    @Bind(R.id.btn0) TextView btn0;
-    @Bind(R.id.btnCL) TextView btnCL;
-    @Bind(R.id.btnBS) TextView btnBS;
+
+    private AQuery mAq;
 
     private int mCount;
     private StringBuffer mInput = new StringBuffer();
@@ -51,81 +56,102 @@ public class Fragment020 extends Fragment {
         mView.findViewById(R.id.reInput).setVisibility(View.GONE);
 
         ButterKnife.bind(this, mView);
-
-        btn1.setOnClickListener(mClick);
-        btn2.setOnClickListener(mClick);
-        btn3.setOnClickListener(mClick);
-        btn4.setOnClickListener(mClick);
-        btn5.setOnClickListener(mClick);
-        btn6.setOnClickListener(mClick);
-        btn7.setOnClickListener(mClick);
-        btn8.setOnClickListener(mClick);
-        btn9.setOnClickListener(mClick);
-        btn0.setOnClickListener(mClick);
-        btnCL.setOnClickListener(mClick);
-        btnBS.setOnClickListener(mClick);
-
+        mAq = new AQuery(mView);
 
         return mView;
     }
 
-    View.OnClickListener mClick = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            switch(v.getId()) {
-                case R.id.btn1:
-                    mInput.append("1");
-                    break;
-                case R.id.btn2:
-                    mInput.append("2");
-                    break;
-                case R.id.btn3:
-                    mInput.append("3");
-                    break;
-                case R.id.btn4:
-                    mInput.append("4");
-                    break;
-                case R.id.btn5:
-                    mInput.append("5");
-                    break;
-                case R.id.btn6:
-                    mInput.append("6");
-                    break;
-                case R.id.btn7:
-                    mInput.append("7");
-                    break;
-                case R.id.btn8:
-                    mInput.append("8");
-                    break;
-                case R.id.btn9:
-                    mInput.append("9");
-                    break;
-                case R.id.btn0:
-                    mInput.append("0");
-                    break;
-                case R.id.btnCL:
-                    mInput = new StringBuffer();
-                    break;
-                case R.id.btnBS:
-                    if(mInput.length() > 0) {
-                        mInput.substring(0, mInput.length() - 1);
+    private void getPassword() {
+        String url = Constant.HOST + Constant.API_020;
+
+        Log.d("LDK", "url:" + url);
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("pn", Util.getMdn(getActivity())); //전화번호
+        params.put("paid", Util.getAndroidId(getActivity())); //안드로이드 아이디
+        params.put("passwd", mInput); //폰모델
+        Log.d("LDK", params.toString());
+
+        mAq.ajax(url, params, JSONObject.class, new AjaxCallback<JSONObject>(){
+            @Override
+            public void callback(String url, JSONObject object, AjaxStatus status) {
+                try {
+                    if (status.getCode() != 200) {
+                        Log.d("LDK", "status:" + status.getCode());
+                        return;
                     }
-                    break;
-                default:
-                    break;
+                    Log.d("LDK", object.toString(1));
+
+                    if(object.getInt("result") == 0) {
+                        //모임리스트 화면 이동
+                        getFragmentManager().beginTransaction()
+                                .replace(R.id.container, new Fragment100())
+                                .commitAllowingStateLoss();
+                    } else {
+                        Util.showToast(getActivity(), "비밀번호가 맞지않습니다");
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
+        });
+    }
 
-            Log.d("LDK", mInput.length() + "," + mInput.toString());
-
-            input11.setBackgroundColor(mInput.length() >= 1 ? Color.BLACK : 0xFF996622);
-            input12.setBackgroundColor(mInput.length() >= 2 ? Color.BLACK : 0xFF996622);
-            input13.setBackgroundColor(mInput.length() >= 3 ? Color.BLACK : 0xFF996622);
-            input14.setBackgroundColor(mInput.length() >= 4 ? Color.BLACK : 0xFF996622);
-
-            if(mInput.length() == 4) {
-
-            }
+    @OnClick({R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4, R.id.btn5, R.id.btn6, R.id.btn7, R.id.btn8, R.id.btn9, R.id.btn0, R.id.btnCL, R.id.btnBS})
+    void onClick(View v) {
+        switch(v.getId()) {
+            case R.id.btn1:
+                mInput.append("1");
+                break;
+            case R.id.btn2:
+                mInput.append("2");
+                break;
+            case R.id.btn3:
+                mInput.append("3");
+                break;
+            case R.id.btn4:
+                mInput.append("4");
+                break;
+            case R.id.btn5:
+                mInput.append("5");
+                break;
+            case R.id.btn6:
+                mInput.append("6");
+                break;
+            case R.id.btn7:
+                mInput.append("7");
+                break;
+            case R.id.btn8:
+                mInput.append("8");
+                break;
+            case R.id.btn9:
+                mInput.append("9");
+                break;
+            case R.id.btn0:
+                mInput.append("0");
+                break;
+            case R.id.btnCL:
+                mInput = new StringBuffer();
+                break;
+            case R.id.btnBS:
+                if(mInput.length() > 0) {
+                    mInput.substring(0, mInput.length() - 1);
+                }
+                break;
+            default:
+                break;
         }
-    };
+
+        Log.d("LDK", mInput.length() + "," + mInput.toString());
+
+        input11.setBackgroundColor(mInput.length() >= 1 ? Color.BLACK : 0xFF996622);
+        input12.setBackgroundColor(mInput.length() >= 2 ? Color.BLACK : 0xFF996622);
+        input13.setBackgroundColor(mInput.length() >= 3 ? Color.BLACK : 0xFF996622);
+        input14.setBackgroundColor(mInput.length() >= 4 ? Color.BLACK : 0xFF996622);
+
+        if(mInput.length() == 4) {
+            getPassword();
+        }
+    }
 
 }

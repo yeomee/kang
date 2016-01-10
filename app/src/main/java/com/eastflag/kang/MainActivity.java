@@ -2,6 +2,7 @@ package com.eastflag.kang;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.DialogInterface;
@@ -17,6 +18,7 @@ import com.eastflag.kang.fragment.Fragment100;
 import com.eastflag.kang.fragment.Fragment110;
 import com.eastflag.kang.fragment.Fragment120;
 import com.eastflag.kang.fragment.Fragment200;
+import com.eastflag.kang.fragment.Fragment400;
 import com.eastflag.kang.fragment.MainFragment;
 import com.eastflag.kang.fragment.Fragment020;
 import com.eastflag.kang.utils.PreferenceUtil;
@@ -30,6 +32,7 @@ import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 
 public class MainActivity extends Activity {
@@ -41,7 +44,6 @@ public class MainActivity extends Activity {
     @Bind(R.id.menu1) Button mMenu1;
     @Bind(R.id.menu2) Button mMenu2;
     @Bind(R.id.menu3) Button mMenu3;
-    @Bind(R.id.menu4) Button mMenu4;
     @Bind(R.id.menu5) Button mMenu5;
 
     @Bind(R.id.submenu) View mSubmenu;
@@ -65,7 +67,6 @@ public class MainActivity extends Activity {
         mMenu1.setOnClickListener(mMenuClick);
         mMenu2.setOnClickListener(mMenuClick);
         mMenu3.setOnClickListener(mMenuClick);
-        mMenu4.setOnClickListener(mMenuClick);
         mMenu5.setOnClickListener(mMenuClick);
 
         submenu1.setOnClickListener(mSubMenuClick);
@@ -174,6 +175,11 @@ public class MainActivity extends Activity {
         mSubmenu.setVisibility(View.GONE);
     }
 
+    @OnClick(R.id.menu4) void onClickMenu4() {
+        DialogFragment frag = Fragment400.newInstance(R.string.help_title);
+        frag.show(getFragmentManager(), "show");
+    }
+
     View.OnClickListener mMenuClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -182,7 +188,6 @@ public class MainActivity extends Activity {
             mMenu1.setSelected(false);
             mMenu2.setSelected(false);
             mMenu3.setSelected(false);
-            mMenu4.setSelected(false);
             mMenu5.setSelected(false);
             switch(v.getId()) {
                 case R.id.menu1:
@@ -197,9 +202,6 @@ public class MainActivity extends Activity {
                     break;
                 case R.id.menu3:
                     mMenu3.setSelected(true);
-                    break;
-                case R.id.menu4:
-                    mMenu4.setSelected(true);
                     break;
                 case R.id.menu5:
                     mMenu5.setSelected(true);
