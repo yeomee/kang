@@ -76,7 +76,9 @@ public class Fragment110 extends Fragment {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Fragment111 dialog = Fragment111.newInstance(mMoimVO.getM_id());
+                Fragment111 dialog = Fragment111.newInstance(mMoimVO.getM_id(), mMemberList.get(position).getMb_name(),
+                        mMemberList.get(position).getMy_position(), mMemberList.get(position).getMb_pn(),
+                        mMemberList.get(position).getMb_add(), mMemberList.get(position).getMb_action());
                 dialog.show(getFragmentManager(), "회원수정");
             }
         });
@@ -141,7 +143,7 @@ public class Fragment110 extends Fragment {
         public void onClick(View v) {
             switch(v.getId()) {
                 case R.id.reg_moim:
-                    DialogFragment dialog = Fragment111.newInstance(mMoimVO.getM_id());
+                    DialogFragment dialog = Fragment111.newInstance(mMoimVO.getM_id(), null, null, null, null, null);
                     dialog.show(getFragmentManager(), "회원등록");
                     break;
             }

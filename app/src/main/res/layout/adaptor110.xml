@@ -17,14 +17,14 @@
             android:id="@+id/tv_Name"
             android:layout_width="wrap_content" android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:text="홍길동" android:textSize="16dp" android:textStyle="bold"/>
+            android:text="홍길동" android:textSize="16dp"/>
 
         <TextView
             android:id="@+id/tv_position"
             android:layout_width="wrap_content" android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
             android:gravity="center_vertical"
-            android:text="총무" android:textSize="16dp" android:textStyle="bold" />
+            android:text="총무" android:textSize="16dp" />
 
         <TextView
             android:id="@+id/tv_phone"

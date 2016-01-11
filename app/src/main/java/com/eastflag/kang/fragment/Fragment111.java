@@ -56,6 +56,7 @@ public class Fragment111 extends DialogFragment {
     @Bind(R.id.mb_enter_ymd) TextView mb_enter_ymd;
     @Bind(R.id.mb_actions) EditText mb_actions;
     @Bind(R.id.submit) Button submit;
+    @Bind(R.id.delete) Button delete;
 
     private String mTitle;
 
@@ -101,8 +102,20 @@ public class Fragment111 extends DialogFragment {
             mTitle = "회원 등록";
         } else {
             mTitle = "회원 수정";
+            //버튼
+            submit.setText("회원 수정");
+            delete.setVisibility(View.VISIBLE);
+
             mb_name.setText(mbName);
-            //mb_position.setText(mbPosition);
+            int selected = 0;
+            if("회장".equals(mbPosition)) {
+                selected = 0;
+            } else if("총무".equals(mbPosition)) {
+                selected = 1;
+            } if("회원".equals(mbPosition)) {
+                selected = 2;
+            }
+            mb_position.setSelection(selected);
             mb_pn.setText(mbPn);
             mb_add.setText(mbAddr);
             mb_actions.setText(mbActions);
@@ -172,6 +185,8 @@ public class Fragment111 extends DialogFragment {
                     if (object.getInt("result") == 0) {
                         Util.showToast(getActivity(), "등록되었습니다");
                         getActivity().getFragmentManager().beginTransaction().replace(R.id.container, new Fragment110()).commitAllowingStateLoss();
+                    } else {
+                        Util.showToast(getActivity(), object.getString("scname_msg"));
                     }
 
                 } catch (JSONException e) {
