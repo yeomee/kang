@@ -1,6 +1,9 @@
 package com.eastflag.kang.fragment;
 
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.text.TextUtils;
@@ -33,7 +36,7 @@ import butterknife.OnClick;
 /**
  * 회원 등록 화면
  */
-public class Fragment111 extends Fragment {
+public class Fragment111 extends DialogFragment {
 
     private View mView;
     private AQuery mAq;
@@ -57,26 +60,27 @@ public class Fragment111 extends Fragment {
         // Required empty public constructor
     }
 
-    public Fragment111(String m_id) {
-        this.m_id = m_id;
+    public static Fragment111 newInstance(String m_id) {
+        Fragment111 frag = new Fragment111();
+        Bundle args = new Bundle();
+        args.putString("m_id", m_id);
+        frag.setArguments(args);
+        return frag;
     }
 
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.fragment_111, container, false);
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        m_id = getArguments().getString("m_id");
+
+        mView = View.inflate(getActivity(), R.layout.fragment_111, null);
         mAq = new AQuery(mView);
         ButterKnife.bind(this, mView);
 
-//        submit.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                submit();
-//            }
-//        });
-
-        return mView;
+        Dialog dialog = new AlertDialog.Builder(getActivity())
+                .setTitle("회원 등록")
+                .setView(mView)
+                .create();
+        return dialog;
     }
 
     @OnClick(R.id.submit)

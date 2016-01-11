@@ -21,26 +21,6 @@ public class Adaptor110 extends BaseAdapter {
     private Context mContext;
     private ArrayList<MemberVO> mMemberList;
 
-    View.OnClickListener mBtnClick = new View.OnClickListener() {
-
-        @Override
-        public void onClick(View v) {
-            Intent intent;
-
-            switch (v.getId()) {
-                case R.id.ic_phone:
-                    intent = new Intent();
-                    intent.setAction(Intent.ACTION_DIAL);
-                    intent.setData(Uri.parse("tel:010-6415-1871"));
-                    //startActivity(intent);
-                    break;
-
-                case R.id.ic_sms :
-                    break;
-            }
-        }
-    };
-
     public Adaptor110(Context mContext, ArrayList<MemberVO> mMemberList) {
         this.mContext = mContext;
         this.mMemberList = mMemberList;
@@ -66,7 +46,7 @@ public class Adaptor110 extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         if(convertView == null) {
             holder = new ViewHolder();
@@ -79,8 +59,16 @@ public class Adaptor110 extends BaseAdapter {
             ImageButton btnPhone = (ImageButton) convertView.findViewById(R.id.ic_phone);
             ImageButton btnSms = (ImageButton) convertView.findViewById(R.id.ic_sms);
 
-            btnPhone.setOnClickListener(mBtnClick);
-            btnSms.setOnClickListener(mBtnClick);
+            btnPhone.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent();
+                    intent.setAction(Intent.ACTION_DIAL);
+                    intent.setData(Uri.parse("tel:" + mMemberList.get(position).getMb_pn()));
+                    mContext.startActivity(intent);
+                }
+            });
+            //btnSms.setOnClickListener(mBtnClick);
 
             convertView.setTag(holder);
         }

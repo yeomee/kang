@@ -1,6 +1,7 @@
 package com.eastflag.kang.fragment;
 
 import android.annotation.SuppressLint;
+import android.app.DialogFragment;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
@@ -127,7 +128,8 @@ public class Fragment110 extends Fragment {
         public void onClick(View v) {
             switch(v.getId()) {
                 case R.id.reg_moim:
-                    getFragmentManager().beginTransaction().replace(R.id.container, new Fragment111(m_id)).commitAllowingStateLoss();
+                    DialogFragment dialog = Fragment111.newInstance(m_id);
+                    dialog.show(getFragmentManager(), "회원등록");
                     break;
             }
         }
