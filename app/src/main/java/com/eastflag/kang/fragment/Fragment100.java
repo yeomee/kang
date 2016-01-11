@@ -19,6 +19,7 @@ import com.eastflag.kang.MainActivity;
 import com.eastflag.kang.R;
 import com.eastflag.kang.adapter.Adaptor100;
 import com.eastflag.kang.dto.MoimVO;
+import com.eastflag.kang.listener.OnDismiss;
 import com.eastflag.kang.utils.PreferenceUtil;
 import com.eastflag.kang.utils.Util;
 
@@ -51,6 +52,13 @@ public class Fragment100 extends Fragment {
         // Required empty public constructor
     }
 
+    private OnDismiss mListener = new OnDismiss() {
+        @Override
+        public void onDismiss() {
+            getMain();
+        }
+    };
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,24 +67,27 @@ public class Fragment100 extends Fragment {
         mAq = new AQuery(mView);
         ButterKnife.bind(this, mView);
 
-        mAdaptor = new Adaptor100(getActivity(), mMoimList);
+        mAdaptor = new Adaptor100(getActivity(), mMoimList, mListener);
         mListView.setAdapter(mAdaptor);
-
-        getMain();
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ((MainActivity) getActivity()).showSubMenu(1);
-                String m_id = mMoimList.get(position).getM_id();
-                getActivity().getFragmentManager().beginTransaction().replace(R.id.container, new Fragment110(m_id)).commitAllowingStateLoss();
+                getActivity().getFragmentManager().beginTransaction().replace(R.id.container, new Fragment110(mMoimList.get(position)))
+                        .addToBackStack(null)
+                        .commitAllowingStateLoss();
             }
         });
+
+        getMain();
 
         return mView;
     }
 
     private void getMain() {
+        mMoimList.clear();
+
         String url = Constant.HOST + Constant.API_010;
 
         Log.d("LDK", "url:" + url);

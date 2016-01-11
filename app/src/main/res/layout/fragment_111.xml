@@ -6,8 +6,8 @@
 
     <TextView
         android:id="@+id/F010_title"
-        android:layout_width="match_parent" android:layout_height="30dp"
-        android:paddingLeft="10sp"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:padding="5dp"
         android:gravity="center_vertical|left" android:background="#AA6DCFFF"
         android:textSize="14sp" android:text="☞ 전화번호는 필수 입력항목, 사진은 수정화면에서 입력하세요."/>
 
@@ -15,122 +15,59 @@
         android:orientation="vertical"
         android:layout_width="match_parent" android:layout_height="match_parent"
         android:padding="10dp">
-
-        <TableLayout
-            android:layout_width="match_parent" android:layout_height="wrap_content">
-            <TableRow
-                android:id="@+id/tableRow1"
+            <EditText
+                android:id="@+id/mb_name"
+                style="@style/InputBox"
+                android:layout_margin="5dp"
+                android:hint="이름" />
+            <Spinner
+                android:id="@+id/mb_position"
                 android:layout_width="match_parent" android:layout_height="wrap_content"
-                android:padding="5dp" >
-                <TextView
-                    android:paddingRight="5dp"
-                    android:gravity="right"
-                    android:text="이름"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-                <EditText
-                    android:id="@+id/mb_name"
-                    android:layout_width="match_parent"
-                    android:background="@drawable/bg_edit_text"
-                    android:layout_weight="1" />
-            </TableRow>
-            <TableRow
-                android:id="@+id/tableRow2"
-                android:layout_width="match_parent" android:layout_height="wrap_content"
-                android:padding="5dp" >
-                <TextView
-                    android:paddingRight="5dp"
-                    android:gravity="right"
-                    android:text="직책"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-                <Spinner
-                    android:id="@+id/mb_position"
-                    android:layout_width="match_parent"
-                    android:spinnerMode="dropdown"
-                    android:prompt="@string/position_prompt"
-                    android:entries="@array/position_arrays" />
-            </TableRow>
+                android:spinnerMode="dropdown"
+                android:prompt="@string/position_prompt"
+                android:entries="@array/position_arrays" />
+            <EditText
+                android:id="@+id/mb_pn"
+                style="@style/InputBox"
+                android:layout_margin="5dp"
+                android:hint="전화번호" />
+            <EditText
+                android:id="@+id/mb_add"
+                style="@style/InputBox"
+                android:layout_margin="5dp"
+                android:hint="주소" />
+            <TextView
+                android:id="@+id/mb_enter_ymd"
+                style="@style/InputBox"
+                android:layout_margin="5dp"
+                android:hint="회원가입일" />
+            <EditText
+                android:id="@+id/mb_actions"
+                style="@style/InputBox"
+                android:layout_height="70dp"
+                android:inputType="textMultiLine"
+                android:layout_margin="5dp"
+                android:hint="회원활동내역" />
 
-            <TableRow
-                android:id="@+id/tableRow3"
-                android:layout_width="match_parent" android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:layout_weight="1">
-                <TextView
-                    android:paddingRight="5dp"
-                    android:gravity="right"
-                    android:text="전화번호"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-                <EditText
-                    android:id="@+id/mb_pn"
-                    android:background="@drawable/bg_edit_text"
-                    android:layout_weight="1" />
-            </TableRow>
-
-            <TableRow
-                android:id="@+id/tableRow4"
-                android:layout_width="match_parent" android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:layout_weight="1">
-                <TextView
-                    android:paddingRight="5dp"
-                    android:gravity="right"
-                    android:text="주소"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-                <EditText
-                    android:id="@+id/mb_add"
-                    android:background="@drawable/bg_edit_text"
-                    android:layout_weight="1" />
-            </TableRow>
-
-            <TableRow
-                android:id="@+id/tableRow5"
-                android:layout_width="match_parent" android:layout_height="wrap_content"
-                android:padding="5dip"
-                android:layout_weight="1">
-                <TextView
-                    android:paddingRight="5dp"
-                    android:gravity="right"
-                    android:text="회원가입일"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-                <EditText
-                    android:id="@+id/mb_enter_ymd"
-                    android:background="@drawable/bg_edit_text"
-                    android:layout_weight="1" />
-
-            </TableRow>
-
-            <TableRow
-                android:id="@+id/tableRow6"
-                android:layout_width="match_parent" android:layout_height="wrap_content"
-                android:padding="5dip"
-                android:layout_weight="1">
-                <TextView
-                    android:paddingRight="5dp"
-                    android:gravity="right"
-                    android:text="회원활동내역"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-                <EditText
-                    android:id="@+id/mb_actions"
-                    android:layout_width="0dp"
-                    android:inputType="textMultiLine"
-                    android:ems="10"
-                    android:background="@drawable/bg_edit_text"
-                    android:lines="5"
-                    android:minLines="3"
-                    android:scrollbars="vertical"
-                    android:layout_weight="1"
-                    />
-            </TableRow>
-
-
-        </TableLayout>
-
-        <Button
-            android:id="@+id/submit"
-            android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:padding="15dp"
-            android:text="회원 등록" />
+        <LinearLayout
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="10dp" android:layout_marginBottom="10dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal" >
+            <Button
+                android:id="@+id/submit"
+                style="@style/Button_gold_orange"
+                android:layout_marginRight="20dp"
+                android:layout_gravity="center_horizontal"
+                android:text="회원 등록" />
+            <Button
+                android:id="@+id/delete"
+                style="@style/Button_gold_orange"
+                android:layout_marginLeft="20dp"
+                android:layout_gravity="center_horizontal"
+                android:text="회원 삭제"
+                android:visibility="gone"/>
+        </LinearLayout>
 
     </LinearLayout>
 

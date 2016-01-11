@@ -1,5 +1,7 @@
 package com.eastflag.kang.adapter;
 
+import android.app.Activity;
+import android.app.DialogFragment;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +10,8 @@ import android.widget.TextView;
 
 import com.eastflag.kang.R;
 import com.eastflag.kang.dto.MoimVO;
+import com.eastflag.kang.fragment.Fragment201;
+import com.eastflag.kang.listener.OnDismiss;
 
 import java.util.ArrayList;
 
@@ -18,10 +22,12 @@ public class Adaptor100 extends BaseAdapter {
 
     private Context mContext;
     private ArrayList<MoimVO> mMoimList;
+    private OnDismiss mListener;
 
-    public Adaptor100(Context context, ArrayList<MoimVO> moimList) {
+    public Adaptor100(Context context, ArrayList<MoimVO> moimList, OnDismiss listener) {
         mContext = context;
         mMoimList = moimList;
+        mListener = listener;
     }
 
     public void setData(ArrayList<MoimVO> moimList) {
@@ -44,7 +50,7 @@ public class Adaptor100 extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         if(convertView == null) {
             holder = new ViewHolder();
@@ -76,6 +82,16 @@ public class Adaptor100 extends BaseAdapter {
         } else {
             holder.status.setVisibility(View.GONE);
         }
+
+        holder.adm_yn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MoimVO vo = mMoimList.get(position);
+                Fragment201 dialog = Fragment201.newInstance(vo.getM_id(), vo.getMn(), vo.getAdm_mb(), vo.getAdm_email());
+                dialog.setListner(mListener);
+                dialog.show(((Activity)mContext).getFragmentManager(), "모임수정");
+            }
+        });
 
         return convertView;
     }

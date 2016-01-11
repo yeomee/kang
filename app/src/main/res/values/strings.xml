@@ -23,5 +23,6 @@
         <item>총무</item>
         <item>회원</item>
     </string-array>
+    <string name="title_activity_111">Activity111</string>
 
 </resources>

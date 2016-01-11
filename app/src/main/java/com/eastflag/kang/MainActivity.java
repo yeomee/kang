@@ -154,6 +154,18 @@ public class MainActivity extends Activity {
         });
     }
 
+    public void showMenu(int selected) {
+        mMenu1.setSelected(false);
+        mMenu2.setSelected(false);
+        mMenu3.setSelected(false);
+        mMenu5.setSelected(false);
+        switch(selected) {
+            case 1:
+                mMenu1.setSelected(true);
+                break;
+        }
+    }
+
     public void showSubMenu(int selected) {
         mSubmenu.setVisibility(View.VISIBLE);
 

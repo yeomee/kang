@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -18,6 +19,7 @@ import com.eastflag.kang.Constant;
 import com.eastflag.kang.R;
 import com.eastflag.kang.adapter.Adaptor110;
 import com.eastflag.kang.dto.MemberVO;
+import com.eastflag.kang.dto.MoimVO;
 import com.eastflag.kang.utils.PreferenceUtil;
 import com.eastflag.kang.utils.Util;
 
@@ -44,17 +46,18 @@ public class Fragment110 extends Fragment {
     @Bind(R.id.title) TextView title;
     @Bind(R.id.listView) ListView mListView;
     @Bind(R.id.reg_moim) View reg_moim;
+    @Bind(R.id.moim_title) TextView moim_title;
 
     private Adaptor110 mAdaptor;
-    private String m_id;
+    private MoimVO mMoimVO;
 
     public Fragment110() {
         // Required empty public constructor
     }
 
     @SuppressLint("ValidFragment")
-    public Fragment110(String m_id) {
-        this.m_id = m_id;
+    public Fragment110(MoimVO moimVO) {
+        mMoimVO = moimVO;
     }
 
 
@@ -66,8 +69,17 @@ public class Fragment110 extends Fragment {
 
         mAdaptor = new Adaptor110(getActivity(), mMemberList);
         mListView.setAdapter(mAdaptor);
+        moim_title.setText(mMoimVO.getMn());
 
         reg_moim.setOnClickListener(mClick);
+
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Fragment111 dialog = Fragment111.newInstance(mMoimVO.getM_id());
+                dialog.show(getFragmentManager(), "회원수정");
+            }
+        });
 
         getMain();
 
@@ -82,7 +94,7 @@ public class Fragment110 extends Fragment {
         params.put("pn", Util.getMdn(getActivity())); //전화번호
         params.put("paid", Util.getAndroidId(getActivity())); //안드로이드 아이디
         params.put("token", PreferenceUtil.getInstance(getActivity()).getToken()); //폰모델*/
-        params.put("m_id", m_id);
+        params.put("m_id", mMoimVO.getM_id());
         Log.d("LDK", params.toString());
 
         mAq.ajax(url, params, JSONObject.class, new AjaxCallback<JSONObject>() {
@@ -98,6 +110,7 @@ public class Fragment110 extends Fragment {
                     if (object.getInt("result") == 0) {
                         String scname_msg = object.getString("scname_msg");
                         title.setText(scname_msg);
+
                         JSONArray array = object.getJSONArray("value");
                         for (int i = 0; i < array.length(); ++i) {
                             MemberVO member = new MemberVO();
@@ -128,7 +141,7 @@ public class Fragment110 extends Fragment {
         public void onClick(View v) {
             switch(v.getId()) {
                 case R.id.reg_moim:
-                    DialogFragment dialog = Fragment111.newInstance(m_id);
+                    DialogFragment dialog = Fragment111.newInstance(mMoimVO.getM_id());
                     dialog.show(getFragmentManager(), "회원등록");
                     break;
             }

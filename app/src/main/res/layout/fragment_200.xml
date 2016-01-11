@@ -4,73 +4,67 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/F010_title"
+        android:id="@+id/title"
         android:layout_width="match_parent" android:layout_height="30dp"
         android:paddingLeft="10sp"
         android:gravity="center_vertical|left" android:background="#AA6DCFFF"
-        android:textSize="14sp" android:text="모임을 등록하는 회원은 해당 모임의 관리자가 됩니다"/>
+        android:textSize="14sp"/>
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent" android:layout_height="match_parent"
         android:padding="10dp">
 
-        <TableLayout
-            android:layout_width="match_parent" android:layout_height="wrap_content">
-            <TableRow
-                android:id="@+id/tableRow1"
-                android:layout_width="match_parent" android:layout_height="wrap_content"
-                android:padding="5dip" >
-                <TextView
-                    android:text="모임이름"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-                <EditText
-                    android:id="@+id/moim_name"
-                    android:layout_width="match_parent"
-                    android:layout_weight="1" />
-            </TableRow>
-            <TableRow
-                android:id="@+id/tableRow2"
-                android:layout_width="match_parent" android:layout_height="wrap_content"
-                android:padding="5dip" >
-                <TextView
-                    android:text="관리자명"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-                <EditText
-                    android:id="@+id/admin_name"
-                    android:layout_weight="1" />
-            </TableRow>
-            <TableRow
-                android:id="@+id/tableRow3"
-                android:layout_width="match_parent" android:layout_height="wrap_content"
-                android:padding="5dip"
-                android:layout_weight="1">
-                <TextView
-                    android:text="관리자메일"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-                <EditText
-                    android:id="@+id/admin_email"
-                    android:layout_weight="1" />
-            </TableRow>
-        </TableLayout>
+        <EditText
+            android:id="@+id/moim_name"
+            style="@style/InputBox"
+            android:layout_margin="5dp"
+            android:hint="모임이름" />
+
+        <EditText
+            android:id="@+id/admin_name"
+            style="@style/InputBox"
+            android:layout_margin="5dp"
+            android:hint="관리자명" />
+
+        <EditText
+            android:id="@+id/admin_email"
+            style="@style/InputBox"
+            android:layout_margin="5dp"
+            android:hint="관리자메일"/>
 
         <LinearLayout
             android:layout_width="match_parent" android:layout_height="1px"
             android:layout_marginTop="5dp" android:layout_marginBottom="5dp"
             android:background="#FF666666"/>
 
-        <Button
-            android:id="@+id/submit"
-            android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:padding="15dp"
-            android:text="모임 등록" />
+        <LinearLayout
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="10dp" android:layout_marginBottom="10dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal" >
+            <Button
+                android:id="@+id/submit"
+                style="@style/Button_gold_orange"
+                android:layout_marginRight="20dp"
+                android:layout_gravity="center_horizontal"
+                android:text="모임 등록" />
+            <Button
+                android:id="@+id/delete"
+                style="@style/Button_gold_orange"
+                android:layout_marginLeft="20dp"
+                android:layout_gravity="center_horizontal"
+                android:text="모임 삭제"
+                android:visibility="gone"/>
+        </LinearLayout>
+
 
         <TextView
             android:layout_width="match_parent" android:layout_height="wrap_content"
             android:padding="10sp" android:lineSpacingMultiplier="1.3"
             android:gravity="left" android:background="#AA6DCFFF"
-            android:textSize="16sp" android:text="@string/s020_note"/>
+            android:textSize="16sp"
+            android:id="@+id/content" />
     </LinearLayout>
 
 </LinearLayout>

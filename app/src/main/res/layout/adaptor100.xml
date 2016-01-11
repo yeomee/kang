@@ -26,7 +26,7 @@
             android:id="@+id/modify"
             android:layout_width="wrap_content" android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:gravity="center_vertical" android:padding="2dp" android:background="@drawable/bg_green_empty"
+            android:gravity="center_vertical" android:padding="5dp" android:background="@drawable/bg_green_empty"
             android:text="수정삭제" android:textSize="14dp" android:textColor="@color/green" android:textStyle="bold" />
         <TextView
             android:id="@+id/status"

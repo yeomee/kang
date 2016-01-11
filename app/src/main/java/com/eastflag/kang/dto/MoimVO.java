@@ -10,6 +10,7 @@ public class MoimVO {
     private String my_position;
     private String adm_yn;
     private String m_status;
+    private String adm_email;
 
     public String getM_id() {
         return m_id;
@@ -57,5 +58,13 @@ public class MoimVO {
 
     public void setM_status(String m_status) {
         this.m_status = m_status;
+    }
+
+    public String getAdm_email() {
+        return adm_email;
+    }
+
+    public void setAdm_email(String adm_email) {
+        this.adm_email = adm_email;
     }
 }

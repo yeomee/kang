@@ -55,11 +55,11 @@ public class Adaptor110 extends BaseAdapter {
             holder.number = (TextView) convertView.findViewById(R.id.tv_Num);
             holder.name = (TextView) convertView.findViewById(R.id.tv_Name);
             holder.position = (TextView) convertView.findViewById(R.id.tv_position);
+            holder.phone = (TextView) convertView.findViewById(R.id.tv_phone);
+            holder.sms = (TextView) convertView.findViewById(R.id.tv_sms);
+            holder.admin = (TextView) convertView.findViewById(R.id.tv_admin);
 
-            ImageButton btnPhone = (ImageButton) convertView.findViewById(R.id.ic_phone);
-            ImageButton btnSms = (ImageButton) convertView.findViewById(R.id.ic_sms);
-
-            btnPhone.setOnClickListener(new View.OnClickListener() {
+            holder.phone.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent();
@@ -68,7 +68,15 @@ public class Adaptor110 extends BaseAdapter {
                     mContext.startActivity(intent);
                 }
             });
-            //btnSms.setOnClickListener(mBtnClick);
+            holder.sms.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Intent.ACTION_SENDTO);
+                    intent.setData(Uri.parse("sms:" + mMemberList.get(position).getMb_pn()));
+                    intent.putExtra("sms_body",  "");
+                    mContext.startActivity(intent);
+                }
+            });
 
             convertView.setTag(holder);
         }
@@ -80,6 +88,12 @@ public class Adaptor110 extends BaseAdapter {
         holder.name.setText(mMemberList.get(position).getMb_name());
         holder.position.setText(mMemberList.get(position).getMy_position());
 
+        if("y".equals(mMemberList.get(position).getAdmin_yn())) {
+            holder.admin.setVisibility(View.VISIBLE);
+        } else {
+            holder.admin.setVisibility(View.GONE);
+        }
+
         return convertView;
     }
 
@@ -87,5 +101,8 @@ public class Adaptor110 extends BaseAdapter {
         TextView number;
         TextView name;
         TextView position;
+        TextView phone;
+        TextView sms;
+        TextView admin;
     }
 }

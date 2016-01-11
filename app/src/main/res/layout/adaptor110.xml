@@ -4,7 +4,8 @@
 
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_width="wrap_content" android:layout_height="50dp">
+        android:layout_width="wrap_content" android:layout_height="40dp"
+        android:gravity="center_vertical">
 
         <TextView
             android:id="@+id/tv_Num"
@@ -16,31 +17,33 @@
             android:id="@+id/tv_Name"
             android:layout_width="wrap_content" android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:text="홍길동" android:textSize="16dp"/>
+            android:text="홍길동" android:textSize="16dp" android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/tv_position"
             android:layout_width="wrap_content" android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
             android:gravity="center_vertical"
-            android:text="총무" android:textSize="16dp" />
+            android:text="총무" android:textSize="16dp" android:textStyle="bold" />
 
-        <ImageButton
-            android:id="@+id/ic_phone"
+        <TextView
+            android:id="@+id/tv_phone"
             android:layout_width="wrap_content" android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:src="@android:drawable/ic_menu_call" />
+            android:text="전화콘" android:textSize="16dp" android:textStyle="bold"/>
 
-        <ImageButton
-            android:id="@+id/ic_sms"
+        <TextView
+            android:id="@+id/tv_sms"
             android:layout_width="wrap_content" android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:src="@android:drawable/ic_dialog_email" />
+            android:text="문자콘" android:textSize="16dp" android:textStyle="bold"/>
 
-        <ImageView
-            android:id="@+id/ic_memberInfo"
+        <TextView
+            android:id="@+id/tv_admin"
             android:layout_width="wrap_content" android:layout_height="wrap_content"
-            />
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/bg_red_empty" android:padding="5dp"
+            android:text="관리자" android:textSize="16dp" android:textStyle="bold" android:textColor="@color/red"/>
 
     </LinearLayout>
 
