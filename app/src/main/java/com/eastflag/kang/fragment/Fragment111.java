@@ -158,8 +158,9 @@ public class Fragment111 extends Fragment {
 
         getPositionList();
 
+        mMenu2.setSelected(true);
         mMenu1.setOnClickListener(mMenuClick);
-        mMenu2.setOnClickListener(mMenuClick);
+        //mMenu2.setOnClickListener(mMenuClick);
         mMenu3.setOnClickListener(mMenuClick);
 
 //        submit.setOnClickListener(new View.OnClickListener() {
@@ -325,6 +326,9 @@ public class Fragment111 extends Fragment {
             case 1:
                 mMenu1.setSelected(true);
                 break;
+            case 2:
+                mMenu2.setSelected(true);
+                break;
         }
     }
 
@@ -335,18 +339,20 @@ public class Fragment111 extends Fragment {
             mMenu1.setSelected(false);
             mMenu2.setSelected(false);
             mMenu3.setSelected(false);
+
+            Fragment mFragment;
+
             switch(v.getId()) {
                 case R.id.menu1:
                     mMenu1.setSelected(true);
-                    mb_position.setSelection(1);
-//                    mFragment = new Fragment100();
-//                    mFm.beginTransaction().replace(R.id.container, mFragment).commitAllowingStateLoss();
+                    mFragment = new Fragment110(mMoimVo);
+                    getFragmentManager().beginTransaction().replace(R.id.container, mFragment).commitAllowingStateLoss();
                     break;
-                case R.id.menu2:
-                    mMenu2.setSelected(true);
+//                case R.id.menu2:
+//                    mMenu2.setSelected(true);
 //                    mFragment = new Fragment200();
 //                    mFm.beginTransaction().replace(R.id.container, mFragment).commitAllowingStateLoss();
-                    break;
+//                    break;
                 case R.id.menu3:
                     mMenu3.setSelected(true);
                     break;

@@ -3,12 +3,14 @@ package com.eastflag.kang.fragment;
 import android.annotation.SuppressLint;
 import android.app.DialogFragment;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -16,6 +18,7 @@ import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxCallback;
 import com.androidquery.callback.AjaxStatus;
 import com.eastflag.kang.Constant;
+import com.eastflag.kang.KangApplication;
 import com.eastflag.kang.R;
 import com.eastflag.kang.adapter.Adaptor110;
 import com.eastflag.kang.dto.MemberVO;
@@ -42,6 +45,10 @@ public class Fragment110 extends Fragment {
     private View mView;
     private AQuery mAq;
     private ArrayList<MemberVO> mMemberList = new ArrayList<MemberVO>();
+
+    @Bind(R.id.menu1) Button mMenu1;
+    @Bind(R.id.menu2) Button mMenu2;
+    @Bind(R.id.menu3) Button mMenu3;
 
     @Bind(R.id.title) TextView title;
     @Bind(R.id.listView) ListView mListView;
@@ -70,6 +77,11 @@ public class Fragment110 extends Fragment {
         mAdaptor = new Adaptor110(getActivity(), mMemberList);
         mListView.setAdapter(mAdaptor);
         moim_title.setText(mMoimVO.getMn());
+
+        mMenu1.setSelected(true);
+        //mMenu1.setOnClickListener(mMenuClick);
+        mMenu2.setOnClickListener(mMenuClick);
+        mMenu3.setOnClickListener(mMenuClick);
 
         reg_member.setOnClickListener(mClick);
 
@@ -146,6 +158,36 @@ public class Fragment110 extends Fragment {
                     //DialogFragment dialog = Fragment111.newInstance(mMoimVO.getM_id(), null, null, null, null, null);
                     //dialog.show(getFragmentManager(), "회원등록");
                     getFragmentManager().beginTransaction().replace(R.id.container, new Fragment111(mMoimVO)).commitAllowingStateLoss();
+                    break;
+            }
+        }
+    };
+
+    View.OnClickListener mMenuClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            KangApplication.sApp.soundButton();
+            mMenu1.setSelected(false);
+            mMenu2.setSelected(false);
+            mMenu3.setSelected(false);
+
+            Fragment mFragment;
+
+            switch(v.getId()) {
+//                case R.id.menu1:
+//                    mMenu1.setSelected(true);
+//                    mFragment = new Fragment100();
+//                    mFm.beginTransaction().replace(R.id.container, mFragment).commitAllowingStateLoss();
+//                    break;
+                case R.id.menu2:
+                    mMenu2.setSelected(true);
+                    mFragment = new Fragment111(mMoimVO);
+                    getFragmentManager().beginTransaction().replace(R.id.container, mFragment).commitAllowingStateLoss();
+                    break;
+                case R.id.menu3:
+                    mMenu3.setSelected(true);
+                    break;
+                default:
                     break;
             }
         }
