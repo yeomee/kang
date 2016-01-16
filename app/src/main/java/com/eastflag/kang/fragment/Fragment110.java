@@ -45,7 +45,7 @@ public class Fragment110 extends Fragment {
 
     @Bind(R.id.title) TextView title;
     @Bind(R.id.listView) ListView mListView;
-    @Bind(R.id.reg_moim) View reg_moim;
+    @Bind(R.id.reg_member) View reg_member;
     @Bind(R.id.moim_title) TextView moim_title;
 
     private Adaptor110 mAdaptor;
@@ -71,15 +71,15 @@ public class Fragment110 extends Fragment {
         mListView.setAdapter(mAdaptor);
         moim_title.setText(mMoimVO.getMn());
 
-        reg_moim.setOnClickListener(mClick);
+        reg_member.setOnClickListener(mClick);
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Fragment111 dialog = Fragment111.newInstance(mMoimVO.getM_id(), mMemberList.get(position).getMb_name(),
-                        mMemberList.get(position).getMy_position(), mMemberList.get(position).getMb_pn(),
-                        mMemberList.get(position).getMb_add(), mMemberList.get(position).getMb_action());
-                dialog.show(getFragmentManager(), "회원수정");
+//                Fragment111 dialog = Fragment111.newInstance(mMoimVO.getM_id(), mMemberList.get(position).getMb_name(),
+//                        mMemberList.get(position).getMy_position(), mMemberList.get(position).getMb_pn(),
+//                        mMemberList.get(position).getMb_add(), mMemberList.get(position).getMb_action());
+//                dialog.show(getFragmentManager(), "회원수정");
             }
         });
 
@@ -142,9 +142,10 @@ public class Fragment110 extends Fragment {
         @Override
         public void onClick(View v) {
             switch(v.getId()) {
-                case R.id.reg_moim:
-                    DialogFragment dialog = Fragment111.newInstance(mMoimVO.getM_id(), null, null, null, null, null);
-                    dialog.show(getFragmentManager(), "회원등록");
+                case R.id.reg_member :
+                    //DialogFragment dialog = Fragment111.newInstance(mMoimVO.getM_id(), null, null, null, null, null);
+                    //dialog.show(getFragmentManager(), "회원등록");
+                    getFragmentManager().beginTransaction().replace(R.id.container, new Fragment111(mMoimVO)).commitAllowingStateLoss();
                     break;
             }
         }

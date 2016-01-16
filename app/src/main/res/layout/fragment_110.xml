@@ -20,7 +20,7 @@
             android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content"
             android:text="모임제목" android:textAppearance="?android:attr/textAppearanceMedium" />
         <Button
-            android:id="@+id/reg_moim"
+            android:id="@+id/reg_member"
             android:layout_width="wrap_content" android:layout_height="35dp"
             style="@style/Button_gold_orange"
             android:text="회원 등록" />
