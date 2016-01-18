@@ -14,6 +14,7 @@ import android.widget.Button;
 import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxCallback;
 import com.androidquery.callback.AjaxStatus;
+import com.eastflag.kang.dto.MoimVO;
 import com.eastflag.kang.fragment.Fragment100;
 import com.eastflag.kang.fragment.Fragment110;
 import com.eastflag.kang.fragment.Fragment120;
@@ -55,8 +56,11 @@ public class MainActivity extends Activity {
     @Bind(R.id.submenu6) Button submenu6;
     @Bind(R.id.submenu7) Button submenu7;
 
+    private MoimVO selectedMoim;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -82,7 +86,6 @@ public class MainActivity extends Activity {
         mFm.beginTransaction().replace(R.id.container, mFragment).commitAllowingStateLoss();
 
         getIntro();
-
     }
 
     @Override
@@ -187,6 +190,10 @@ public class MainActivity extends Activity {
         mSubmenu.setVisibility(View.GONE);
     }
 
+    public void setSelectedMoim(MoimVO selectedMoim) {
+        this.selectedMoim = selectedMoim;
+    }
+
     @OnClick(R.id.menu4) void onClickMenu4() {
         DialogFragment frag = Fragment400.newInstance(R.string.help_title);
         frag.show(getFragmentManager(), "show");
@@ -216,9 +223,9 @@ public class MainActivity extends Activity {
                     mMenu3.setSelected(true);
                     break;
                 case R.id.menu5:
-                    mMenu5.setSelected(true);
-                    mFragment = new Fragment110();
-                    mFm.beginTransaction().replace(R.id.container, mFragment).commitAllowingStateLoss();
+//                    mMenu5.setSelected(true);
+//                    mFragment = new Fragment110();
+//                    mFm.beginTransaction().replace(R.id.container, mFragment).commitAllowingStateLoss();
                     break;
                 default:
                     break;
@@ -233,7 +240,7 @@ public class MainActivity extends Activity {
             switch(v.getId()) {
                 case R.id.submenu1:
                     showSubMenu(1);
-                    mFragment = new Fragment110();
+                    mFragment = new Fragment110(selectedMoim);
                     mFm.beginTransaction().replace(R.id.container, mFragment).commitAllowingStateLoss();
                     break;
                 case R.id.submenu2:

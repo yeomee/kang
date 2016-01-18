@@ -74,6 +74,7 @@ public class Fragment100 extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ((MainActivity) getActivity()).showSubMenu(1);
+                ((MainActivity) getActivity()).setSelectedMoim(mMoimList.get(position));
                 getActivity().getFragmentManager().beginTransaction().replace(R.id.container, new Fragment110(mMoimList.get(position)))
                         .addToBackStack(null)
                         .commitAllowingStateLoss();

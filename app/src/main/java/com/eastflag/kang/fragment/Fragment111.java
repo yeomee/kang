@@ -38,6 +38,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 
+import java.lang.reflect.Member;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -52,6 +53,8 @@ import butterknife.OnClick;
  * 회원 등록 화면
  */
 public class Fragment111 extends Fragment {
+    private final int MODE_REG = 0;
+    private final int MODE_MODIFY = 1;
 
     private View mView;
     private AQuery mAq;
@@ -75,11 +78,14 @@ public class Fragment111 extends Fragment {
     private String mTitle;
 
     private MoimVO mMoimVo;
+    private MemberVO mMemberVo;
     private String mbName;
     private String mbPosition;
     private String mbPn;
     private String mbAddr;
     private String mbActions;
+
+    private int screenMode;
 
     public Fragment111() {
         // Required empty public constructor
@@ -87,6 +93,13 @@ public class Fragment111 extends Fragment {
 
     public Fragment111(MoimVO moimVo) {
         this.mMoimVo = moimVo;
+        screenMode = MODE_REG;
+    }
+
+    public Fragment111(MoimVO moimVo, MemberVO memberVo) {
+        this.mMoimVo = moimVo;
+        this.mMemberVo = memberVo;
+        screenMode = MODE_MODIFY;
     }
 
 //    public static Fragment111 newInstance(String m_id, String mb_name, String mb_position,
@@ -147,8 +160,8 @@ public class Fragment111 extends Fragment {
 //    }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         mView = inflater.inflate(R.layout.fragment_111, container, false);
         mAq = new AQuery(mView);
         ButterKnife.bind(this, mView);
@@ -158,10 +171,32 @@ public class Fragment111 extends Fragment {
 
         getPositionList();
 
-        mMenu2.setSelected(true);
+        if(screenMode == MODE_REG) { // 등록 모드
+            mMenu2.setSelected(true);
+        }
+        else { // 수정 모드
+            mMenu3.setSelected(true);
+
+            submit.setText("회원 수정");
+            delete.setVisibility(View.VISIBLE);
+
+            mb_name.setText(mMemberVo.getMb_name());
+            for(int i = 0; i < mAdaptor.getCount(); i++) {
+                PositionVo positionVo = mAdaptor.getItem(i);
+                if(positionVo.getPo_name().equals(mMemberVo.getMy_position())) {
+                    mb_position.setSelection(i);
+                    break;
+                }
+            }
+            mb_pn.setText(mMemberVo.getMb_pn());
+            mb_add.setText(mMemberVo.getMb_add());
+            mb_enter_ymd.setText(mMemberVo.getMb_enter_ymd());
+            mb_actions.setText(mMemberVo.getMb_action());
+        }
+
         mMenu1.setOnClickListener(mMenuClick);
         //mMenu2.setOnClickListener(mMenuClick);
-        mMenu3.setOnClickListener(mMenuClick);
+        //mMenu3.setOnClickListener(mMenuClick);
 
 //        submit.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -188,42 +223,54 @@ public class Fragment111 extends Fragment {
         mAq.ajax(url, params, JSONObject.class, new AjaxCallback<JSONObject>() {
             @Override
             public void callback(String url, JSONObject object, AjaxStatus status) {
-                try {
-                    if (status.getCode() != 200) {
-                        Log.d("LDK", "status:" + status.getCode());
-                        Util.showToast(getActivity(), "서버 오류가 발생하였습니다.");
-                        return;
-                    }
-                    Log.d("LDK", object.toString(1));
-                    //데이터 존재하지 않음
-
-                    //데이터 존재하지 않음
-                    PositionVo position = new PositionVo();
-                    position.setPo_cd("-1");
-                    position.setPo_name("직책을 선택하세요.");
-                    mPositionList.add(position);
-
-                    if (object.getInt("result") == 0) {
-                        String scname_msg = object.getString("scname_msg1");
-                        //title.setText(scname_msg);
-
-                        JSONArray array = object.getJSONArray("position");
-                        for(int i = 0; i < array.length(); ++i) {
-                            JSONObject json = array.getJSONObject(i);
-                            position = new PositionVo();
-
-                            position.setPo_cd(json.getString("po_cd"));
-                            position.setPo_name(json.getString("po_name"));
-
-                            mPositionList.add(position);
-                        }
-
-                        mb_position.setSelection(0);
-                        mAdaptor.notifyDataSetChanged();
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
+            try {
+                if (status.getCode() != 200) {
+                    Log.d("LDK", "status:" + status.getCode());
+                    Util.showToast(getActivity(), "서버 오류가 발생하였습니다.");
+                    return;
                 }
+                Log.d("LDK", object.toString(1));
+                //데이터 존재하지 않음
+
+                //데이터 존재하지 않음
+                PositionVo position = new PositionVo();
+                position.setPo_cd("-1");
+                position.setPo_name("직책을 선택하세요.");
+                mPositionList.add(position);
+
+                if (object.getInt("result") == 0) {
+                    String scname_msg = object.getString("scname_msg1");
+                    //title.setText(scname_msg);
+
+                    JSONArray array = object.getJSONArray("position");
+                    for(int i = 0; i < array.length(); ++i) {
+                        JSONObject json = array.getJSONObject(i);
+                        position = new PositionVo();
+
+                        position.setPo_cd(json.getString("po_cd"));
+                        position.setPo_name(json.getString("po_name"));
+
+                        mPositionList.add(position);
+                    }
+
+                    if(screenMode == MODE_REG) {
+                        mb_position.setSelection(0);
+                    }
+                    else {
+                        for(int i = 0; i < mAdaptor.getCount(); i++) {
+                            PositionVo positionVo = mAdaptor.getItem(i);
+                            if(positionVo.getPo_name().equals(mMemberVo.getMy_position())) {
+                                mb_position.setSelection(i);
+                                break;
+                            }
+                        }
+                    }
+
+                    mAdaptor.notifyDataSetChanged();
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
             }
         });
     }
@@ -251,10 +298,11 @@ public class Fragment111 extends Fragment {
         }
 
         String url;
-        if(TextUtils.isEmpty(mbName)) {
+        if(screenMode == MODE_REG) {
             url = Constant.HOST + Constant.API_111;
-        } else {
-            url = Constant.HOST + Constant.API_111;
+        }
+        else {
+            url = Constant.HOST + Constant.API_112;
         }
 
         Log.d("LDK", "url:" + url);
@@ -269,29 +317,37 @@ public class Fragment111 extends Fragment {
         params.put("mb_add", mb_add.getText().toString());
         params.put("mb_enter_ymd", mb_enter_ymd.getText().toString());
         params.put("mb_actions", mb_actions.getText().toString());
+        if(screenMode == MODE_MODIFY) {
+            params.put("mb_id", mMemberVo.getMb_id());
+        }
         Log.d("LDK", params.toString());
 
         mAq.ajax(url, params, JSONObject.class, new AjaxCallback<JSONObject>() {
             @Override
             public void callback(String url, JSONObject object, AjaxStatus status) {
-                try {
-                    if (status.getCode() != 200) {
-                        Log.d("LDK", "status:" + status.getCode());
-                        Util.showToast(getActivity(), "서버 오류가 발생하였습니다.");
-                        return;
-                    }
-                    Log.d("LDK", object.toString(1));
-                    //데이터 존재하지 않음
-                    if (object.getInt("result") == 0) {
-                        Util.showToast(getActivity(), "등록되었습니다");
-                        getActivity().getFragmentManager().beginTransaction().replace(R.id.container, new Fragment110(mMoimVo)).commitAllowingStateLoss();
-                    } else {
-                        Util.showToast(getActivity(), object.getString("scname_msg"));
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
+            try {
+                if (status.getCode() != 200) {
+                    Log.d("LDK", "status:" + status.getCode());
+                    Util.showToast(getActivity(), "서버 오류가 발생하였습니다.");
+                    return;
                 }
+                Log.d("LDK", object.toString(1));
+                //데이터 존재하지 않음
+                if (object.getInt("result") == 0) {
+                    if(screenMode == MODE_REG) {
+                        Util.showToast(getActivity(), "등록 되었습니다");
+                    }
+                    else {
+                        Util.showToast(getActivity(), "수정 되었습니다");
+                    }
+                    getActivity().getFragmentManager().beginTransaction().replace(R.id.container, new Fragment110(mMoimVo)).commitAllowingStateLoss();
+                } else {
+                    Util.showToast(getActivity(), object.getString("scname_msg"));
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
             }
         });
     }
@@ -321,7 +377,7 @@ public class Fragment111 extends Fragment {
     public void showMenu(int selected) {
         mMenu1.setSelected(false);
         mMenu2.setSelected(false);
-        mMenu3.setSelected(false);
+        //mMenu3.setSelected(false);
         switch(selected) {
             case 1:
                 mMenu1.setSelected(true);
@@ -338,7 +394,7 @@ public class Fragment111 extends Fragment {
             KangApplication.sApp.soundButton();
             mMenu1.setSelected(false);
             mMenu2.setSelected(false);
-            mMenu3.setSelected(false);
+            //mMenu3.setSelected(false);
 
             Fragment mFragment;
 
@@ -353,9 +409,9 @@ public class Fragment111 extends Fragment {
 //                    mFragment = new Fragment200();
 //                    mFm.beginTransaction().replace(R.id.container, mFragment).commitAllowingStateLoss();
 //                    break;
-                case R.id.menu3:
-                    mMenu3.setSelected(true);
-                    break;
+//                case R.id.menu3:
+//                    mMenu3.setSelected(true);
+//                    break;
                 default:
                     break;
             }

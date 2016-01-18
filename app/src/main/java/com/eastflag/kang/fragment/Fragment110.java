@@ -48,11 +48,11 @@ public class Fragment110 extends Fragment {
 
     @Bind(R.id.menu1) Button mMenu1;
     @Bind(R.id.menu2) Button mMenu2;
-    @Bind(R.id.menu3) Button mMenu3;
+    //@Bind(R.id.menu3) Button mMenu3;
 
     @Bind(R.id.title) TextView title;
     @Bind(R.id.listView) ListView mListView;
-    @Bind(R.id.reg_member) View reg_member;
+    //@Bind(R.id.reg_member) View reg_member;
     @Bind(R.id.moim_title) TextView moim_title;
 
     private Adaptor110 mAdaptor;
@@ -81,9 +81,9 @@ public class Fragment110 extends Fragment {
         mMenu1.setSelected(true);
         //mMenu1.setOnClickListener(mMenuClick);
         mMenu2.setOnClickListener(mMenuClick);
-        mMenu3.setOnClickListener(mMenuClick);
+        //mMenu3.setOnClickListener(mMenuClick);
 
-        reg_member.setOnClickListener(mClick);
+        //reg_member.setOnClickListener(mClick);
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -92,6 +92,9 @@ public class Fragment110 extends Fragment {
 //                        mMemberList.get(position).getMy_position(), mMemberList.get(position).getMb_pn(),
 //                        mMemberList.get(position).getMb_add(), mMemberList.get(position).getMb_action());
 //                dialog.show(getFragmentManager(), "회원수정");
+                getFragmentManager().beginTransaction().replace(R.id.container, new Fragment111(mMoimVO, mMemberList.get(position)))
+                        .addToBackStack(null)
+                        .commitAllowingStateLoss();
             }
         });
 
@@ -150,18 +153,18 @@ public class Fragment110 extends Fragment {
         });
     }
 
-    View.OnClickListener mClick = new View.OnClickListener(){
-        @Override
-        public void onClick(View v) {
-            switch(v.getId()) {
-                case R.id.reg_member :
-                    //DialogFragment dialog = Fragment111.newInstance(mMoimVO.getM_id(), null, null, null, null, null);
-                    //dialog.show(getFragmentManager(), "회원등록");
-                    getFragmentManager().beginTransaction().replace(R.id.container, new Fragment111(mMoimVO)).commitAllowingStateLoss();
-                    break;
-            }
-        }
-    };
+//    View.OnClickListener mClick = new View.OnClickListener(){
+//        @Override
+//        public void onClick(View v) {
+//            switch(v.getId()) {
+//                case R.id.reg_member :
+//                    //DialogFragment dialog = Fragment111.newInstance(mMoimVO.getM_id(), null, null, null, null, null);
+//                    //dialog.show(getFragmentManager(), "회원등록");
+//                    getFragmentManager().beginTransaction().replace(R.id.container, new Fragment111(mMoimVO)).commitAllowingStateLoss();
+//                    break;
+//            }
+//        }
+//    };
 
     View.OnClickListener mMenuClick = new View.OnClickListener() {
         @Override
@@ -169,7 +172,7 @@ public class Fragment110 extends Fragment {
             KangApplication.sApp.soundButton();
             mMenu1.setSelected(false);
             mMenu2.setSelected(false);
-            mMenu3.setSelected(false);
+            //mMenu3.setSelected(false);
 
             Fragment mFragment;
 
@@ -184,9 +187,9 @@ public class Fragment110 extends Fragment {
                     mFragment = new Fragment111(mMoimVO);
                     getFragmentManager().beginTransaction().replace(R.id.container, mFragment).commitAllowingStateLoss();
                     break;
-                case R.id.menu3:
-                    mMenu3.setSelected(true);
-                    break;
+//                case R.id.menu3:
+//                    mMenu3.setSelected(true);
+//                    break;
                 default:
                     break;
             }

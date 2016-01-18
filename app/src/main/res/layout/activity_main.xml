@@ -35,8 +35,10 @@
 
     <LinearLayout
         android:id="@+id/submenu"
-        android:orientation="horizontal" android:visibility="gone"
-        android:layout_width="match_parent" android:layout_height="38dp">
+        android:layout_width="match_parent" android:layout_height="38dp"
+        android:layout_marginTop="1dp"
+        android:orientation="horizontal"
+        android:visibility="gone">
         <Button
             android:id="@+id/submenu1"
             style="@style/Main_Menu"
@@ -45,28 +47,34 @@
         <Button
             android:id="@+id/submenu2"
             style="@style/Main_Menu"
+            android:layout_marginLeft="1dp"
             android:text="회칙"
             android:onClick="subMenuClick"/>
         <Button
             android:id="@+id/submenu3"
             style="@style/Main_Menu"
+            android:layout_marginLeft="1dp"
             android:text="회계"
             android:onClick="subMenuClick"/>
         <Button
             android:id="@+id/submenu4"
             style="@style/Main_Menu"
+            android:layout_marginLeft="1dp"
             android:text="투표" />
         <Button
             android:id="@+id/submenu5"
             style="@style/Main_Menu"
+            android:layout_marginLeft="1dp"
             android:text="문자" />
         <Button
             android:id="@+id/submenu6"
             style="@style/Main_Menu"
+            android:layout_marginLeft="1dp"
             android:text="쪽지" />
         <Button
             android:id="@+id/submenu7"
             style="@style/Main_Menu"
+            android:layout_marginLeft="1dp"
             android:text="나는" />
     </LinearLayout>
 
@@ -85,18 +93,22 @@
             android:text="홈" />
         <Button
             android:id="@+id/menu2"
+            android:layout_marginLeft="1dp"
             style="@style/Main_Menu"
             android:text="모임등록" />
         <Button
             android:id="@+id/menu3"
+            android:layout_marginLeft="1dp"
             style="@style/Main_Menu"
             android:text="공지사항" />
         <Button
             android:id="@+id/menu4"
+            android:layout_marginLeft="1dp"
             style="@style/Main_Menu"
             android:text="도움말" />
         <Button
             android:id="@+id/menu5"
+            android:layout_marginLeft="1dp"
             style="@style/Main_Menu"
             android:text="불편신고" />
     </LinearLayout>

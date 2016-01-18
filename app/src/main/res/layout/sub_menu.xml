@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="40dp"
+    android:layout_marginTop="1dp"
     android:orientation="horizontal">
 
     <Button
@@ -11,11 +12,13 @@
     <Button
         android:id="@+id/menu2"
         android:layout_width="wrap_content"
+        android:layout_marginLeft="1dp"
         style="@style/Main_Menu"
         android:text="회원등록" />
     <Button
         android:id="@+id/menu3"
         android:layout_width="wrap_content"
+        android:layout_marginLeft="1dp"
         style="@style/Main_Menu"
         android:text="회원정보열람/수정/삭제" />
 
