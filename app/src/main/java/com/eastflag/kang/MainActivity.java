@@ -140,7 +140,7 @@ public class MainActivity extends Activity {
                             //010 모임 리스트 화면 이동
                             mMenu1.setSelected(true);
                             mFragment = new Fragment100();
-                            mFm.beginTransaction().replace(R.id.container, mFragment).commitAllowingStateLoss();
+                            mFm.beginTransaction().replace(R.id.container, mFragment).addToBackStack(null).commitAllowingStateLoss();
                         } else if ("001".equals(value)) {
                             //이용 비번 등록 화면
                         } else if ("002".equals(value)) {
@@ -157,7 +157,7 @@ public class MainActivity extends Activity {
         });
     }
 
-    public void showMenu(int selected) {
+    public void showMenu(int selected, int subSelected) {
         mMenu1.setSelected(false);
         mMenu2.setSelected(false);
         mMenu3.setSelected(false);
@@ -166,22 +166,40 @@ public class MainActivity extends Activity {
             case 1:
                 mMenu1.setSelected(true);
                 break;
+            case 2:
+                mMenu2.setSelected(true);
+                break;
+            case 3:
+                mMenu3.setSelected(true);
+                break;
+            case 5:
+                mMenu5.setSelected(true);
+                break;
+        }
+
+        if(subSelected>0) {
+            submenu1.setVisibility(View.VISIBLE);
+            showSubMenu(subSelected);
+        } else {
+            submenu1.setVisibility(View.GONE);
         }
     }
 
     public void showSubMenu(int selected) {
-        mSubmenu.setVisibility(View.VISIBLE);
-
         submenu1.setSelected(false);
         submenu2.setSelected(false);
-        switch(selected) {
+        submenu3.setSelected(false);
+        submenu4.setSelected(false);
+        submenu5.setSelected(false);
+        switch (selected) {
             case 1:
                 submenu1.setSelected(true);
                 break;
             case 2:
                 submenu2.setSelected(true);
                 break;
-            default:
+            case 3:
+                submenu3.setSelected(true);
                 break;
         }
     }
@@ -212,12 +230,12 @@ public class MainActivity extends Activity {
                 case R.id.menu1:
                     mMenu1.setSelected(true);
                     mFragment = new Fragment100();
-                    mFm.beginTransaction().replace(R.id.container, mFragment).commitAllowingStateLoss();
+                    mFm.beginTransaction().replace(R.id.container, mFragment).addToBackStack(null).commitAllowingStateLoss();
                     break;
                 case R.id.menu2:
                     mMenu2.setSelected(true);
                     mFragment = new Fragment200();
-                    mFm.beginTransaction().replace(R.id.container, mFragment).commitAllowingStateLoss();
+                    mFm.beginTransaction().replace(R.id.container, mFragment).addToBackStack(null).commitAllowingStateLoss();
                     break;
                 case R.id.menu3:
                     mMenu3.setSelected(true);
@@ -241,12 +259,12 @@ public class MainActivity extends Activity {
                 case R.id.submenu1:
                     showSubMenu(1);
                     mFragment = new Fragment110(selectedMoim);
-                    mFm.beginTransaction().replace(R.id.container, mFragment).commitAllowingStateLoss();
+                    mFm.beginTransaction().replace(R.id.container, mFragment).addToBackStack(null).commitAllowingStateLoss();
                     break;
                 case R.id.submenu2:
                     showSubMenu(2);
                     mFragment = new Fragment120();
-                    mFm.beginTransaction().replace(R.id.container, mFragment).commitAllowingStateLoss();
+                    mFm.beginTransaction().replace(R.id.container, mFragment).addToBackStack(null).commitAllowingStateLoss();
                     break;
             }
         }

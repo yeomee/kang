@@ -85,6 +85,7 @@ public class Fragment020 extends Fragment {
                         //모임리스트 화면 이동
                         getFragmentManager().beginTransaction()
                                 .replace(R.id.container, new Fragment100())
+                                .addToBackStack(null)
                                 .commitAllowingStateLoss();
                     } else {
                         Util.showToast(getActivity(), "비밀번호가 맞지않습니다");

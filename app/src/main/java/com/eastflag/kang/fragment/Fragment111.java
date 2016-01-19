@@ -24,8 +24,10 @@ import android.widget.TextView;
 import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxCallback;
 import com.androidquery.callback.AjaxStatus;
+import com.androidquery.util.AQUtility;
 import com.eastflag.kang.Constant;
 import com.eastflag.kang.KangApplication;
+import com.eastflag.kang.MainActivity;
 import com.eastflag.kang.R;
 import com.eastflag.kang.dto.MemberVO;
 import com.eastflag.kang.dto.MoimVO;
@@ -164,6 +166,7 @@ public class Fragment111 extends Fragment {
 
         mView = inflater.inflate(R.layout.fragment_111, container, false);
         mAq = new AQuery(mView);
+        AQUtility.setDebug(true);
         ButterKnife.bind(this, mView);
 
         mAdaptor = new ArrayAdapter<PositionVo>(getActivity(), R.layout.spinner, mPositionList);
@@ -173,8 +176,10 @@ public class Fragment111 extends Fragment {
 
         if(screenMode == MODE_REG) { // 등록 모드
             mMenu2.setSelected(true);
+            ((MainActivity)getActivity()).showMenu(1, 2);
         }
         else { // 수정 모드
+            ((MainActivity)getActivity()).showMenu(1, 3);
             mMenu3.setSelected(true);
 
             submit.setText("회원 수정");
@@ -340,7 +345,9 @@ public class Fragment111 extends Fragment {
                     else {
                         Util.showToast(getActivity(), "수정 되었습니다");
                     }
-                    getActivity().getFragmentManager().beginTransaction().replace(R.id.container, new Fragment110(mMoimVo)).commitAllowingStateLoss();
+                    getActivity().getFragmentManager().beginTransaction().replace(R.id.container, new Fragment110(mMoimVo))
+                            .addToBackStack(null)
+                            .commitAllowingStateLoss();
                 } else {
                     Util.showToast(getActivity(), object.getString("scname_msg"));
                 }
@@ -402,7 +409,9 @@ public class Fragment111 extends Fragment {
                 case R.id.menu1:
                     mMenu1.setSelected(true);
                     mFragment = new Fragment110(mMoimVo);
-                    getFragmentManager().beginTransaction().replace(R.id.container, mFragment).commitAllowingStateLoss();
+                    getFragmentManager().beginTransaction().replace(R.id.container, mFragment)
+                            .addToBackStack(null)
+                            .commitAllowingStateLoss();
                     break;
 //                case R.id.menu2:
 //                    mMenu2.setSelected(true);

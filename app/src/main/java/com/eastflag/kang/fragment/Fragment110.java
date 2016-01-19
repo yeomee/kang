@@ -19,6 +19,7 @@ import com.androidquery.callback.AjaxCallback;
 import com.androidquery.callback.AjaxStatus;
 import com.eastflag.kang.Constant;
 import com.eastflag.kang.KangApplication;
+import com.eastflag.kang.MainActivity;
 import com.eastflag.kang.R;
 import com.eastflag.kang.adapter.Adaptor110;
 import com.eastflag.kang.dto.MemberVO;
@@ -84,6 +85,8 @@ public class Fragment110 extends Fragment {
         //mMenu3.setOnClickListener(mMenuClick);
 
         //reg_member.setOnClickListener(mClick);
+
+        ((MainActivity)getActivity()).showMenu(1, 1);
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -185,7 +188,9 @@ public class Fragment110 extends Fragment {
                 case R.id.menu2:
                     mMenu2.setSelected(true);
                     mFragment = new Fragment111(mMoimVO);
-                    getFragmentManager().beginTransaction().replace(R.id.container, mFragment).commitAllowingStateLoss();
+                    getFragmentManager().beginTransaction().replace(R.id.container, mFragment)
+                            .addToBackStack(null)
+                            .commitAllowingStateLoss();
                     break;
 //                case R.id.menu3:
 //                    mMenu3.setSelected(true);

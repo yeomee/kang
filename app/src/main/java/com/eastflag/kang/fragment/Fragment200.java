@@ -59,6 +59,8 @@ public class Fragment200 extends Fragment {
         mAq = new AQuery(mView);
         ButterKnife.bind(this, mView);
 
+        ((MainActivity)getActivity()).showMenu(2, 0);
+
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -146,8 +148,10 @@ public class Fragment200 extends Fragment {
                         InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                         imm.hideSoftInputFromWindow(mView.getWindowToken(), 0);
                         //퀵메뉴 홈아이콘 선택
-                        ((MainActivity)getActivity()).showMenu(1);
-                        getActivity().getFragmentManager().beginTransaction().replace(R.id.container, new Fragment100()).commitAllowingStateLoss();
+                        ((MainActivity)getActivity()).showMenu(1, 0);
+                        getActivity().getFragmentManager().beginTransaction().replace(R.id.container, new Fragment100())
+                                .addToBackStack(null)
+                                .commitAllowingStateLoss();
                     }
 
                 } catch (JSONException e) {
