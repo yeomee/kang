@@ -39,38 +39,60 @@
         android:orientation="vertical"
         android:layout_width="match_parent" android:layout_height="match_parent"
         android:padding="10dp">
-            <EditText
-                android:id="@+id/mb_name"
-                style="@style/InputBox"
-                android:layout_margin="5dp"
-                android:hint="이름" />
-            <Spinner
-                android:id="@+id/mb_position"
-                android:layout_width="match_parent" android:layout_height="wrap_content"
-                android:spinnerMode="dropdown"
-                android:prompt="@string/position_prompt" />
-            <EditText
-                android:id="@+id/mb_pn"
-                style="@style/InputBox"
-                android:layout_margin="5dp"
-                android:hint="전화번호" />
-            <EditText
-                android:id="@+id/mb_add"
-                style="@style/InputBox"
-                android:layout_margin="5dp"
-                android:hint="주소" />
-            <TextView
-                android:id="@+id/mb_enter_ymd"
-                style="@style/InputBox"
-                android:layout_margin="5dp"
-                android:hint="회원가입일" />
-            <EditText
-                android:id="@+id/mb_actions"
-                style="@style/InputBox"
-                android:layout_height="70dp"
-                android:inputType="textMultiLine"
-                android:layout_margin="5dp"
-                android:hint="회원활동내역" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent" android:layout_height="wrap_content">
+            android:orientation="horizontal"
+
+            <LinearLayout
+                android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/mb_name"
+                    style="@style/InputBox"
+                    android:layout_margin="5dp"
+                    android:hint="이름" />
+
+                <Spinner
+                    android:id="@+id/mb_position"
+                    android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:spinnerMode="dropdown"
+                    android:prompt="@string/position_prompt" />
+
+                <EditText
+                    android:id="@+id/mb_pn"
+                    style="@style/InputBox"
+                    android:layout_margin="5dp"
+                    android:hint="전화번호" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/photo"
+                android:layout_width="140dp" android:layout_height="match_parent" />
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/mb_add"
+            style="@style/InputBox"
+            android:layout_margin="5dp"
+            android:hint="주소" />
+        <TextView
+            android:id="@+id/mb_enter_ymd"
+            style="@style/InputBox"
+            android:layout_margin="5dp"
+            android:hint="회원가입일" />
+        <EditText
+            android:id="@+id/mb_actions"
+            style="@style/InputBox"
+            android:layout_height="70dp"
+            android:inputType="textMultiLine"
+            android:layout_margin="5dp"
+            android:hint="회원활동내역" />
 
         <LinearLayout
             android:layout_width="match_parent" android:layout_height="wrap_content"

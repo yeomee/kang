@@ -5,10 +5,15 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +23,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -40,6 +46,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.lang.reflect.Member;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -55,6 +63,8 @@ import butterknife.OnClick;
  * 회원 등록 화면
  */
 public class Fragment111 extends Fragment {
+    final int REQ_CODE_SELECT_IMAGE=100;
+
     private final int MODE_REG = 0;
     private final int MODE_MODIFY = 1;
 
@@ -65,6 +75,7 @@ public class Fragment111 extends Fragment {
     @Bind(R.id.menu2) Button mMenu2;
     @Bind(R.id.menu3) Button mMenu3;
 
+    @Bind(R.id.photo) ImageView mb_photo;
     @Bind(R.id.mb_name) EditText mb_name;
     @Bind(R.id.mb_position) Spinner mb_position;
     @Bind(R.id.mb_pn) EditText mb_pn;
@@ -370,6 +381,59 @@ public class Fragment111 extends Fragment {
                 calendar.get(Calendar.DAY_OF_MONTH));
         datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         datePickerDialog.show();
+    }
+
+    @OnClick(R.id.photo) void selectPhoto() {
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE);
+        intent.setData(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, REQ_CODE_SELECT_IMAGE);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == REQ_CODE_SELECT_IMAGE) {
+
+            if(resultCode == getActivity().RESULT_OK) {
+
+                try {
+                    //Uri에서 이미지 이름을 얻어온다.
+                    //String name_Str = getImageNameToUri(data.getData());
+
+                    //이미지 데이터를 비트맵으로 받아온다.
+                    Bitmap image_bitmap 	= MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
+
+                    //배치해놓은 ImageView에 set
+                    mb_photo.setImageBitmap(image_bitmap);
+
+                    //Toast.makeText(getBaseContext(), "name_Str : "+name_Str , Toast.LENGTH_SHORT).show();
+                }
+                catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                catch (IOException e) {
+                    e.printStackTrace();
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public String getImageNameToUri(Uri data) {
+        String[] proj = { MediaStore.Images.Media.DATA };
+        Cursor cursor = getActivity().getContentResolver().query(data, proj, null, null, null);
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+
+        cursor.moveToFirst();
+
+        String imgPath = cursor.getString(column_index);
+        String imgName = imgPath.substring(imgPath.lastIndexOf("/")+1);
+
+        return imgName;
     }
 
     private DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
