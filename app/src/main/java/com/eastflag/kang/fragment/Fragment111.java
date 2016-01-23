@@ -1,18 +1,16 @@
 package com.eastflag.kang.fragment;
 
 
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.app.DialogFragment;
+import android.app.Fragment;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
@@ -44,11 +42,8 @@ import com.eastflag.kang.utils.Util;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.lang.reflect.Member;
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -75,6 +70,7 @@ public class Fragment111 extends Fragment {
     @Bind(R.id.menu2) Button mMenu2;
     @Bind(R.id.menu3) Button mMenu3;
 
+    @Bind(R.id.title) TextView title;
     @Bind(R.id.photo) ImageView mb_photo;
     @Bind(R.id.mb_name) EditText mb_name;
     @Bind(R.id.mb_position) Spinner mb_position;
@@ -99,6 +95,7 @@ public class Fragment111 extends Fragment {
     private String mbActions;
 
     private int screenMode;
+    private Bitmap mBitmapPhoto;
 
     public Fragment111() {
         // Required empty public constructor
@@ -188,10 +185,12 @@ public class Fragment111 extends Fragment {
         if(screenMode == MODE_REG) { // 등록 모드
             mMenu2.setSelected(true);
             ((MainActivity)getActivity()).showMenu(1, 2);
+            mb_photo.setVisibility(View.GONE);
         }
         else { // 수정 모드
-            ((MainActivity)getActivity()).showMenu(1, 3);
             mMenu3.setSelected(true);
+            ((MainActivity) getActivity()).showMenu(1, 3);
+            mb_photo.setVisibility(View.VISIBLE);
 
             submit.setText("회원 수정");
             delete.setVisibility(View.VISIBLE);
@@ -256,7 +255,7 @@ public class Fragment111 extends Fragment {
 
                 if (object.getInt("result") == 0) {
                     String scname_msg = object.getString("scname_msg1");
-                    //title.setText(scname_msg);
+                    title.setText(scname_msg);
 
                     JSONArray array = object.getJSONArray("position");
                     for(int i = 0; i < array.length(); ++i) {
@@ -335,6 +334,7 @@ public class Fragment111 extends Fragment {
         params.put("mb_actions", mb_actions.getText().toString());
         if(screenMode == MODE_MODIFY) {
             params.put("mb_id", mMemberVo.getMb_id());
+            params.put("mb_imgs", bitmapToByteArray(mBitmapPhoto));
         }
         Log.d("LDK", params.toString());
 
@@ -370,6 +370,13 @@ public class Fragment111 extends Fragment {
         });
     }
 
+    private byte[] bitmapToByteArray(Bitmap bitmap) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
+        return byteArray;
+    }
+
     @OnClick(R.id.mb_enter_ymd) void enter_ymd() {
         final GregorianCalendar calendar = new GregorianCalendar();
 
@@ -398,29 +405,80 @@ public class Fragment111 extends Fragment {
 
             if(resultCode == getActivity().RESULT_OK) {
 
-                try {
-                    //Uri에서 이미지 이름을 얻어온다.
-                    //String name_Str = getImageNameToUri(data.getData());
+//                try {
+                    Uri selectedImage = data.getData();
+                    String[] filePathColumn = { MediaStore.Images.Media.DATA };
+
+                    // Get the cursor
+                    Cursor cursor = getActivity().getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+                    // Move to first row
+                    cursor.moveToFirst();
+
+                    int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                    String filePath = cursor.getString(columnIndex);
+                    cursor.close();
+
+                    // 이미지 메타정보 얻어오기
+                    // First decode with inJustDecodeBounds=true to check dimensions
+                    BitmapFactory.Options options = new BitmapFactory.Options();
+                    options.inJustDecodeBounds = true;
+                    //BitmapFactory.decodeResource(getResources(), R.id.myimage, options);
+                    BitmapFactory.decodeFile(filePath, options);
+                    int imageHeight = options.outHeight;
+                    int imageWidth = options.outWidth;
+                    String imageType = options.outMimeType;
+
+                    // Calculate inSampleSize
+                    int reqWidth = mb_photo.getWidth();
+                    int reqHeight = mb_photo.getHeight();
+                    options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
+
+                    // Decode bitmap with inSampleSize set
+                    options.inJustDecodeBounds = false;
+                    mBitmapPhoto = BitmapFactory.decodeFile(filePath, options);
+
 
                     //이미지 데이터를 비트맵으로 받아온다.
-                    Bitmap image_bitmap 	= MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
+                    //Bitmap image_bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
 
                     //배치해놓은 ImageView에 set
-                    mb_photo.setImageBitmap(image_bitmap);
+                    mb_photo.setImageBitmap(mBitmapPhoto);
 
                     //Toast.makeText(getBaseContext(), "name_Str : "+name_Str , Toast.LENGTH_SHORT).show();
-                }
-                catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-                catch (IOException e) {
-                    e.printStackTrace();
-                }
-                catch (Exception e) {
-                    e.printStackTrace();
-                }
+//                }
+//                catch (FileNotFoundException e) {
+//                    e.printStackTrace();
+//                }
+//                catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//                catch (Exception e) {
+//                    e.printStackTrace();
+//                }
             }
         }
+    }
+
+    private int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
+        // Raw height and width of image
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        int inSampleSize = 1;
+
+        if (height > reqHeight || width > reqWidth) {
+
+            final int halfHeight = height / 2;
+            final int halfWidth = width / 2;
+
+            // Calculate the largest inSampleSize value that is a power of 2 and keeps both
+            // height and width larger than the requested height and width.
+            while ((halfHeight / inSampleSize) > reqHeight
+                    && (halfWidth / inSampleSize) > reqWidth) {
+                inSampleSize *= 2;
+            }
+        }
+
+        return inSampleSize;
     }
 
     public String getImageNameToUri(Uri data) {

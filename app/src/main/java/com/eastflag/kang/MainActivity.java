@@ -204,6 +204,10 @@ public class MainActivity extends Activity {
         }
     }
 
+    public void showSubMenu() {
+        mSubmenu.setVisibility(View.VISIBLE);
+    }
+
     public void hideSubMenu() {
         mSubmenu.setVisibility(View.GONE);
     }

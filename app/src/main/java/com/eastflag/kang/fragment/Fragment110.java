@@ -77,6 +77,9 @@ public class Fragment110 extends Fragment {
 
         mAdaptor = new Adaptor110(getActivity(), mMemberList);
         mListView.setAdapter(mAdaptor);
+
+        ((MainActivity)getActivity()).showSubMenu();
+
         moim_title.setText(mMoimVO.getMn());
 
         mMenu1.setSelected(true);

@@ -28,7 +28,7 @@
     <include layout="@layout/sub_menu" />
 
     <TextView
-        android:id="@+id/F010_title"
+        android:id="@+id/title"
         android:layout_width="match_parent" android:layout_height="wrap_content"
         android:padding="5dp"
         android:gravity="center_vertical|left" android:background="#AA6DCFFF"
@@ -72,7 +72,9 @@
 
             <ImageView
                 android:id="@+id/photo"
-                android:layout_width="140dp" android:layout_height="match_parent" />
+                android:layout_width="140dp" android:layout_height="match_parent"
+                android:background="@drawable/ic_contact_picture"
+                android:visibility="gone" />
 
         </LinearLayout>
 

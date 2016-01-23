@@ -70,6 +70,7 @@ public class Fragment100 extends Fragment {
         mAdaptor = new Adaptor100(getActivity(), mMoimList, mListener);
         mListView.setAdapter(mAdaptor);
 
+        ((MainActivity)getActivity()).hideSubMenu();
         ((MainActivity)getActivity()).showMenu(1, 0);
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
