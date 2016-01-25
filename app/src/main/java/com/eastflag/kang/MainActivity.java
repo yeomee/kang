@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxCallback;
@@ -42,6 +43,8 @@ public class MainActivity extends Activity {
     private AQuery mAq;
     private Fragment mFragment;
     private FragmentManager mFm;
+
+    @Bind(R.id.title) TextView mTitle;
 
     @Bind(R.id.menu) LinearLayout mMenu;
     @Bind(R.id.menu1) Button mMenu1;
@@ -212,6 +215,10 @@ public class MainActivity extends Activity {
                 submenu3.setSelected(true);
                 break;
         }
+    }
+
+    public void setTitle(String title) {
+        mTitle.setText(title);
     }
 
     public void showSubMenu() {

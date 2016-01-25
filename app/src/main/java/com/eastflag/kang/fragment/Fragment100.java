@@ -61,8 +61,10 @@ public class Fragment100 extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        ((MainActivity)getActivity()).setTitle("나의 모임 리스트");
+
         mView = inflater.inflate(R.layout.fragment_100, container, false);
         mAq = new AQuery(mView);
         ButterKnife.bind(this, mView);
@@ -101,7 +103,7 @@ public class Fragment100 extends Fragment {
         params.put("token", PreferenceUtil.getInstance(getActivity()).getToken()); //폰모델
         Log.d("LDK", params.toString());
 
-        mAq.ajax(url, params, JSONObject.class, new AjaxCallback<JSONObject>(){
+        mAq.ajax(url, params, JSONObject.class, new AjaxCallback<JSONObject>() {
             @Override
             public void callback(String url, JSONObject object, AjaxStatus status) {
                 try {
@@ -111,11 +113,11 @@ public class Fragment100 extends Fragment {
                     }
                     Log.d("LDK", object.toString(1));
                     //데이터 존재하지 않음
-                    if(object.getInt("result") == 0) {
+                    if (object.getInt("result") == 0) {
                         String scname_msg = object.getString("scname_msg");
                         title.setText(scname_msg);
                         JSONArray array = object.getJSONArray("value");
-                        for(int i=0; i < array.length(); ++i) {
+                        for (int i = 0; i < array.length(); ++i) {
                             MoimVO moim = new MoimVO();
                             JSONObject json = array.getJSONObject(i);
                             moim.setM_id(json.getString("m_id"));

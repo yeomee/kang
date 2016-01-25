@@ -1,7 +1,6 @@
 package com.eastflag.kang.adapter;
 
 import android.app.Activity;
-import android.app.DialogFragment;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;

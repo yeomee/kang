@@ -1,9 +1,7 @@
 package com.eastflag.kang.fragment;
 
 import android.annotation.SuppressLint;
-import android.app.DialogFragment;
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -71,10 +69,12 @@ public class Fragment110 extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         mView = inflater.inflate(R.layout.fragment_110, container, false);
         mAq = new AQuery(mView);
         ButterKnife.bind(this, mView);
 
+        mMemberList.clear();
         mAdaptor = new Adaptor110(getActivity(), mMemberList);
         mListView.setAdapter(mAdaptor);
 
@@ -133,6 +133,7 @@ public class Fragment110 extends Fragment {
                     if (object.getInt("result") == 0) {
                         String scname_msg = object.getString("scname_msg");
                         title.setText(scname_msg);
+                        ((MainActivity)getActivity()).setTitle(object.getString("m_name"));
 
                         JSONArray array = object.getJSONArray("value");
                         for (int i = 0; i < array.length(); ++i) {

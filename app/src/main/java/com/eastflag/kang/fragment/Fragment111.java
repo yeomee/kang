@@ -172,6 +172,8 @@ public class Fragment111 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+        ((MainActivity)getActivity()).setTitle(mMoimVo.getMn());
+
         mView = inflater.inflate(R.layout.fragment_111, container, false);
         mAq = new AQuery(mView);
         AQUtility.setDebug(true);
@@ -225,7 +227,12 @@ public class Fragment111 extends Fragment {
 
     public void getPositionList() {
         String url;
-        url = Constant.HOST + Constant.API_111_SCENE;
+        if(screenMode == MODE_REG) {
+            url = Constant.HOST + Constant.API_111_REG_SCENE;
+        }
+        else {
+            url = Constant.HOST + Constant.API_111_MOD_SCENE;
+        }
 
         Log.d("LDK", "url:" + url);
         Map<String, Object> params = new HashMap<String, Object>();
@@ -233,6 +240,9 @@ public class Fragment111 extends Fragment {
         params.put("paid", Util.getAndroidId(getActivity())); //안드로이드 아이디
         params.put("token", PreferenceUtil.getInstance(getActivity()).getToken()); //폰모델
         params.put("m_id", mMoimVo.getM_id());
+        if(screenMode == MODE_MODIFY) {
+            params.put("mb_id", mMemberVo.getMb_id());
+        }
         Log.d("LDK", params.toString());
 
         mAq.ajax(url, params, JSONObject.class, new AjaxCallback<JSONObject>() {
@@ -254,31 +264,53 @@ public class Fragment111 extends Fragment {
                 mPositionList.add(position);
 
                 if (object.getInt("result") == 0) {
-                    String scname_msg = object.getString("scname_msg1");
-                    title.setText(scname_msg);
-
-                    JSONArray array = object.getJSONArray("position");
-                    for(int i = 0; i < array.length(); ++i) {
-                        JSONObject json = array.getJSONObject(i);
-                        position = new PositionVo();
-
-                        position.setPo_cd(json.getString("po_cd"));
-                        position.setPo_name(json.getString("po_name"));
-
-                        mPositionList.add(position);
-                    }
-
                     if(screenMode == MODE_REG) {
+                        String scname_msg = object.getString("scname_msg1");
+                        title.setText(scname_msg);
+
+                        JSONArray array = object.getJSONArray("position");
+                        for(int i = 0; i < array.length(); ++i) {
+                            JSONObject json = array.getJSONObject(i);
+                            position = new PositionVo();
+
+                            position.setPo_cd(json.getString("po_cd"));
+                            position.setPo_name(json.getString("po_name"));
+
+                            mPositionList.add(position);
+                        }
+
                         mb_position.setSelection(0);
                     }
                     else {
+                        String scname_msg = object.getString("scname_msg");
+                        title.setText(scname_msg);
+
+                        mb_actions.setText(object.getString("mb_actions"));
+                        mb_add.setText(object.getString("mb_add"));
+                        mb_enter_ymd.setText(object.getString("mb_enter_ymd"));
+
+                        JSONArray array = object.getJSONArray("position_list");
+                        for(int i = 0; i < array.length(); ++i) {
+                            JSONObject json = array.getJSONObject(i);
+                            position = new PositionVo();
+
+                            position.setPo_cd(json.getString("po_cd"));
+                            position.setPo_name(json.getString("po_name"));
+
+                            mPositionList.add(position);
+                        }
+
+                        String mbPosition = object.getString("mb_position");
                         for(int i = 0; i < mAdaptor.getCount(); i++) {
                             PositionVo positionVo = mAdaptor.getItem(i);
-                            if(positionVo.getPo_name().equals(mMemberVo.getMy_position())) {
+                            if(positionVo.getPo_name().equals(mbPosition)) {
                                 mb_position.setSelection(i);
                                 break;
                             }
                         }
+
+                        mb_name.setText(object.getString("mb_name"));
+                        mb_pn.setText(object.getString("mb_pn"));
                     }
 
                     mAdaptor.notifyDataSetChanged();

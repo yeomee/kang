@@ -12,13 +12,13 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxCallback;
 import com.androidquery.callback.AjaxStatus;
 import com.eastflag.kang.Constant;
+import com.eastflag.kang.MainActivity;
 import com.eastflag.kang.R;
 import com.eastflag.kang.listener.OnDismiss;
 import com.eastflag.kang.utils.PreferenceUtil;
@@ -78,6 +78,9 @@ public class Fragment201 extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+
+        ((MainActivity)getActivity()).setTitle("나의 모임 리스트");
+
         m_id = getArguments().getString("m_id");
         mMoimName = getArguments().getString("moim_name");
         mAdmName = getArguments().getString("adm_name");

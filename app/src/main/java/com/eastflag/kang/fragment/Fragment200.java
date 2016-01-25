@@ -53,8 +53,10 @@ public class Fragment200 extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        ((MainActivity)getActivity()).setTitle("모임 등록");
+
         mView = inflater.inflate(R.layout.fragment_200, container, false);
         mAq = new AQuery(mView);
         ButterKnife.bind(this, mView);
