@@ -13,28 +13,28 @@
             <TextView
                 android:id="@+id/input11"
                 android:layout_width="30dp" android:layout_height="30dp"
-                android:background="#FF996622"/>
+                android:background="@color/yellow"/>
             <Space
                 android:layout_width="30dp"
                 android:layout_height="1dp" />
             <TextView
                 android:id="@+id/input12"
                 android:layout_width="30dp" android:layout_height="30dp"
-                android:background="#FF996622"/>
+                android:background="@color/yellow"/>
             <Space
                 android:layout_width="30dp"
                 android:layout_height="1dp" />
             <TextView
                 android:id="@+id/input13"
                 android:layout_width="30dp" android:layout_height="30dp"
-                android:background="#FF996622"/>
+                android:background="@color/yellow"/>
             <Space
                 android:layout_width="30dp"
                 android:layout_height="1dp" />
             <TextView
                 android:id="@+id/input14"
                 android:layout_width="30dp" android:layout_height="30dp"
-                android:background="#FF996622"/>
+                android:background="@color/yellow"/>
         </LinearLayout>
         <Space
             android:layout_width="1dp"
@@ -48,28 +48,28 @@
             <TextView
                 android:id="@+id/input21"
                 android:layout_width="30dp" android:layout_height="30dp"
-                android:background="#FF996622"/>
+                android:background="@color/yellow"/>
             <Space
                 android:layout_width="30dp"
                 android:layout_height="1dp" />
             <TextView
                 android:id="@+id/input22"
                 android:layout_width="30dp" android:layout_height="30dp"
-                android:background="#FF996622"/>
+                android:background="@color/yellow"/>
             <Space
                 android:layout_width="30dp"
                 android:layout_height="1dp" />
             <TextView
                 android:id="@+id/input23"
                 android:layout_width="30dp" android:layout_height="30dp"
-                android:background="#FF996622"/>
+                android:background="@color/yellow"/>
             <Space
                 android:layout_width="30dp"
                 android:layout_height="1dp" />
             <TextView
                 android:id="@+id/input24"
                 android:layout_width="30dp" android:layout_height="30dp"
-                android:background="#FF996622"/>
+                android:background="@color/yellow"/>
         </LinearLayout>
     </LinearLayout>
 

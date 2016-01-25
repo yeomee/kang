@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxCallback;
@@ -42,6 +43,7 @@ public class MainActivity extends Activity {
     private Fragment mFragment;
     private FragmentManager mFm;
 
+    @Bind(R.id.menu) LinearLayout mMenu;
     @Bind(R.id.menu1) Button mMenu1;
     @Bind(R.id.menu2) Button mMenu2;
     @Bind(R.id.menu3) Button mMenu3;
@@ -90,7 +92,7 @@ public class MainActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-        if(mFm.getBackStackEntryCount() > 0) {
+        if(mFm.getBackStackEntryCount() > 1) {
             mFm.popBackStack();
         } else {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -136,9 +138,11 @@ public class MainActivity extends Activity {
                     if (object.getInt("result") == 0) {
                         String value = object.getString("value");
                         if ("000".equals(value)) {
+                            //토큰 등록
                             PreferenceUtil.getInstance(MainActivity.this).putToken(object.getString("token"));
+                            //메인메뉴 display & 홈 탭 선택
+                            showMenu(1, 0);
                             //010 모임 리스트 화면 이동
-                            mMenu1.setSelected(true);
                             mFragment = new Fragment100();
                             mFm.beginTransaction().replace(R.id.container, mFragment).addToBackStack(null).commitAllowingStateLoss();
                         } else if ("001".equals(value)) {
@@ -158,6 +162,12 @@ public class MainActivity extends Activity {
     }
 
     public void showMenu(int selected, int subSelected) {
+        if(selected > 0) {
+            mMenu.setVisibility(View.VISIBLE);
+        } else {
+            mMenu.setVisibility(View.GONE);
+        }
+
         mMenu1.setSelected(false);
         mMenu2.setSelected(false);
         mMenu3.setSelected(false);

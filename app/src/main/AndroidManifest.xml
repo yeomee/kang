@@ -10,7 +10,7 @@
     <application
         android:name=".KangApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/logo"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
@@ -22,10 +22,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".activity.Activity111"
-            android:label="@string/title_activity_111" >
         </activity>
     </application>
 

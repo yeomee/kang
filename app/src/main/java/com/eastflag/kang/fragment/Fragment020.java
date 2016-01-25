@@ -13,6 +13,8 @@ import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxCallback;
 import com.androidquery.callback.AjaxStatus;
 import com.eastflag.kang.Constant;
+import com.eastflag.kang.KangApplication;
+import com.eastflag.kang.MainActivity;
 import com.eastflag.kang.R;
 import com.eastflag.kang.dto.MoimVO;
 import com.eastflag.kang.utils.PreferenceUtil;
@@ -82,13 +84,17 @@ public class Fragment020 extends Fragment {
                     Log.d("LDK", object.toString(1));
 
                     if(object.getInt("result") == 0) {
+                        //토큰값 저장
+                        PreferenceUtil.getInstance(getActivity()).putToken(object.getString("token"));
+                        //탭메뉴 display
+                        ((MainActivity)getActivity()).showMenu(1, 0);
                         //모임리스트 화면 이동
                         getFragmentManager().beginTransaction()
                                 .replace(R.id.container, new Fragment100())
-                                .addToBackStack(null)
                                 .commitAllowingStateLoss();
                     } else {
                         Util.showToast(getActivity(), "비밀번호가 맞지않습니다");
+
                     }
 
                 } catch (JSONException e) {
@@ -100,6 +106,7 @@ public class Fragment020 extends Fragment {
 
     @OnClick({R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4, R.id.btn5, R.id.btn6, R.id.btn7, R.id.btn8, R.id.btn9, R.id.btn0, R.id.btnCL, R.id.btnBS})
     void onClick(View v) {
+        KangApplication.sApp.soundButton();
         switch(v.getId()) {
             case R.id.btn1:
                 mInput.append("1");
@@ -136,7 +143,9 @@ public class Fragment020 extends Fragment {
                 break;
             case R.id.btnBS:
                 if(mInput.length() > 0) {
-                    mInput.substring(0, mInput.length() - 1);
+                    String str = mInput.substring(0, mInput.length() - 1);
+                    mInput = new StringBuffer();
+                    mInput.append(str);
                 }
                 break;
             default:
@@ -145,10 +154,10 @@ public class Fragment020 extends Fragment {
 
         Log.d("LDK", mInput.length() + "," + mInput.toString());
 
-        input11.setBackgroundColor(mInput.length() >= 1 ? Color.BLACK : 0xFF996622);
-        input12.setBackgroundColor(mInput.length() >= 2 ? Color.BLACK : 0xFF996622);
-        input13.setBackgroundColor(mInput.length() >= 3 ? Color.BLACK : 0xFF996622);
-        input14.setBackgroundColor(mInput.length() >= 4 ? Color.BLACK : 0xFF996622);
+        input11.setBackgroundColor(mInput.length() >= 1 ? Color.BLACK : Color.YELLOW);
+        input12.setBackgroundColor(mInput.length() >= 2 ? Color.BLACK : Color.YELLOW);
+        input13.setBackgroundColor(mInput.length() >= 3 ? Color.BLACK : Color.YELLOW);
+        input14.setBackgroundColor(mInput.length() >= 4 ? Color.BLACK : Color.YELLOW);
 
         if(mInput.length() == 4) {
             getPassword();

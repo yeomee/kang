@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="transparent">#00000000</color>
-    <color name="white">#FFF0F0F0</color>
+    <color name="white">#FFFFFFFF</color>
     <color name="orange">#FFFF7127</color>
     <color name="gold">#FEA942</color>
-    <color name="yellow">#FFF0F000</color>
+    <color name="yellow">#FFFFFF00</color>
     <color name="green">#32A844</color>
     <color name="red">#F04B50</color>
 </resources>
