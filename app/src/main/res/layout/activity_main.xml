@@ -22,9 +22,9 @@
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            android:layout_centerVertical="true" android:layout_toRightOf="@id/logoText"
             android:layout_marginLeft="20dp"
-            android:text="환영합니다" android:textSize="22sp" android:textStyle="bold"/>
+            android:text="환영합니다" android:textSize="20sp" android:textStyle="bold"/>
 <!--        <TextView
             android:id="@+id/btnName"
             android:layout_width="wrap_content" android:layout_height="wrap_content"

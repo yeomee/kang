@@ -186,12 +186,12 @@ public class Fragment111 extends Fragment {
 
         if(screenMode == MODE_REG) { // 등록 모드
             mMenu2.setSelected(true);
-            ((MainActivity)getActivity()).showMenu(1, 2);
+            ((MainActivity)getActivity()).showMenu(1, 1);
             mb_photo.setVisibility(View.GONE);
         }
         else { // 수정 모드
             mMenu3.setSelected(true);
-            ((MainActivity) getActivity()).showMenu(1, 3);
+            ((MainActivity) getActivity()).showMenu(1, 1);
             mb_photo.setVisibility(View.VISIBLE);
 
             submit.setText("회원 수정");
