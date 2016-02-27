@@ -12,16 +12,16 @@ import com.eastflag.kang.R;
 /**
  * 도움말 화면
  */
-public class Fragment400 extends DialogFragment {
+public class HelpFragment extends DialogFragment {
 
 
-    public Fragment400() {
+    public HelpFragment() {
         // Required empty public constructor
     }
 
 
-    public static Fragment400 newInstance(int title) {
-        Fragment400 frag = new Fragment400();
+    public static HelpFragment newInstance(int title) {
+        HelpFragment frag = new HelpFragment();
         Bundle args = new Bundle();
         args.putInt("title", title);
         frag.setArguments(args);
@@ -32,7 +32,7 @@ public class Fragment400 extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         int title = getArguments().getInt("title");
 
-        View view = View.inflate(getActivity(), R.layout.fragment_400, null);
+        View view = View.inflate(getActivity(), R.layout.fragment_help, null);
 
         Dialog dialog = new AlertDialog.Builder(getActivity())
                 .setTitle(title)

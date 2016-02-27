@@ -37,7 +37,7 @@ import butterknife.ButterKnife;
 /**
  * 홈화면: 모임리스트
  */
-public class MoimMainFragment extends Fragment {
+public class MoimListFragment extends Fragment {
 
     private View mView;
     private AQuery mAq;
@@ -48,7 +48,7 @@ public class MoimMainFragment extends Fragment {
 
     private MoimListAdaptor mAdaptor;
 
-    public MoimMainFragment() {
+    public MoimListFragment() {
         // Required empty public constructor
     }
 
@@ -65,7 +65,7 @@ public class MoimMainFragment extends Fragment {
 
         ((MainActivity)getActivity()).setTitle("나의 모임 리스트");
 
-        mView = inflater.inflate(R.layout.fragment_moim_main, container, false);
+        mView = inflater.inflate(R.layout.fragment_moim_list, container, false);
         mAq = new AQuery(mView);
         ButterKnife.bind(this, mView);
 
@@ -83,7 +83,7 @@ public class MoimMainFragment extends Fragment {
                 } else {
                     ((MainActivity) getActivity()).showSubMenu(1);
                     ((MainActivity) getActivity()).setSelectedMoim(mMoimList.get(position));
-                    getActivity().getFragmentManager().beginTransaction().replace(R.id.container, new MoimViewFragment(mMoimList.get(position)))
+                    getActivity().getFragmentManager().beginTransaction().replace(R.id.container, new MemberListFragment(mMoimList.get(position)))
                             .addToBackStack(null)
                             .commitAllowingStateLoss();
                 }

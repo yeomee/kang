@@ -168,7 +168,7 @@ public class MoimAddFragment extends Fragment {
                         imm.hideSoftInputFromWindow(mView.getWindowToken(), 0);
                         //퀵메뉴 홈아이콘 선택
                         ((MainActivity)getActivity()).showMenu(1, 0);
-                        getActivity().getFragmentManager().beginTransaction().replace(R.id.container, new MoimMainFragment())
+                        getActivity().getFragmentManager().beginTransaction().replace(R.id.container, new MoimListFragment())
                                 .addToBackStack(null)
                                 .commitAllowingStateLoss();
                     }

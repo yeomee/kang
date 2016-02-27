@@ -388,7 +388,7 @@ public class MemberAddFragment extends Fragment {
                     else {
                         Util.showToast(getActivity(), "수정 되었습니다");
                     }
-                    getActivity().getFragmentManager().beginTransaction().replace(R.id.container, new MoimViewFragment(mMoimVo))
+                    getActivity().getFragmentManager().beginTransaction().replace(R.id.container, new MemberListFragment(mMoimVo))
                             .addToBackStack(null)
                             .commitAllowingStateLoss();
                 } else {
@@ -562,7 +562,7 @@ public class MemberAddFragment extends Fragment {
             switch(v.getId()) {
                 case R.id.menu1:
                     mMenu1.setSelected(true);
-                    mFragment = new MoimViewFragment(mMoimVo);
+                    mFragment = new MemberListFragment(mMoimVo);
                     getFragmentManager().beginTransaction().replace(R.id.container, mFragment)
                             .addToBackStack(null)
                             .commitAllowingStateLoss();

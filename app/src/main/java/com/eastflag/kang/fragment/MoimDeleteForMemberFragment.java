@@ -61,7 +61,7 @@ public class MoimDeleteForMemberFragment extends Fragment {
 
         ((MainActivity)getActivity()).setTitle("나의 모임 리스트");
 
-        mView = inflater.inflate(R.layout.fragment_moim_main, container, false);
+        mView = inflater.inflate(R.layout.fragment_moim_list, container, false);
         mAq = new AQuery(mView);
         ButterKnife.bind(this, mView);
         AQUtility.setDebug(true);

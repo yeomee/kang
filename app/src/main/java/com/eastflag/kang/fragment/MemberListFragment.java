@@ -39,7 +39,7 @@ import butterknife.ButterKnife;
 /**
  * 회원 : 회원 리스트 조회화면
  */
-public class MoimViewFragment extends Fragment {
+public class MemberListFragment extends Fragment {
 
     private View mView;
     private AQuery mAq;
@@ -51,18 +51,16 @@ public class MoimViewFragment extends Fragment {
 
     @Bind(R.id.title) TextView title;
     @Bind(R.id.listView) ListView mListView;
-    //@Bind(R.id.reg_member) View reg_member;
-    @Bind(R.id.moim_title) TextView moim_title;
 
     private Adaptor110 mAdaptor;
     private MoimVO mMoimVO;
 
-    public MoimViewFragment() {
+    public MemberListFragment() {
         // Required empty public constructor
     }
 
     @SuppressLint("ValidFragment")
-    public MoimViewFragment(MoimVO moimVO) {
+    public MemberListFragment(MoimVO moimVO) {
         mMoimVO = moimVO;
     }
 
@@ -70,7 +68,7 @@ public class MoimViewFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        mView = inflater.inflate(R.layout.fragment_moim_view, container, false);
+        mView = inflater.inflate(R.layout.fragment_member_list, container, false);
         mAq = new AQuery(mView);
         ButterKnife.bind(this, mView);
 
@@ -79,8 +77,6 @@ public class MoimViewFragment extends Fragment {
         mListView.setAdapter(mAdaptor);
 
         ((MainActivity)getActivity()).showSubMenu();
-
-        moim_title.setText(mMoimVO.getMn());
 
         mMenu1.setSelected(true);
         //mMenu1.setOnClickListener(mMenuClick);
@@ -186,7 +182,7 @@ public class MoimViewFragment extends Fragment {
             switch(v.getId()) {
 //                case R.id.menu1:
 //                    mMenu1.setSelected(true);
-//                    mFragment = new MoimMainFragment();
+//                    mFragment = new MoimListFragment();
 //                    mFm.beginTransaction().replace(R.id.container, mFragment).commitAllowingStateLoss();
 //                    break;
                 case R.id.menu2:

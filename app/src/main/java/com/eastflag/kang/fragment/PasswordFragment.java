@@ -88,7 +88,7 @@ public class PasswordFragment extends Fragment {
                         ((MainActivity)getActivity()).showMenu(1, 0);
                         //모임리스트 화면 이동
                         getFragmentManager().beginTransaction()
-                                .replace(R.id.container, new MoimMainFragment())
+                                .replace(R.id.container, new MoimListFragment())
                                 .commitAllowingStateLoss();
                     } else {
                         Util.showToast(getActivity(), "비밀번호가 맞지않습니다");

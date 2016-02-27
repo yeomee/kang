@@ -19,10 +19,10 @@ import com.androidquery.callback.AjaxStatus;
 import com.eastflag.kang.dto.MoimVO;
 import com.eastflag.kang.fragment.MoimAddFragment;
 import com.eastflag.kang.fragment.MoimDeleteForMemberFragment;
-import com.eastflag.kang.fragment.MoimMainFragment;
-import com.eastflag.kang.fragment.MoimViewFragment;
+import com.eastflag.kang.fragment.MoimListFragment;
+import com.eastflag.kang.fragment.MemberListFragment;
 import com.eastflag.kang.fragment.Fragment120;
-import com.eastflag.kang.fragment.Fragment400;
+import com.eastflag.kang.fragment.HelpFragment;
 import com.eastflag.kang.fragment.IntroFragment;
 import com.eastflag.kang.fragment.PasswordFragment;
 import com.eastflag.kang.fragment.ServerWorkingFragment;
@@ -148,7 +148,7 @@ public class MainActivity extends Activity {
                             //메인메뉴 display & 홈 탭 선택
                             showMenu(1, 0);
                             //010 모임 리스트 화면 이동
-                            mFragment = new MoimMainFragment();
+                            mFragment = new MoimListFragment();
                             mFm.beginTransaction().replace(R.id.container, mFragment).addToBackStack(null).commitAllowingStateLoss();
                         } else if ("001".equals(value)) {
                             //이용 비번 등록 화면
@@ -240,7 +240,7 @@ public class MainActivity extends Activity {
     }
 
     @OnClick(R.id.menu4) void onClickMenu4() {
-        DialogFragment frag = Fragment400.newInstance(R.string.help_title);
+        DialogFragment frag = HelpFragment.newInstance(R.string.help_title);
         frag.show(getFragmentManager(), "show");
     }
 
@@ -256,7 +256,7 @@ public class MainActivity extends Activity {
             switch(v.getId()) {
                 case R.id.menu1:
                     mMenu1.setSelected(true);
-                    mFragment = new MoimMainFragment();
+                    mFragment = new MoimListFragment();
                     mFm.beginTransaction().replace(R.id.container, mFragment).addToBackStack(null).commitAllowingStateLoss();
                     break;
                 case R.id.menu2:
@@ -271,7 +271,7 @@ public class MainActivity extends Activity {
                     break;
                 case R.id.menu5:
 //                    mMenu5.setSelected(true);
-//                    mFragment = new MoimViewFragment();
+//                    mFragment = new MemberListFragment();
 //                    mFm.beginTransaction().replace(R.id.container, mFragment).commitAllowingStateLoss();
                     break;
                 default:
@@ -287,7 +287,7 @@ public class MainActivity extends Activity {
             switch(v.getId()) {
                 case R.id.submenu1:
                     showSubMenu(1);
-                    mFragment = new MoimViewFragment(selectedMoim);
+                    mFragment = new MemberListFragment(selectedMoim);
                     mFm.beginTransaction().replace(R.id.container, mFragment).addToBackStack(null).commitAllowingStateLoss();
                     break;
                 case R.id.submenu2:
