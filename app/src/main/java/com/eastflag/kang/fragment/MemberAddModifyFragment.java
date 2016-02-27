@@ -132,7 +132,7 @@ public class MemberAddModifyFragment extends Fragment {
         getPositionList();
 
         //관리자가 아니면 수정,삭제 버튼 비활성화
-        if ("n".equals(mMemberVo.getAdmin_yn())) {
+        if ("n".equals(mMoimVo.getAdm_yn())) {
             layoutSubmit.setVisibility(View.GONE);
         }
 
@@ -164,15 +164,6 @@ public class MemberAddModifyFragment extends Fragment {
         }
 
         mMenu1.setOnClickListener(mMenuClick);
-        //mMenu2.setOnClickListener(mMenuClick);
-        //mMenu3.setOnClickListener(mMenuClick);
-
-//        submit.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                submit();
-//            }
-//        });
 
         return mView;
     }
