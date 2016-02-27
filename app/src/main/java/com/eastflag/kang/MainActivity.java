@@ -17,13 +17,13 @@ import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxCallback;
 import com.androidquery.callback.AjaxStatus;
 import com.eastflag.kang.dto.MoimVO;
-import com.eastflag.kang.fragment.Fragment100;
-import com.eastflag.kang.fragment.Fragment110;
+import com.eastflag.kang.fragment.MoimAddFragment;
+import com.eastflag.kang.fragment.MoimMainFragment;
+import com.eastflag.kang.fragment.MoimViewFragment;
 import com.eastflag.kang.fragment.Fragment120;
-import com.eastflag.kang.fragment.Fragment200;
 import com.eastflag.kang.fragment.Fragment400;
-import com.eastflag.kang.fragment.MainFragment;
-import com.eastflag.kang.fragment.Fragment020;
+import com.eastflag.kang.fragment.IntroFragment;
+import com.eastflag.kang.fragment.PasswordFragment;
 import com.eastflag.kang.fragment.ServerWorkingFragment;
 import com.eastflag.kang.utils.PreferenceUtil;
 import com.eastflag.kang.utils.Util;
@@ -88,7 +88,7 @@ public class MainActivity extends Activity {
         submenu7.setOnClickListener(mSubMenuClick);
 
         //메인 프래그먼트 노출
-        mFragment = new MainFragment();
+        mFragment = new IntroFragment();
         mFm.beginTransaction().replace(R.id.container, mFragment).commitAllowingStateLoss();
 
         getIntro();
@@ -147,13 +147,13 @@ public class MainActivity extends Activity {
                             //메인메뉴 display & 홈 탭 선택
                             showMenu(1, 0);
                             //010 모임 리스트 화면 이동
-                            mFragment = new Fragment100();
+                            mFragment = new MoimMainFragment();
                             mFm.beginTransaction().replace(R.id.container, mFragment).addToBackStack(null).commitAllowingStateLoss();
                         } else if ("001".equals(value)) {
                             //이용 비번 등록 화면
                         } else if ("002".equals(value)) {
                             //이용 비번 확인 화면
-                            mFragment = new Fragment020();
+                            mFragment = new PasswordFragment();
                             mFm.beginTransaction().replace(R.id.container, mFragment).addToBackStack(null).commitAllowingStateLoss();
                         } else if ("099".equals(value)) {
                             //서버 작업중
@@ -255,12 +255,12 @@ public class MainActivity extends Activity {
             switch(v.getId()) {
                 case R.id.menu1:
                     mMenu1.setSelected(true);
-                    mFragment = new Fragment100();
+                    mFragment = new MoimMainFragment();
                     mFm.beginTransaction().replace(R.id.container, mFragment).addToBackStack(null).commitAllowingStateLoss();
                     break;
                 case R.id.menu2:
                     mMenu2.setSelected(true);
-                    mFragment = new Fragment200();
+                    mFragment = new MoimAddFragment();
                     mFm.beginTransaction().replace(R.id.container, mFragment).addToBackStack(null).commitAllowingStateLoss();
                     break;
                 case R.id.menu3:
@@ -268,7 +268,7 @@ public class MainActivity extends Activity {
                     break;
                 case R.id.menu5:
 //                    mMenu5.setSelected(true);
-//                    mFragment = new Fragment110();
+//                    mFragment = new MoimViewFragment();
 //                    mFm.beginTransaction().replace(R.id.container, mFragment).commitAllowingStateLoss();
                     break;
                 default:
@@ -284,7 +284,7 @@ public class MainActivity extends Activity {
             switch(v.getId()) {
                 case R.id.submenu1:
                     showSubMenu(1);
-                    mFragment = new Fragment110(selectedMoim);
+                    mFragment = new MoimViewFragment(selectedMoim);
                     mFm.beginTransaction().replace(R.id.container, mFragment).addToBackStack(null).commitAllowingStateLoss();
                     break;
                 case R.id.submenu2:

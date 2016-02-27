@@ -16,11 +16,9 @@ import com.eastflag.kang.Constant;
 import com.eastflag.kang.KangApplication;
 import com.eastflag.kang.MainActivity;
 import com.eastflag.kang.R;
-import com.eastflag.kang.dto.MoimVO;
 import com.eastflag.kang.utils.PreferenceUtil;
 import com.eastflag.kang.utils.Util;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -34,7 +32,7 @@ import butterknife.OnClick;
 /**
  * 비밀번호 입력화면
  */
-public class Fragment020 extends Fragment {
+public class PasswordFragment extends Fragment {
 
     private View mView;
     @Bind(R.id.input11) TextView input11;
@@ -47,14 +45,14 @@ public class Fragment020 extends Fragment {
     private int mCount;
     private StringBuffer mInput = new StringBuffer();
 
-    public Fragment020() {
+    public PasswordFragment() {
         // Required empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.fragment_020, container, false);
+        mView = inflater.inflate(R.layout.fragment_password, container, false);
         mView.findViewById(R.id.reInput).setVisibility(View.GONE);
 
         ButterKnife.bind(this, mView);
@@ -90,7 +88,7 @@ public class Fragment020 extends Fragment {
                         ((MainActivity)getActivity()).showMenu(1, 0);
                         //모임리스트 화면 이동
                         getFragmentManager().beginTransaction()
-                                .replace(R.id.container, new Fragment100())
+                                .replace(R.id.container, new MoimMainFragment())
                                 .commitAllowingStateLoss();
                     } else {
                         Util.showToast(getActivity(), "비밀번호가 맞지않습니다");

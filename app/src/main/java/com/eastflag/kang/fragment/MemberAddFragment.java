@@ -57,7 +57,7 @@ import butterknife.OnClick;
 /**
  * 회원 등록 화면
  */
-public class Fragment111 extends Fragment {
+public class MemberAddFragment extends Fragment {
     final int REQ_CODE_SELECT_IMAGE=100;
 
     private final int MODE_REG = 0;
@@ -97,24 +97,24 @@ public class Fragment111 extends Fragment {
     private int screenMode;
     private Bitmap mBitmapPhoto;
 
-    public Fragment111() {
+    public MemberAddFragment() {
         // Required empty public constructor
     }
 
-    public Fragment111(MoimVO moimVo) {
+    public MemberAddFragment(MoimVO moimVo) {
         this.mMoimVo = moimVo;
         screenMode = MODE_REG;
     }
 
-    public Fragment111(MoimVO moimVo, MemberVO memberVo) {
+    public MemberAddFragment(MoimVO moimVo, MemberVO memberVo) {
         this.mMoimVo = moimVo;
         this.mMemberVo = memberVo;
         screenMode = MODE_MODIFY;
     }
 
-//    public static Fragment111 newInstance(String m_id, String mb_name, String mb_position,
+//    public static MemberAddFragment newInstance(String m_id, String mb_name, String mb_position,
 //                                          String mb_pn, String mb_addr, String mb_actions) {
-//        Fragment111 frag = new Fragment111();
+//        MemberAddFragment frag = new MemberAddFragment();
 //        Bundle args = new Bundle();
 //        args.putString("m_id", m_id);
 //        args.putString("mb_name", mb_name);
@@ -174,7 +174,7 @@ public class Fragment111 extends Fragment {
 
         ((MainActivity)getActivity()).setTitle(mMoimVo.getMn());
 
-        mView = inflater.inflate(R.layout.fragment_111, container, false);
+        mView = inflater.inflate(R.layout.fragment_member_add, container, false);
         mAq = new AQuery(mView);
         AQUtility.setDebug(true);
         ButterKnife.bind(this, mView);
@@ -388,7 +388,7 @@ public class Fragment111 extends Fragment {
                     else {
                         Util.showToast(getActivity(), "수정 되었습니다");
                     }
-                    getActivity().getFragmentManager().beginTransaction().replace(R.id.container, new Fragment110(mMoimVo))
+                    getActivity().getFragmentManager().beginTransaction().replace(R.id.container, new MoimViewFragment(mMoimVo))
                             .addToBackStack(null)
                             .commitAllowingStateLoss();
                 } else {
@@ -562,14 +562,14 @@ public class Fragment111 extends Fragment {
             switch(v.getId()) {
                 case R.id.menu1:
                     mMenu1.setSelected(true);
-                    mFragment = new Fragment110(mMoimVo);
+                    mFragment = new MoimViewFragment(mMoimVo);
                     getFragmentManager().beginTransaction().replace(R.id.container, mFragment)
                             .addToBackStack(null)
                             .commitAllowingStateLoss();
                     break;
 //                case R.id.menu2:
 //                    mMenu2.setSelected(true);
-//                    mFragment = new Fragment200();
+//                    mFragment = new MoimAddFragment();
 //                    mFm.beginTransaction().replace(R.id.container, mFragment).commitAllowingStateLoss();
 //                    break;
 //                case R.id.menu3:

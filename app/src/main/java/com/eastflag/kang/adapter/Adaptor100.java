@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.eastflag.kang.R;
 import com.eastflag.kang.dto.MoimVO;
-import com.eastflag.kang.fragment.Fragment201;
+import com.eastflag.kang.fragment.MoimModifyFragment;
 import com.eastflag.kang.listener.OnDismiss;
 
 import java.util.ArrayList;
@@ -86,7 +86,7 @@ public class Adaptor100 extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 MoimVO vo = mMoimList.get(position);
-                Fragment201 dialog = Fragment201.newInstance(vo.getM_id(), vo.getMn(), vo.getAdm_mb(), vo.getAdm_email());
+                MoimModifyFragment dialog = MoimModifyFragment.newInstance(vo.getM_id(), vo.getMn(), vo.getAdm_mb(), vo.getAdm_email());
                 dialog.setListner(mListener);
                 dialog.show(((Activity)mContext).getFragmentManager(), "모임수정");
             }

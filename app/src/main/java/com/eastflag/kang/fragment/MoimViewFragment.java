@@ -39,7 +39,7 @@ import butterknife.ButterKnife;
 /**
  * 회원 : 회원 리스트 조회화면
  */
-public class Fragment110 extends Fragment {
+public class MoimViewFragment extends Fragment {
 
     private View mView;
     private AQuery mAq;
@@ -57,12 +57,12 @@ public class Fragment110 extends Fragment {
     private Adaptor110 mAdaptor;
     private MoimVO mMoimVO;
 
-    public Fragment110() {
+    public MoimViewFragment() {
         // Required empty public constructor
     }
 
     @SuppressLint("ValidFragment")
-    public Fragment110(MoimVO moimVO) {
+    public MoimViewFragment(MoimVO moimVO) {
         mMoimVO = moimVO;
     }
 
@@ -70,7 +70,7 @@ public class Fragment110 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        mView = inflater.inflate(R.layout.fragment_110, container, false);
+        mView = inflater.inflate(R.layout.fragment_moim_view, container, false);
         mAq = new AQuery(mView);
         ButterKnife.bind(this, mView);
 
@@ -94,11 +94,11 @@ public class Fragment110 extends Fragment {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Fragment111 dialog = Fragment111.newInstance(mMoimVO.getM_id(), mMemberList.get(position).getMb_name(),
+//                MemberAddFragment dialog = MemberAddFragment.newInstance(mMoimVO.getM_id(), mMemberList.get(position).getMb_name(),
 //                        mMemberList.get(position).getMy_position(), mMemberList.get(position).getMb_pn(),
 //                        mMemberList.get(position).getMb_add(), mMemberList.get(position).getMb_action());
 //                dialog.show(getFragmentManager(), "회원수정");
-                getFragmentManager().beginTransaction().replace(R.id.container, new Fragment111(mMoimVO, mMemberList.get(position)))
+                getFragmentManager().beginTransaction().replace(R.id.container, new MemberAddFragment(mMoimVO, mMemberList.get(position)))
                         .addToBackStack(null)
                         .commitAllowingStateLoss();
             }
@@ -165,9 +165,9 @@ public class Fragment110 extends Fragment {
 //        public void onClick(View v) {
 //            switch(v.getId()) {
 //                case R.id.reg_member :
-//                    //DialogFragment dialog = Fragment111.newInstance(mMoimVO.getM_id(), null, null, null, null, null);
+//                    //DialogFragment dialog = MemberAddFragment.newInstance(mMoimVO.getM_id(), null, null, null, null, null);
 //                    //dialog.show(getFragmentManager(), "회원등록");
-//                    getFragmentManager().beginTransaction().replace(R.id.container, new Fragment111(mMoimVO)).commitAllowingStateLoss();
+//                    getFragmentManager().beginTransaction().replace(R.id.container, new MemberAddFragment(mMoimVO)).commitAllowingStateLoss();
 //                    break;
 //            }
 //        }
@@ -186,12 +186,12 @@ public class Fragment110 extends Fragment {
             switch(v.getId()) {
 //                case R.id.menu1:
 //                    mMenu1.setSelected(true);
-//                    mFragment = new Fragment100();
+//                    mFragment = new MoimMainFragment();
 //                    mFm.beginTransaction().replace(R.id.container, mFragment).commitAllowingStateLoss();
 //                    break;
                 case R.id.menu2:
                     mMenu2.setSelected(true);
-                    mFragment = new Fragment111(mMoimVO);
+                    mFragment = new MemberAddFragment(mMoimVO);
                     getFragmentManager().beginTransaction().replace(R.id.container, mFragment)
                             .addToBackStack(null)
                             .commitAllowingStateLoss();

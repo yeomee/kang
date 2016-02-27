@@ -1,7 +1,5 @@
 package com.eastflag.kang.fragment;
 
-import android.app.Activity;
-import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,18 +8,18 @@ import android.view.ViewGroup;
 
 import com.eastflag.kang.R;
 
-public class MainFragment extends Fragment {
+public class IntroFragment extends Fragment {
 
     private View mView;
 
-    public MainFragment() {
+    public IntroFragment() {
         // Required empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.fragment_main, container, false);
+        mView = inflater.inflate(R.layout.fragment_intro, container, false);
         return mView;
     }
 
