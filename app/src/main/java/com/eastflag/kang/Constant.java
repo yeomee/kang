@@ -8,7 +8,7 @@ public final class Constant {
 
     public static final String API_INTRO= "/intro.asp";
     public static final String API_010 = "/moim/moim.asp";
-    public static final String API_200 = "/moim/moim_i.asp"; //모임등록
+    public static final String API_MOIM_ADD = "/moim/moim_i.asp"; //모임등록
     public static final String API_201 = "/moim/moim_u.asp"; //모임 수정
     public static final String API_110 = "/member/member.asp";
     public static final String API_111 = "/member/member_i.asp"; //회원등록

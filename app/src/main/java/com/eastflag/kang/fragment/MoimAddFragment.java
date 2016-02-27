@@ -1,7 +1,9 @@
 package com.eastflag.kang.fragment;
 
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.text.TextUtils;
@@ -66,7 +68,35 @@ public class MoimAddFragment extends Fragment {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                submit();
+                if(TextUtils.isEmpty(moim_name.getText())) {
+                    Util.showToast(getActivity(), "모임 제목을 입력하세요");
+                    return;
+                }
+                if(TextUtils.isEmpty(adm_name.getText())) {
+                    Util.showToast(getActivity(), "관리자 이름을 입력하세요");
+                    return;
+                }
+                if(TextUtils.isEmpty(adm_email.getText())) {
+                    Util.showToast(getActivity(), "관리자 이메일을 입력하세요");
+                    return;
+                }
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle("강총무")
+                        .setMessage("모임을 등록하게 되면 등록할 모임의 관리자가 됩니다. 등록하시겠습니까?")
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int arg1) {
+                                submit();
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .show();
+
             }
         });
 
@@ -109,20 +139,7 @@ public class MoimAddFragment extends Fragment {
     }
 
     private void submit() {
-        String url = Constant.HOST + Constant.API_200;
-
-        if(TextUtils.isEmpty(moim_name.getText())) {
-            Util.showToast(getActivity(), "모임 제목을 입력하세요");
-            return;
-        }
-        if(TextUtils.isEmpty(adm_name.getText())) {
-            Util.showToast(getActivity(), "관리자 이름을 입력하세요");
-            return;
-        }
-        if(TextUtils.isEmpty(adm_email.getText())) {
-            Util.showToast(getActivity(), "관리자 이메일을 입력하세요");
-            return;
-        }
+        String url = Constant.HOST + Constant.API_MOIM_ADD;
 
         Log.d("LDK", "url:" + url);
         Map<String, Object> params = new HashMap<String, Object>();

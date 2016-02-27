@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -139,10 +140,9 @@ public class MoimModifyFragment extends DialogFragment {
         });
     }
 
+    //모임 수정
     @OnClick(R.id.submit)
     public void submit() {
-        String url = Constant.HOST + Constant.API_201;
-
         if(TextUtils.isEmpty(moim_name.getText())) {
             Util.showToast(getActivity(), "모임 제목을 입력하세요");
             return;
@@ -155,6 +155,47 @@ public class MoimModifyFragment extends DialogFragment {
             Util.showToast(getActivity(), "관리자 이메일을 입력하세요");
             return;
         }
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("강총무")
+                .setMessage("수정하시겠습니까?")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int arg1) {
+                        modifyMoim();
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
+    }
+
+    //모임 삭제
+    @OnClick(R.id.delete) void delete() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("강총무")
+                .setMessage("모임을 삭제하면 기존 모임의 자료는 모두 삭제됩니다. 그래도 삭제하시겠습니까?")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int arg1) {
+                        modifyMoim();
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
+    }
+
+    private void modifyMoim() {
+        String url = Constant.HOST + Constant.API_201;
 
         Log.d("LDK", "url:" + url);
         Map<String, Object> params = new HashMap<String, Object>();
@@ -193,7 +234,7 @@ public class MoimModifyFragment extends DialogFragment {
         });
     }
 
-    @OnClick(R.id.delete) void delete() {
+    private void deleteMoim() {
         String url = Constant.HOST + Constant.API_202;
 
         Log.d("LDK", "url:" + url);
