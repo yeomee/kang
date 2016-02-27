@@ -67,7 +67,7 @@ public class MoimListAdaptor extends BaseAdapter {
 
         holder.number.setText(String.valueOf(position + 1));
         holder.title.setText(mMoimList.get(position).getMn());
-        holder.chongmu.setText("총무 ");
+        holder.chongmu.setText("관리자 ");
         holder.chongmu.append(mMoimList.get(position).getAdm_mb());
 
         if("y".equals(mMoimList.get(position).getAdm_yn())) {

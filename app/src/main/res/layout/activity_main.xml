@@ -101,7 +101,7 @@
             android:id="@+id/menu3"
             android:layout_marginLeft="1dp"
             style="@style/Main_Menu"
-            android:text="공지사항" />
+            android:text="모임삭제" />
         <Button
             android:id="@+id/menu4"
             android:layout_marginLeft="1dp"

@@ -12,12 +12,12 @@
         android:textSize="14sp" android:text="보다 나은 서비스를 위하요 자료를 정리하고 있습니다."/>
 
     <RelativeLayout
-        android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1">
+        android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1"
+        android:background="#FFFFFF">
         <ImageView
             android:layout_width="250dp" android:layout_height="140dp"
             android:layout_centerInParent="true"
-            android:src="@drawable/serverworking" android:scaleType="fitXY"
-            android:background="#FFFFFF"/>
+            android:src="@drawable/serverworking" android:scaleType="fitXY" />
 
         <Button
             android:id="@+id/btnClose"

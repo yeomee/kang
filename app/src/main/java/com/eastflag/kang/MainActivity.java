@@ -18,6 +18,7 @@ import com.androidquery.callback.AjaxCallback;
 import com.androidquery.callback.AjaxStatus;
 import com.eastflag.kang.dto.MoimVO;
 import com.eastflag.kang.fragment.MoimAddFragment;
+import com.eastflag.kang.fragment.MoimDeleteForMemberFragment;
 import com.eastflag.kang.fragment.MoimMainFragment;
 import com.eastflag.kang.fragment.MoimViewFragment;
 import com.eastflag.kang.fragment.Fragment120;
@@ -265,6 +266,8 @@ public class MainActivity extends Activity {
                     break;
                 case R.id.menu3:
                     mMenu3.setSelected(true);
+                    mFragment = new MoimDeleteForMemberFragment();
+                    mFm.beginTransaction().replace(R.id.container, mFragment).addToBackStack(null).commitAllowingStateLoss();
                     break;
                 case R.id.menu5:
 //                    mMenu5.setSelected(true);
