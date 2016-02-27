@@ -76,6 +76,7 @@
             android:hint="회원활동내역" />
 
         <LinearLayout
+            android:id="@+id/layoutSubmit"
             android:layout_width="match_parent" android:layout_height="wrap_content"
             android:layout_marginTop="10dp" android:layout_marginBottom="10dp"
             android:gravity="center_horizontal"

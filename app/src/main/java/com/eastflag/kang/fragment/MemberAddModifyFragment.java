@@ -1,6 +1,7 @@
 package com.eastflag.kang.fragment;
 
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Fragment;
 import android.content.Intent;
@@ -57,7 +58,7 @@ import butterknife.OnClick;
 /**
  * 회원 등록 화면
  */
-public class MemberAddFragment extends Fragment {
+public class MemberAddModifyFragment extends Fragment {
     final int REQ_CODE_SELECT_IMAGE=100;
 
     private final int MODE_REG = 0;
@@ -80,6 +81,7 @@ public class MemberAddFragment extends Fragment {
     @Bind(R.id.mb_actions) EditText mb_actions;
     @Bind(R.id.submit) Button submit;
     @Bind(R.id.delete) Button delete;
+    @Bind(R.id.layoutSubmit) View layoutSubmit;
 
     private ArrayList<PositionVo> mPositionList = new ArrayList<PositionVo>();
     private ArrayAdapter<PositionVo> mAdaptor;
@@ -97,84 +99,29 @@ public class MemberAddFragment extends Fragment {
     private int screenMode;
     private Bitmap mBitmapPhoto;
 
-    public MemberAddFragment() {
+    public MemberAddModifyFragment() {
         // Required empty public constructor
     }
 
-    public MemberAddFragment(MoimVO moimVo) {
+    @SuppressLint("ValidFragment")
+    public MemberAddModifyFragment(MoimVO moimVo) {
         this.mMoimVo = moimVo;
         screenMode = MODE_REG;
     }
 
-    public MemberAddFragment(MoimVO moimVo, MemberVO memberVo) {
+    @SuppressLint("ValidFragment")
+    public MemberAddModifyFragment(MoimVO moimVo, MemberVO memberVo) {
         this.mMoimVo = moimVo;
         this.mMemberVo = memberVo;
         screenMode = MODE_MODIFY;
     }
-
-//    public static MemberAddFragment newInstance(String m_id, String mb_name, String mb_position,
-//                                          String mb_pn, String mb_addr, String mb_actions) {
-//        MemberAddFragment frag = new MemberAddFragment();
-//        Bundle args = new Bundle();
-//        args.putString("m_id", m_id);
-//        args.putString("mb_name", mb_name);
-//        args.putString("mb_position", mb_position);
-//        args.putString("mb_pn", mb_pn);
-//        args.putString("mb_addr", mb_addr);
-//        args.putString("mb_actions", mb_actions);
-//        frag.setArguments(args);
-//        return frag;
-//    }
-
-//    @Override
-//    public Dialog onCreateDialog(Bundle savedInstanceState) {
-//        mId = getArguments().getString("m_id");
-//        mbName = getArguments().getString("mb_name");
-//        mbPosition = getArguments().getString("mb_position");
-//        mbPn = getArguments().getString("mb_pn");
-//        mbAddr = getArguments().getString("mb_addr");
-//        mbActions = getArguments().getString("mb_actions");
-//
-//        mView = View.inflate(getActivity(), R.layout.fragment_111, null);
-//        mAq = new AQuery(mView);
-//        ButterKnife.bind(this, mView);
-//
-//        if(TextUtils.isEmpty(mbName)) {
-//            mTitle = "회원 등록";
-//        } else {
-//            mTitle = "회원 수정";
-//            //버튼
-//            submit.setText("회원 수정");
-//            delete.setVisibility(View.VISIBLE);
-//
-//            mb_name.setText(mbName);
-//            int selected = 0;
-//            if("회장".equals(mbPosition)) {
-//                selected = 0;
-//            } else if("총무".equals(mbPosition)) {
-//                selected = 1;
-//            } if("회원".equals(mbPosition)) {
-//                selected = 2;
-//            }
-//            mb_position.setSelection(selected);
-//            mb_pn.setText(mbPn);
-//            mb_add.setText(mbAddr);
-//            mb_actions.setText(mbActions);
-//        }
-//
-//        Dialog dialog = new AlertDialog.Builder(getActivity())
-//                .setTitle(mTitle)
-//                .setView(mView)
-//                .create();
-//        return dialog;
-//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         ((MainActivity)getActivity()).setTitle(mMoimVo.getMn());
 
-        mView = inflater.inflate(R.layout.fragment_member_add, container, false);
+        mView = inflater.inflate(R.layout.fragment_member_add_modify, container, false);
         mAq = new AQuery(mView);
         AQUtility.setDebug(true);
         ButterKnife.bind(this, mView);
@@ -183,6 +130,11 @@ public class MemberAddFragment extends Fragment {
         mb_position.setAdapter(mAdaptor);
 
         getPositionList();
+
+        //관리자가 아니면 수정,삭제 버튼 비활성화
+        if ("n".equals(mMemberVo.getAdmin_yn())) {
+            layoutSubmit.setVisibility(View.GONE);
+        }
 
         if(screenMode == MODE_REG) { // 등록 모드
             mMenu2.setSelected(true);

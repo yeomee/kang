@@ -90,11 +90,11 @@ public class MemberListFragment extends Fragment {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                MemberAddFragment dialog = MemberAddFragment.newInstance(mMoimVO.getM_id(), mMemberList.get(position).getMb_name(),
+//                MemberAddModifyFragment dialog = MemberAddModifyFragment.newInstance(mMoimVO.getM_id(), mMemberList.get(position).getMb_name(),
 //                        mMemberList.get(position).getMy_position(), mMemberList.get(position).getMb_pn(),
 //                        mMemberList.get(position).getMb_add(), mMemberList.get(position).getMb_action());
 //                dialog.show(getFragmentManager(), "회원수정");
-                getFragmentManager().beginTransaction().replace(R.id.container, new MemberAddFragment(mMoimVO, mMemberList.get(position)))
+                getFragmentManager().beginTransaction().replace(R.id.container, new MemberAddModifyFragment(mMoimVO, mMemberList.get(position)))
                         .addToBackStack(null)
                         .commitAllowingStateLoss();
             }
@@ -161,9 +161,9 @@ public class MemberListFragment extends Fragment {
 //        public void onClick(View v) {
 //            switch(v.getId()) {
 //                case R.id.reg_member :
-//                    //DialogFragment dialog = MemberAddFragment.newInstance(mMoimVO.getM_id(), null, null, null, null, null);
+//                    //DialogFragment dialog = MemberAddModifyFragment.newInstance(mMoimVO.getM_id(), null, null, null, null, null);
 //                    //dialog.show(getFragmentManager(), "회원등록");
-//                    getFragmentManager().beginTransaction().replace(R.id.container, new MemberAddFragment(mMoimVO)).commitAllowingStateLoss();
+//                    getFragmentManager().beginTransaction().replace(R.id.container, new MemberAddModifyFragment(mMoimVO)).commitAllowingStateLoss();
 //                    break;
 //            }
 //        }
@@ -172,6 +172,11 @@ public class MemberListFragment extends Fragment {
     View.OnClickListener mMenuClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            if("n".equals(mMoimVO.getAdm_yn())) {
+                Util.showToast(getActivity(), "모임의 관리자만 등록이 가능합니다.");
+                return;
+            }
+
             KangApplication.sApp.soundButton();
             mMenu1.setSelected(false);
             mMenu2.setSelected(false);
@@ -187,7 +192,7 @@ public class MemberListFragment extends Fragment {
 //                    break;
                 case R.id.menu2:
                     mMenu2.setSelected(true);
-                    mFragment = new MemberAddFragment(mMoimVO);
+                    mFragment = new MemberAddModifyFragment(mMoimVO);
                     getFragmentManager().beginTransaction().replace(R.id.container, mFragment)
                             .addToBackStack(null)
                             .commitAllowingStateLoss();
