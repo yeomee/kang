@@ -24,6 +24,7 @@ import com.eastflag.kang.fragment.Fragment200;
 import com.eastflag.kang.fragment.Fragment400;
 import com.eastflag.kang.fragment.MainFragment;
 import com.eastflag.kang.fragment.Fragment020;
+import com.eastflag.kang.fragment.ServerWorkingFragment;
 import com.eastflag.kang.utils.PreferenceUtil;
 import com.eastflag.kang.utils.Util;
 
@@ -153,6 +154,10 @@ public class MainActivity extends Activity {
                         } else if ("002".equals(value)) {
                             //이용 비번 확인 화면
                             mFragment = new Fragment020();
+                            mFm.beginTransaction().replace(R.id.container, mFragment).addToBackStack(null).commitAllowingStateLoss();
+                        } else if ("099".equals(value)) {
+                            //서버 작업중
+                            mFragment = new ServerWorkingFragment();
                             mFm.beginTransaction().replace(R.id.container, mFragment).addToBackStack(null).commitAllowingStateLoss();
                         }
                     }
