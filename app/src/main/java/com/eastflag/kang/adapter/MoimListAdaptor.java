@@ -17,13 +17,13 @@ import java.util.ArrayList;
 /**
  * Created by eastflag on 2016-01-07.
  */
-public class Adaptor100 extends BaseAdapter {
+public class MoimListAdaptor extends BaseAdapter {
 
     private Context mContext;
     private ArrayList<MoimVO> mMoimList;
     private OnDismiss mListener;
 
-    public Adaptor100(Context context, ArrayList<MoimVO> moimList, OnDismiss listener) {
+    public MoimListAdaptor(Context context, ArrayList<MoimVO> moimList, OnDismiss listener) {
         mContext = context;
         mMoimList = moimList;
         mListener = listener;
@@ -53,7 +53,7 @@ public class Adaptor100 extends BaseAdapter {
         ViewHolder holder;
         if(convertView == null) {
             holder = new ViewHolder();
-            convertView = View.inflate(mContext, R.layout.adaptor100, null);
+            convertView = View.inflate(mContext, R.layout.adaptor_moim_list, null);
 
             holder.number = (TextView) convertView.findViewById(R.id.number);
             holder.title = (TextView) convertView.findViewById(R.id.title);

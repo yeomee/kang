@@ -17,7 +17,7 @@ import com.androidquery.callback.AjaxStatus;
 import com.eastflag.kang.Constant;
 import com.eastflag.kang.MainActivity;
 import com.eastflag.kang.R;
-import com.eastflag.kang.adapter.Adaptor100;
+import com.eastflag.kang.adapter.MoimListAdaptor;
 import com.eastflag.kang.dto.MoimVO;
 import com.eastflag.kang.listener.OnDismiss;
 import com.eastflag.kang.utils.PreferenceUtil;
@@ -46,7 +46,7 @@ public class MoimMainFragment extends Fragment {
     @Bind(R.id.title) TextView title;
     @Bind(R.id.listView) ListView mListView;
 
-    private Adaptor100 mAdaptor;
+    private MoimListAdaptor mAdaptor;
 
     public MoimMainFragment() {
         // Required empty public constructor
@@ -69,7 +69,7 @@ public class MoimMainFragment extends Fragment {
         mAq = new AQuery(mView);
         ButterKnife.bind(this, mView);
 
-        mAdaptor = new Adaptor100(getActivity(), mMoimList, mListener);
+        mAdaptor = new MoimListAdaptor(getActivity(), mMoimList, mListener);
         mListView.setAdapter(mAdaptor);
 
         ((MainActivity)getActivity()).hideSubMenu();
@@ -78,11 +78,15 @@ public class MoimMainFragment extends Fragment {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ((MainActivity) getActivity()).showSubMenu(1);
-                ((MainActivity) getActivity()).setSelectedMoim(mMoimList.get(position));
-                getActivity().getFragmentManager().beginTransaction().replace(R.id.container, new MoimViewFragment(mMoimList.get(position)))
-                        .addToBackStack(null)
-                        .commitAllowingStateLoss();
+                if("0".equals(mMoimList.get(position).getM_status())) {
+                    Util.showToast(getActivity(), "요금납부후 이용하세요.");
+                } else {
+                    ((MainActivity) getActivity()).showSubMenu(1);
+                    ((MainActivity) getActivity()).setSelectedMoim(mMoimList.get(position));
+                    getActivity().getFragmentManager().beginTransaction().replace(R.id.container, new MoimViewFragment(mMoimList.get(position)))
+                            .addToBackStack(null)
+                            .commitAllowingStateLoss();
+                }
             }
         });
 
