@@ -28,32 +28,43 @@
                 android:layout_width="0dp" android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical">
-
                 <EditText
                     android:id="@+id/mb_name"
                     style="@style/InputBox"
                     android:layout_margin="5dp"
                     android:hint="이름" />
-
                 <Spinner
                     android:id="@+id/mb_position"
                     android:layout_width="match_parent" android:layout_height="wrap_content"
                     android:spinnerMode="dropdown"
                     android:prompt="@string/position_prompt" />
-
                 <EditText
                     android:id="@+id/mb_pn"
                     style="@style/InputBox"
                     android:layout_margin="5dp"
                     android:hint="전화번호" />
-
+                <TextView
+                    android:id="@+id/mb_enter_ymd"
+                    style="@style/InputBox"
+                    android:layout_margin="5dp"
+                    android:hint="회원가입일" />
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/photo"
-                android:layout_width="140dp" android:layout_height="match_parent"
-                android:background="@drawable/ic_contact_picture"
-                android:visibility="gone" />
+            <LinearLayout
+                android:id="@+id/layoutPhoto"
+                android:layout_width="150dp" android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+                <ImageView
+                    android:id="@+id/photo"
+                    android:layout_width="150dp" android:layout_height="150dp"
+                    android:src="@drawable/ic_contact_picture"
+                    android:scaleType="fitCenter" />
+                <Button
+                    android:id="@+id/btnZoom"
+                    android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:text="크게보기"/>
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -62,11 +73,7 @@
             style="@style/InputBox"
             android:layout_margin="5dp"
             android:hint="주소" />
-        <TextView
-            android:id="@+id/mb_enter_ymd"
-            style="@style/InputBox"
-            android:layout_margin="5dp"
-            android:hint="회원가입일" />
+
         <EditText
             android:id="@+id/mb_actions"
             style="@style/InputBox"

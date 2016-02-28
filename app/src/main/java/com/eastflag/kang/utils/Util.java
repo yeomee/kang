@@ -2,15 +2,24 @@ package com.eastflag.kang.utils;
 
 import android.content.Context;
 import android.os.Build;
+import android.os.Environment;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Toast;
+
+import com.eastflag.kang.Constant;
+
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by eastflag on 2016-01-05.
  */
 public final class Util {
+    public static final int MAX_IMAGE_SIZE = 1000;
+
     public static String getMdn(Context context) {
         TelephonyManager tMgr =(TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE);
         //2015-06-29 전화번호가 +82로 시작하는 경우 보정
@@ -64,5 +73,43 @@ public final class Util {
         m_toast.setDuration(Toast.LENGTH_SHORT);
 
         m_toast.show();
+    }
+
+    public static int calculateInSampleSize(int reqWidth, int reqHeight) {
+        int inSampleSize = 1;
+
+        //가로가 큰 경우
+        if (reqWidth >= reqHeight) {
+            while(MAX_IMAGE_SIZE < reqWidth/inSampleSize) {
+                inSampleSize *= 2;
+            }
+        } else { //세로가 큰경우
+            while(MAX_IMAGE_SIZE < reqHeight/inSampleSize) {
+                inSampleSize *= 2;
+            }
+        }
+        Log.d("LDK", "reqWidth:" + reqWidth + ", reqHeight:" + reqHeight + ", sampleSize:" + inSampleSize);
+
+        return inSampleSize;
+    }
+
+    public static File getTempFile() {
+        boolean isSdCardMounted = false;
+        String status = Environment.getExternalStorageState();
+        if (status.equals(Environment.MEDIA_MOUNTED)) {
+            isSdCardMounted = true;
+        }
+
+        if (isSdCardMounted) {
+            File f = new File(Environment.getExternalStorageDirectory(), // 외장메모리 경로
+                    Constant.TEMP_PHOTO_FILE);
+            try {
+                f.createNewFile();      // 외장메모리에 temp.jpg 파일 생성
+            } catch (IOException e) {
+            }
+
+            return f;
+        } else
+            return null;
     }
 }

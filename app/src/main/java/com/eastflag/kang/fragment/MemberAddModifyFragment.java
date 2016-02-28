@@ -2,13 +2,16 @@ package com.eastflag.kang.fragment;
 
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -59,6 +62,7 @@ import butterknife.OnClick;
  * 회원 등록 화면
  */
 public class MemberAddModifyFragment extends Fragment {
+    public static final int MAX_IMAGE_SIZE = 1000;
     final int REQ_CODE_SELECT_IMAGE=100;
 
     private final int MODE_REG = 0;
@@ -73,6 +77,7 @@ public class MemberAddModifyFragment extends Fragment {
 
     @Bind(R.id.title) TextView title;
     @Bind(R.id.photo) ImageView mb_photo;
+    @Bind(R.id.layoutPhoto) View layoutPhoto;
     @Bind(R.id.mb_name) EditText mb_name;
     @Bind(R.id.mb_position) Spinner mb_position;
     @Bind(R.id.mb_pn) EditText mb_pn;
@@ -139,12 +144,12 @@ public class MemberAddModifyFragment extends Fragment {
         if(screenMode == MODE_REG) { // 등록 모드
             mMenu2.setSelected(true);
             ((MainActivity)getActivity()).showMenu(1, 1);
-            mb_photo.setVisibility(View.GONE);
+            layoutPhoto.setVisibility(View.GONE);
         }
         else { // 수정 모드
             mMenu3.setSelected(true);
             ((MainActivity) getActivity()).showMenu(1, 1);
-            mb_photo.setVisibility(View.VISIBLE);
+            layoutPhoto.setVisibility(View.VISIBLE);
 
             submit.setText("회원 수정");
             delete.setVisibility(View.VISIBLE);
@@ -191,76 +196,93 @@ public class MemberAddModifyFragment extends Fragment {
         mAq.ajax(url, params, JSONObject.class, new AjaxCallback<JSONObject>() {
             @Override
             public void callback(String url, JSONObject object, AjaxStatus status) {
-            try {
-                if (status.getCode() != 200) {
-                    Log.d("LDK", "status:" + status.getCode());
-                    Util.showToast(getActivity(), "서버 오류가 발생하였습니다.");
-                    return;
-                }
-                Log.d("LDK", object.toString(1));
-                //데이터 존재하지 않음
-
-                //데이터 존재하지 않음
-                PositionVo position = new PositionVo();
-                position.setPo_cd("-1");
-                position.setPo_name("직책을 선택하세요.");
-                mPositionList.add(position);
-
-                if (object.getInt("result") == 0) {
-                    if(screenMode == MODE_REG) {
-                        String scname_msg = object.getString("scname_msg1");
-                        title.setText(scname_msg);
-
-                        JSONArray array = object.getJSONArray("position");
-                        for(int i = 0; i < array.length(); ++i) {
-                            JSONObject json = array.getJSONObject(i);
-                            position = new PositionVo();
-
-                            position.setPo_cd(json.getString("po_cd"));
-                            position.setPo_name(json.getString("po_name"));
-
-                            mPositionList.add(position);
-                        }
-
-                        mb_position.setSelection(0);
+                try {
+                    if (status.getCode() != 200) {
+                        Log.d("LDK", "status:" + status.getCode());
+                        Util.showToast(getActivity(), "서버 오류가 발생하였습니다.");
+                        return;
                     }
-                    else {
-                        String scname_msg = object.getString("scname_msg");
-                        title.setText(scname_msg);
+                    Log.d("LDK", object.toString(1));
+                    //데이터 존재하지 않음
 
-                        mb_actions.setText(object.getString("mb_actions"));
-                        mb_add.setText(object.getString("mb_add"));
-                        mb_enter_ymd.setText(object.getString("mb_enter_ymd"));
+                    //데이터 존재하지 않음
+                    PositionVo position = new PositionVo();
+                    position.setPo_cd("-1");
+                    position.setPo_name("직책을 선택하세요.");
+                    mPositionList.add(position);
 
-                        JSONArray array = object.getJSONArray("position_list");
-                        for(int i = 0; i < array.length(); ++i) {
-                            JSONObject json = array.getJSONObject(i);
-                            position = new PositionVo();
+                    if (object.getInt("result") == 0) {
+                        if (screenMode == MODE_REG) {
+                            String scname_msg = object.getString("scname_msg1");
+                            title.setText(scname_msg);
 
-                            position.setPo_cd(json.getString("po_cd"));
-                            position.setPo_name(json.getString("po_name"));
+                            JSONArray array = object.getJSONArray("position");
+                            for (int i = 0; i < array.length(); ++i) {
+                                JSONObject json = array.getJSONObject(i);
+                                position = new PositionVo();
 
-                            mPositionList.add(position);
-                        }
+                                position.setPo_cd(json.getString("po_cd"));
+                                position.setPo_name(json.getString("po_name"));
 
-                        String mbPosition = object.getString("mb_position");
-                        for(int i = 0; i < mAdaptor.getCount(); i++) {
-                            PositionVo positionVo = mAdaptor.getItem(i);
-                            if(positionVo.getPo_name().equals(mbPosition)) {
-                                mb_position.setSelection(i);
-                                break;
+                                mPositionList.add(position);
+                            }
+
+                            mb_position.setSelection(0);
+                        } else {
+                            String scname_msg = object.getString("scname_msg");
+                            title.setText(scname_msg);
+
+                            if (object.isNull("mb_actions") || TextUtils.isEmpty(object.getString("mb_actions"))) {
+                                mb_actions.setText("");
+                            } else {
+                                mb_actions.setText(object.getString("mb_actions"));
+                            }
+
+                            if (object.isNull("mb_add") || TextUtils.isEmpty(object.getString("mb_add"))) {
+                                mb_add.setText("");
+                            } else {
+                                mb_add.setText(object.getString("mb_add"));
+                            }
+
+                            if (object.isNull("mb_enter_ymd") || TextUtils.isEmpty(object.getString("mb_enter_ymd"))) {
+                                mb_enter_ymd.setText("");
+                            } else {
+                                mb_enter_ymd.setText(object.getString("mb_enter_ymd"));
+                            }
+
+                            JSONArray array = object.getJSONArray("position_list");
+                            for (int i = 0; i < array.length(); ++i) {
+                                JSONObject json = array.getJSONObject(i);
+                                position = new PositionVo();
+
+                                position.setPo_cd(json.getString("po_cd"));
+                                position.setPo_name(json.getString("po_name"));
+
+                                mPositionList.add(position);
+                            }
+
+                            String mbPosition = object.getString("mb_position");
+                            for (int i = 0; i < mAdaptor.getCount(); i++) {
+                                PositionVo positionVo = mAdaptor.getItem(i);
+                                if (positionVo.getPo_name().equals(mbPosition)) {
+                                    mb_position.setSelection(i);
+                                    break;
+                                }
+                            }
+
+                            mb_name.setText(object.getString("mb_name"));
+                            mb_pn.setText(object.getString("mb_pn"));
+
+                            if (!TextUtils.isEmpty(object.getString("mb_img"))) {
+                                mAq.id(mb_photo).image(object.getString("mb_img"));
                             }
                         }
 
-                        mb_name.setText(object.getString("mb_name"));
-                        mb_pn.setText(object.getString("mb_pn"));
+                        mAdaptor.notifyDataSetChanged();
                     }
-
-                    mAdaptor.notifyDataSetChanged();
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
             }
         });
     }
@@ -304,12 +326,16 @@ public class MemberAddModifyFragment extends Fragment {
         params.put("mb_name", mb_name.getText().toString());
         params.put("mb_position", ((PositionVo)mb_position.getSelectedItem()).getPo_cd());
         params.put("mb_pn", mb_pn.getText().toString());
-        params.put("mb_add", mb_add.getText().toString());
+        if (!TextUtils.isEmpty(mb_add.getText())) {
+            params.put("mb_add", mb_add.getText().toString());
+        }
         params.put("mb_enter_ymd", mb_enter_ymd.getText().toString());
         params.put("mb_actions", mb_actions.getText().toString());
         if(screenMode == MODE_MODIFY) {
             params.put("mb_id", mMemberVo.getMb_id());
-            params.put("mb_imgs", bitmapToByteArray(mBitmapPhoto));
+            if(mBitmapPhoto != null) {
+                params.put("file", bitmapToByteArray(mBitmapPhoto));
+            }
         }
         Log.d("LDK", params.toString());
 
@@ -347,7 +373,7 @@ public class MemberAddModifyFragment extends Fragment {
 
     private byte[] bitmapToByteArray(Bitmap bitmap) {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 90, stream);
         byte[] byteArray = stream.toByteArray();
         return byteArray;
     }
@@ -366,10 +392,34 @@ public class MemberAddModifyFragment extends Fragment {
     }
 
     @OnClick(R.id.photo) void selectPhoto() {
-        Intent intent = new Intent(Intent.ACTION_PICK);
-        intent.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE);
-        intent.setData(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        Intent intent = new Intent(Intent.ACTION_PICK,
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        intent.setType("image/*");              // 모든 이미지
+        intent.putExtra("crop", "true");        // Crop기능 활성화
+        intent.putExtra("scale", true);
+        intent.putExtra("outputX",  800);
+        intent.putExtra("outputY",  800);
+        intent.putExtra("aspectX", 1);
+        intent.putExtra("aspectY",  1);
+
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(Util.getTempFile()));     // 임시파일 생성
+        intent.putExtra("outputFormat",         // 포맷방식
+                Bitmap.CompressFormat.JPEG.toString());
         startActivityForResult(intent, REQ_CODE_SELECT_IMAGE);
+    }
+
+    @OnClick(R.id.btnZoom) void imageZoom() {
+        Bitmap bitmap = ((BitmapDrawable)mb_photo.getDrawable()).getBitmap();
+        if(bitmap == null) {
+            return;
+        }
+
+        View view = View.inflate(getActivity(), R.layout.image_zoom, null);
+        ImageView img_zoom = (ImageView) view.findViewById(R.id.img_zoom);
+        img_zoom.setImageBitmap(bitmap);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setView(view)
+                .show();
     }
 
     @Override
@@ -379,81 +429,27 @@ public class MemberAddModifyFragment extends Fragment {
         if(requestCode == REQ_CODE_SELECT_IMAGE) {
 
             if(resultCode == getActivity().RESULT_OK) {
+                String filePath = Util.getTempFile().getAbsolutePath();
 
-//                try {
-                    Uri selectedImage = data.getData();
-                    String[] filePathColumn = { MediaStore.Images.Media.DATA };
+                // 이미지 메타정보 얻어오기
+                // First decode with inJustDecodeBounds=true to check dimensions
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inJustDecodeBounds = true;
 
-                    // Get the cursor
-                    Cursor cursor = getActivity().getContentResolver().query(selectedImage, filePathColumn, null, null, null);
-                    // Move to first row
-                    cursor.moveToFirst();
+                BitmapFactory.decodeFile(filePath, options);
+                int imageHeight = options.outHeight;
+                int imageWidth = options.outWidth;
+                Log.d("LDK", "width:" + imageWidth + ", height:" + imageHeight);
+                options.inSampleSize = Util.calculateInSampleSize(imageHeight, imageWidth);
 
-                    int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                    String filePath = cursor.getString(columnIndex);
-                    cursor.close();
+                // Decode bitmap with inSampleSize set
+                options.inJustDecodeBounds = false;
+                mBitmapPhoto = BitmapFactory.decodeFile(filePath, options);
 
-                    // 이미지 메타정보 얻어오기
-                    // First decode with inJustDecodeBounds=true to check dimensions
-                    BitmapFactory.Options options = new BitmapFactory.Options();
-                    options.inJustDecodeBounds = true;
-                    //BitmapFactory.decodeResource(getResources(), R.id.myimage, options);
-                    BitmapFactory.decodeFile(filePath, options);
-                    int imageHeight = options.outHeight;
-                    int imageWidth = options.outWidth;
-                    String imageType = options.outMimeType;
-
-                    // Calculate inSampleSize
-                    int reqWidth = mb_photo.getWidth();
-                    int reqHeight = mb_photo.getHeight();
-                    options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
-
-                    // Decode bitmap with inSampleSize set
-                    options.inJustDecodeBounds = false;
-                    mBitmapPhoto = BitmapFactory.decodeFile(filePath, options);
-
-
-                    //이미지 데이터를 비트맵으로 받아온다.
-                    //Bitmap image_bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
-
-                    //배치해놓은 ImageView에 set
-                    mb_photo.setImageBitmap(mBitmapPhoto);
-
-                    //Toast.makeText(getBaseContext(), "name_Str : "+name_Str , Toast.LENGTH_SHORT).show();
-//                }
-//                catch (FileNotFoundException e) {
-//                    e.printStackTrace();
-//                }
-//                catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//                catch (Exception e) {
-//                    e.printStackTrace();
-//                }
+                //배치해놓은 ImageView에 set
+                mb_photo.setImageBitmap(mBitmapPhoto);
             }
         }
-    }
-
-    private int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
-        // Raw height and width of image
-        final int height = options.outHeight;
-        final int width = options.outWidth;
-        int inSampleSize = 1;
-
-        if (height > reqHeight || width > reqWidth) {
-
-            final int halfHeight = height / 2;
-            final int halfWidth = width / 2;
-
-            // Calculate the largest inSampleSize value that is a power of 2 and keeps both
-            // height and width larger than the requested height and width.
-            while ((halfHeight / inSampleSize) > reqHeight
-                    && (halfWidth / inSampleSize) > reqWidth) {
-                inSampleSize *= 2;
-            }
-        }
-
-        return inSampleSize;
     }
 
     public String getImageNameToUri(Uri data) {
