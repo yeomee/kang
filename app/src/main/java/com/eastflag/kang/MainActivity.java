@@ -136,6 +136,7 @@ public class MainActivity extends Activity {
                 try {
                     if (status.getCode() != 200) {
                         Log.d("LDK", "status:" + status.getCode());
+                        Util.showNetworkError(MainActivity.this);
                         return;
                     }
                     Log.d("LDK", object.toString(1));

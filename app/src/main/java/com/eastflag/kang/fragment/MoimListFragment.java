@@ -107,12 +107,13 @@ public class MoimListFragment extends Fragment {
         params.put("token", PreferenceUtil.getInstance(getActivity()).getToken()); //폰모델
         Log.d("LDK", params.toString());
 
-        mAq.ajax(url, params, JSONObject.class, new AjaxCallback<JSONObject>() {
+        AjaxCallback<JSONObject> cb = new AjaxCallback<JSONObject>() {
             @Override
             public void callback(String url, JSONObject object, AjaxStatus status) {
                 try {
                     if (status.getCode() != 200) {
                         Log.d("LDK", "status:" + status.getCode());
+                        Util.showNetworkError(getActivity());
                         return;
                     }
                     Log.d("LDK", object.toString(1));
@@ -140,6 +141,9 @@ public class MoimListFragment extends Fragment {
                     e.printStackTrace();
                 }
             }
-        });
+        };
+        cb.setTimeout(Constant.AJAX_TIMEOUT);
+
+        mAq.ajax(url, params, JSONObject.class, cb);
     }
 }

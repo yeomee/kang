@@ -1,5 +1,6 @@
 package com.eastflag.kang.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.os.Environment;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.eastflag.kang.Constant;
+import com.eastflag.kang.R;
 
 import java.io.File;
 import java.io.IOException;
@@ -73,6 +75,17 @@ public final class Util {
         m_toast.setDuration(Toast.LENGTH_SHORT);
 
         m_toast.show();
+    }
+
+    public static void showNetworkError(Activity activity) {
+        if (m_toast == null) {
+            m_toast = Toast.makeText(activity, activity.getString(R.string.network_error), Toast.LENGTH_SHORT);
+        }
+        m_toast.setText(activity.getString(R.string.network_error));
+        m_toast.setDuration(Toast.LENGTH_LONG);
+
+        m_toast.show();
+        activity.finish();
     }
 
     public static int calculateInSampleSize(int reqWidth, int reqHeight) {

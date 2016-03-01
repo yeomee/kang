@@ -122,6 +122,7 @@ public class MoimModifyFragment extends DialogFragment {
                 try {
                     if (status.getCode() != 200) {
                         Log.d("LDK", "status:" + status.getCode());
+                        Util.showNetworkError(getActivity());
                         return;
                     }
                     Log.d("LDK", object.toString(1));
@@ -214,6 +215,7 @@ public class MoimModifyFragment extends DialogFragment {
                 try {
                     if (status.getCode() != 200) {
                         Log.d("LDK", "status:" + status.getCode());
+                        Util.showNetworkError(getActivity());
                         return;
                     }
                     Log.d("LDK", object.toString(1));
@@ -251,6 +253,7 @@ public class MoimModifyFragment extends DialogFragment {
                 try {
                     if (status.getCode() != 200) {
                         Log.d("LDK", "status:" + status.getCode());
+                        Util.showNetworkError(getActivity());
                         return;
                     }
                     Log.d("LDK", object.toString(1));

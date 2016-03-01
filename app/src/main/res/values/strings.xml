@@ -25,4 +25,6 @@
     </string-array>
     <string name="title_activity_111">Activity111</string>
 
+    <string name="network_error">관리자에게 연락하세요</string>
+
 </resources>

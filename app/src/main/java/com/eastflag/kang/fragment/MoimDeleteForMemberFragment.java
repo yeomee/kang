@@ -124,6 +124,7 @@ public class MoimDeleteForMemberFragment extends Fragment {
                 try {
                     if (status.getCode() != 200) {
                         Log.d("LDK", "status:" + status.getCode());
+                        Util.showNetworkError(getActivity());
                         return;
                     }
                     Log.d("LDK", object.toString(1));
@@ -171,6 +172,7 @@ public class MoimDeleteForMemberFragment extends Fragment {
                 try {
                     if (status.getCode() != 200) {
                         Log.d("LDK", "status:" + status.getCode());
+                        Util.showNetworkError(getActivity());
                         return;
                     }
                     Log.d("LDK", object.toString(1));
