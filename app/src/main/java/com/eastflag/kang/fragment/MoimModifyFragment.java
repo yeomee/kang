@@ -182,7 +182,7 @@ public class MoimModifyFragment extends DialogFragment {
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int arg1) {
-                        modifyMoim();
+                        deleteMoim();
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -195,7 +195,7 @@ public class MoimModifyFragment extends DialogFragment {
     }
 
     private void modifyMoim() {
-        String url = Constant.HOST + Constant.API_201;
+        String url = Constant.HOST + Constant.API_MOIM_MODIFY;
 
         Log.d("LDK", "url:" + url);
         Map<String, Object> params = new HashMap<String, Object>();
@@ -235,7 +235,7 @@ public class MoimModifyFragment extends DialogFragment {
     }
 
     private void deleteMoim() {
-        String url = Constant.HOST + Constant.API_202;
+        String url = Constant.HOST + Constant.API_MOIM_DELETE;
 
         Log.d("LDK", "url:" + url);
         Map<String, Object> params = new HashMap<String, Object>();
