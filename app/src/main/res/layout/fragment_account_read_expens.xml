@@ -1,0 +1,302 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f2f2f2"
+    android:orientation="vertical">
+
+    <include layout="@layout/sub_menu_account" />
+
+    <TextView
+        android:id="@+id/sc_help1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#AA6DCFFF"
+        android:gravity="center_vertical|left"
+        android:padding="5dp"
+        android:text="☞ 읽어 오는중..."
+        android:textSize="14sp" />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/acc_jango"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/acc_rect_e"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#001aff"
+                    android:orientation="vertical"
+                    android:padding="1dp">
+
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#001aff"
+                        android:stretchColumns="*">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp" />
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:layout_marginBottom="1dp"
+                                android:layout_marginLeft="1dp"
+                                android:layout_marginRight="1dp"
+                                android:layout_span="2"
+                                android:background="#f2f2f2"
+                                android:gravity="center"
+                                android:padding="3dp"
+                                android:text="지출사항"
+                                android:textColor="#001aff" />
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="42dp"
+                                android:layout_marginLeft="1dp"
+                                android:background="#f2f2f2"
+                                android:gravity="center_vertical|center"
+                                android:padding="3dp"
+                                android:text="● 지출일" />
+
+                            <TextView
+                                android:id="@+id/e_ymd"
+                                android:layout_width="wrap_content"
+                                android:layout_height="42dp"
+                                android:layout_marginBottom="1dp"
+                                android:layout_marginLeft="1dp"
+                                android:layout_marginRight="1dp"
+                                android:background="#ffffff"
+                                android:gravity="center_vertical|left"
+                                android:hint="여기를 터치하세요."
+                                android:padding="3dp" />
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="42dp"
+                                android:layout_marginBottom="1dp"
+                                android:layout_marginLeft="1dp"
+                                android:background="#f2f2f2"
+                                android:gravity="center_vertical|center"
+                                android:padding="3dp"
+                                android:text="● 지출과목" />
+
+                            <Spinner
+                                android:id="@+id/expen_cd"
+                                android:layout_width="wrap_content"
+                                android:layout_height="42dp"
+                                android:layout_marginBottom="1dp"
+                                android:layout_marginLeft="1dp"
+                                android:layout_marginRight="1dp"
+                                android:background="#ffffff"
+                                android:spinnerMode="dropdown" />
+
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="42dp"
+                                android:layout_marginBottom="1dp"
+                                android:layout_marginLeft="1dp"
+                                android:background="#f2f2f2"
+                                android:gravity="center_vertical|center"
+                                android:padding="3dp"
+                                android:text="관련회원명" />
+
+                            <Spinner
+                                android:id="@+id/mb_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="42dp"
+                                android:layout_marginBottom="1dp"
+                                android:layout_marginLeft="1dp"
+                                android:layout_marginRight="1dp"
+                                android:background="#ffffff"
+                                android:spinnerMode="dropdown" />
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="42dp"
+                                android:layout_marginBottom="1dp"
+                                android:layout_marginLeft="1dp"
+                                android:background="#f2f2f2"
+                                android:gravity="center_vertical|center"
+                                android:padding="3dp"
+                                android:text="지출적요" />
+
+                            <EditText
+                                android:id="@+id/e_jukyo"
+                                android:layout_width="wrap_content"
+                                android:layout_height="42dp"
+                                android:layout_marginBottom="1dp"
+                                android:layout_marginLeft="1dp"
+                                android:layout_marginRight="1dp"
+                                android:background="#ffffff"
+                                android:padding="3dp"
+                                android:singleLine="true"
+                                android:textSize="14sp" />
+
+                        </TableRow>
+
+                        <TableRow android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_height="42dp"
+                                android:layout_marginBottom="1dp"
+                                android:layout_marginLeft="1dp"
+                                android:background="#f2f2f2"
+                                android:gravity="center"
+                                android:padding="3dp"
+                                android:text="● 지출수단" />
+
+                            <RadioGroup
+                                android:layout_height="42dp"
+                                android:layout_marginBottom="1dp"
+                                android:layout_marginLeft="1dp"
+                                android:layout_marginRight="1dp"
+                                android:layout_span="1"
+                                android:background="#ffffff"
+                                android:gravity="center_vertical|left"
+                                android:orientation="horizontal">
+
+                                <RadioButton
+                                    android:id="@+id/cash"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="3dp"
+                                    android:text="현금"
+                                    android:textSize="14sp" />
+
+                                <RadioButton
+                                    android:id="@+id/deposit"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="10dp"
+                                    android:text="예금(계좌)"
+                                    android:textSize="14sp" />
+                            </RadioGroup>
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="42dp"
+                                android:layout_marginBottom="1dp"
+                                android:layout_marginLeft="1dp"
+                                android:background="#f2f2f2"
+                                android:gravity="center_vertical|center"
+                                android:padding="3dp"
+                                android:text="● 금액" />
+
+                            <EditText
+                                android:id="@+id/e_amount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="42dp"
+                                android:layout_marginBottom="1dp"
+                                android:layout_marginLeft="1dp"
+                                android:layout_marginRight="1dp"
+                                android:background="#ffffff"
+                                android:inputType="number"
+                                android:padding="3dp"
+                                android:singleLine="true"
+                                android:textSize="14sp" />
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="42dp"
+                                android:layout_marginBottom="1dp"
+                                android:layout_marginLeft="1dp"
+                                android:background="#f2f2f2"
+                                android:gravity="center_vertical|center"
+                                android:padding="3dp"
+                                android:text="메모" />
+
+                            <EditText
+                                android:id="@+id/e_memo"
+                                android:layout_width="wrap_content"
+                                android:layout_height="42dp"
+                                android:layout_marginBottom="1dp"
+                                android:layout_marginLeft="1dp"
+                                android:layout_marginRight="1dp"
+                                android:background="#ffffff"
+                                android:padding="3dp"
+                                android:singleLine="true"
+                                android:textSize="14sp" />
+                        </TableRow>
+                    </TableLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layoutSubmit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/modi_submit"
+                    style="@style/Button_lightblue_orange"
+                    android:layout_gravity="center"
+                    android:text="지출전표 수정" />
+
+                <Button
+                    android:id="@+id/del_submit"
+                    style="@style/Button_lightblue_orange"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="20dp"
+                    android:text="지출전표 삭제" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
