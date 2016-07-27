@@ -6,31 +6,56 @@
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="#AAFFFF00">
+        android:background="#FFFF00">
         <ImageView
             android:id="@+id/logoImg"
-            android:layout_width="30dp" android:layout_height="30dp"
+            android:layout_width="25dp" android:layout_height="25dp"
             android:layout_alignParentLeft="true" android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"
             android:src="@drawable/logo" />
-        <TextView
+        <Button
             android:id="@+id/logoText"
-            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_width="wrap_content" android:layout_height="match_parent"
             android:layout_toRightOf="@id/logoImg" android:layout_centerVertical="true"
-            android:layout_marginLeft="5dp"
-            android:text="총무" android:textSize="20sp" android:textStyle="bold"/>
+            android:layout_marginLeft="3dp"
+            android:text="강총무" android:textSize="18sp" android:textStyle="bold"
+            android:textColor="#be542e"
+            android:background="#FFFF00"/>
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content" android:layout_height="wrap_content"
             android:layout_centerVertical="true" android:layout_toRightOf="@id/logoText"
-            android:layout_marginLeft="20dp"
-            android:text="환영합니다" android:textSize="20sp" android:textStyle="bold"/>
-<!--        <TextView
+            android:layout_marginLeft="10dp"
+            android:text="환영합니다" android:textSize="19sp" android:textStyle="bold"/>
+
+        <ImageButton
+            android:id="@+id/finishImg"
+            android:layout_alignParentRight="true" android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:onClick="onButtonClicked"
+            android:src="@drawable/finish_bt1"
+            android:layout_width="25dp"
+            android:layout_height="25dp" />
+        <!--<Button-->
+            <!--android:layout_width="40dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:text="X"-->
+            <!--android:id="@+id/button"-->
+            <!--android:layout_alignBottom="@+id/logoImg"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_marginTop="5dp"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:onClick="onButtonClicked"-->
+            <!--android:textSize="20sp"-->
+            <!--android:width="3dp"-->
+            <!--android:background="#FFFF00" />-->
+        <!--TextView
             android:id="@+id/btnName"
             android:layout_width="wrap_content" android:layout_height="wrap_content"
             android:layout_alignParentRight="true" android:layout_centerVertical="true"
             android:layout_marginRight="5dp"
-            android:text="010-3010-1482"/>-->
+            android:text="010-3010-1482"/-->
     </RelativeLayout>
 
     <LinearLayout
