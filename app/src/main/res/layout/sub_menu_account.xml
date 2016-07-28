@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="38dp"
+    android:layout_marginTop="1dp"
+    android:orientation="horizontal">
+
+    <Button
+        android:id="@+id/menu1"
+        android:layout_width="wrap_content"
+        style="@style/Main_Menu"
+        android:text="현황" />
+    <Button
+        android:id="@+id/menu2"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="1dp"
+        style="@style/Main_Menu"
+        android:text="전표열람" />
+    <!--<Button-->
+        <!--android:id="@+id/menu3"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_marginLeft="1dp"-->
+        <!--style="@style/Main_Menu"-->
+        <!--android:text="지출" />-->
+    <Button
+        android:id="@+id/menu4"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="1dp"
+        style="@style/Main_Menu"
+        android:text="전표등록" />
+    <Button
+        android:id="@+id/menu5"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="1dp"
+        style="@style/Main_Menu"
+        android:text="보고서" />
+
+</LinearLayout>
