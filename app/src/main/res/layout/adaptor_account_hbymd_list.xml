@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content">
+    <!--<
+        ㅡmodify by lmg 201.7.28  화면높이 수정
+    >-->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/tv_ymd"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:gravity="center_vertical"
+            android:text="30" android:textSize="16dp"/>
+
+        <TextView
+            android:id="@+id/tv_jukyo"
+            android:layout_width="110dp" android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:gravity="center_vertical|left"
+            android:text="회원회비 홍길동" android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/tv_iamount"
+            android:layout_width="80dp" android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:gravity="center_vertical|right"
+            android:text="9,000,000" android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/tv_ramount"
+            android:layout_width="80dp" android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:gravity="center_vertical|right"
+            android:text="9,000,000" android:textSize="16dp" />
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
