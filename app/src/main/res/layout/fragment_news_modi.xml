@@ -1,0 +1,165 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/sub_menu_commun" />
+
+    <TextView
+        android:id="@+id/sc_help1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#AA6DCFFF"
+        android:gravity="center_vertical|left"
+        android:padding="5dp"
+        android:text="☞ 읽어 오는중..."
+        android:textSize="14sp" />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <LinearLayout
+                android:id="@+id/layout_pre_nextSubmit"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/pre_submit"
+                    style="@style/Button_pre_next"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="20dp"
+                    android:text="◁이전" />
+
+                <Button
+                    android:id="@+id/list_submit"
+                    style="@style/Button_pre_next"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginTop="20dp"
+                    android:text="목록"/>
+
+                <Button
+                    android:id="@+id/next_submit"
+                    style="@style/Button_pre_next"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginTop="20dp"
+                    android:text="다음▷"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tv_wrt_day"
+                        android:gravity="bottom|left"
+                        android:paddingRight="10sp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp" android:layout_marginLeft="5dp"
+                        android:text="[2016.07.30]"
+                        android:textColor="#595959"/>
+
+                    <EditText
+                        android:id="@+id/et_contitle"
+                        style="@style/InputBox"
+                        android:gravity="center_vertical"
+                        android:layout_margin="5dp"
+                        android:hint="공지 제목" />
+
+                    <EditText
+                        android:id="@+id/et_cont"
+                        style="@style/InputBox"
+                        android:gravity="top"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:hint="공지 내용"
+                        android:inputType="textMultiLine" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tv_modi_day"
+                        android:gravity="bottom|left"
+                        android:paddingRight="10sp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp" android:layout_marginLeft="5dp"
+                        android:text="[2016.07.30]"
+                        android:textColor="#595959"/>
+
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layoutSubmit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+                <!--<Button-->
+                    <!--android:id="@+id/pre_submit"-->
+                    <!--style="@style/Button_heavygrey"-->
+                    <!--android:layout_gravity="center_horizontal"-->
+                    <!--android:layout_marginBottom="20dp"-->
+                    <!--android:layout_marginTop="20dp"-->
+                    <!--android:text="이전" />-->
+
+                <Button
+                    android:id="@+id/modi_submit"
+                    style="@style/Button_gold_orange"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="20dp"
+                    android:text="수정" />
+
+                <Button
+                    android:id="@+id/delete_submit"
+                    style="@style/Button_gold_orange"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="20dp"
+                    android:text="삭제" />
+                <!--<Button-->
+                    <!--android:id="@+id/next_submit"-->
+                    <!--style="@style/Button_heavygrey"-->
+                    <!--android:layout_gravity="center_horizontal"-->
+                    <!--android:layout_marginBottom="20dp"-->
+                    <!--android:layout_marginLeft="15dp"-->
+                    <!--android:layout_marginTop="20dp"-->
+                    <!--android:text="다음"/>-->
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
