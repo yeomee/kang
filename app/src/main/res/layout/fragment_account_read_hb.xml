@@ -218,7 +218,7 @@
                                 android:background="#f2f2f2"
                                 android:gravity="center_vertical|center"
                                 android:padding="3dp"
-                                android:text="미수회비" />
+                                android:text="미수납회비" />
 
                             <TextView
                                 android:id="@+id/misoonap"

@@ -23,15 +23,15 @@
         <Button
             android:id="@+id/submenu4"
             style="@style/Main_Menu"
-            android:text="투표" />
+            android:text="의결" />
         <Button
             android:id="@+id/submenu5"
             style="@style/Main_Menu"
-            android:text="문자" />
+            android:text="소통" />
         <Button
             android:id="@+id/submenu6"
             style="@style/Main_Menu"
-            android:text="쪽지" />
+            android:text="투표" />
         <Button
             android:id="@+id/submenu7"
             style="@style/Main_Menu"

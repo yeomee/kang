@@ -7,4 +7,10 @@
     <color name="yellow">#FFFFFF00</color>
     <color name="green">#32A844</color>
     <color name="red">#F04B50</color>
+    <color name="lightred">#fd9393</color>
+    <color name="black">#000000</color>
+    <color name="lightblack">#7b7b7b</color>
+    <color name="lightblue">#7cbeff</color>
+    <color name="heavygrey">#c4c4c4</color>
+    <color name="lightgrey">#e6e5e5</color>
 </resources>

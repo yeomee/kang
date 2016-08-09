@@ -5,6 +5,6 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.eastflag.kang.activity.Activity111">
+    tools:context="com.yeomee.kang.activity.Activity111">
 
 </RelativeLayout>
