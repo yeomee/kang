@@ -5,14 +5,7 @@
 
     <ImageView
         android:layout_width="220dp" android:layout_height="220dp"
-        android:alpha="50"
         android:id="@+id/imageView"
         android:layout_centerVertical="true" android:layout_centerHorizontal="true"
-        android:src="@drawable/logo2"/>
-    <ProgressBar
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:id="@+id/progressBar"
-        android:contextClickable="false" />
+        android:src="@drawable/logo"/>
 </RelativeLayout>

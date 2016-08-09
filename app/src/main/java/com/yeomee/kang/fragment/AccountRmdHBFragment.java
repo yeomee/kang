@@ -54,7 +54,7 @@ import butterknife.OnClick;
 
 /**
  * 회계 한 장의 회비발생된 전표 열람화면.
- * 화면의 모양은 수납전표를 처리하기 위한 등록화면.
+ * 화면의 모양은 수납전표를 처리하기 위한 입력화면.
  * 버튼은 회비수납처리와 회비발생전표 삭제.
  * 관리자가 아니면 수정|삭제 버튼 안보임.2016.7.28.
  */
@@ -74,7 +74,7 @@ public class AccountRmdHBFragment extends Fragment {
     Button mMenu2;//수입
     //    @Bind(R.id.menu3) Button mMenu3;//비용
     @Bind(R.id.menu4)
-    Button mMenu4;//전표등록
+    Button mMenu4;//전표입력
     @Bind(R.id.menu5)
     Button mMenu5;//보고서
 
@@ -108,7 +108,7 @@ public class AccountRmdHBFragment extends Fragment {
     @Bind(R.id.r_memo)
     EditText r_memo;
     @Bind(R.id.layout_submit)
-    View layout_submit;
+    EditText layout_submit;
 
 
 //    private String mbPosition;
@@ -188,7 +188,7 @@ public class AccountRmdHBFragment extends Fragment {
         //getIncomeList();
 
 
-        mMenu4.setSelected(true);//전표등록
+        mMenu4.setSelected(true);//전표입력
 
 
         mMenu1.setOnClickListener(mMenuClick);

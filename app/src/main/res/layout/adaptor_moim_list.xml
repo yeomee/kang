@@ -5,13 +5,14 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="wrap_content" android:layout_height="50dp">
+
         <TextView
             android:id="@+id/number"
             android:layout_width="40dp" android:layout_height="match_parent"
             android:gravity="center"
             android:text="22" android:textSize="16dp" />
         <TextView
-            android:id="@+id/moimtitle"
+            android:id="@+id/title"
             android:layout_width="wrap_content" android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:text="국제초등학교동창회" android:textSize="16dp" android:textColor="#FF0000FF"/>
@@ -21,23 +22,18 @@
             android:layout_marginLeft="10dp"
             android:gravity="center_vertical"
             android:text="총무 홍길동" android:textSize="16dp" />
-
         <TextView
             android:id="@+id/modify"
-            android:layout_width="wrap_content" android:layout_height="35dp"
-            android:layout_marginLeft="5dp"
-            android:gravity="center_vertical" android:padding="2dp"
-            android:background="@drawable/bg_green_empty"
-            android:text=" 수정삭제 " android:textSize="14dp"
-            android:textColor="@color/green"
-            android:textStyle="bold" />
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:gravity="center_vertical" android:padding="5dp" android:background="@drawable/bg_green_empty"
+            android:text="수정삭제" android:textSize="14dp" android:textColor="@color/green" android:textStyle="bold" />
         <TextView
             android:id="@+id/status"
-            android:layout_width="wrap_content" android:layout_height="35dp"
-            android:layout_marginLeft="5dp"
-            android:gravity="center_vertical" android:padding="2dp"
-            android:background="@drawable/bg_red_empty"
-            android:text=" 미납 " android:textSize="14dp" android:textColor="@color/red" android:textStyle="bold" />
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:gravity="center_vertical" android:padding="2dp" android:background="@drawable/bg_red_empty"
+            android:text="요금미납" android:textSize="14dp" android:textColor="@color/red" android:textStyle="bold" />
     </LinearLayout>
 
 </LinearLayout>

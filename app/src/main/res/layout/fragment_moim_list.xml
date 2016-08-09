@@ -5,17 +5,14 @@
 
     <TextView
         android:id="@+id/title"
-        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_width="match_parent" android:layout_height="30dp"
         android:paddingLeft="10sp"
         android:gravity="center_vertical|left" android:background="#AA6DCFFF"
-        android:textSize="16dp" android:text="읽는중..."/>
+        android:textSize="14sp" android:text="강총무는 모임을 튼튼하고 믿음직스럽게 만들어 줍니다"/>
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/listView" />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#aad6d6d6"/>
+
 </LinearLayout>

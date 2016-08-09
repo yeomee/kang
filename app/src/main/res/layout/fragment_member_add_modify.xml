@@ -4,14 +4,14 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/sub_menu_member" />
+    <include layout="@layout/sub_menu" />
 
     <TextView
         android:id="@+id/title"
         android:layout_width="match_parent" android:layout_height="wrap_content"
         android:padding="5dp"
         android:gravity="center_vertical|left" android:background="#AA6DCFFF"
-        android:textSize="14sp" android:text="☞ 읽는중..."/>
+        android:textSize="14sp" android:text="☞ 전화번호는 필수 입력항목, 사진은 수정화면에서 입력하세요."/>
 
     <LinearLayout
         android:id="@+id/mb_reg"
@@ -21,8 +21,8 @@
 
 
         <LinearLayout
-            android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_width="match_parent" android:layout_height="wrap_content">
+            android:orientation="horizontal"
 
             <LinearLayout
                 android:layout_width="0dp" android:layout_height="wrap_content"
@@ -101,12 +101,6 @@
                 android:layout_gravity="center_horizontal"
                 android:text="회원 삭제"
                 android:visibility="gone"/>
-            <Button
-                android:id="@+id/call_contact"
-                style="@style/Button_green_orange"
-                android:layout_marginLeft="20dp"
-                android:layout_gravity="center_horizontal"
-                android:text="주소록"/>
         </LinearLayout>
 
     </LinearLayout>

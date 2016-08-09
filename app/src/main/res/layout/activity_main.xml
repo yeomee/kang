@@ -85,17 +85,17 @@
             android:id="@+id/submenu4"
             style="@style/Main_Menu"
             android:layout_marginLeft="1dp"
-            android:text="의결" />
+            android:text="투표" />
         <Button
             android:id="@+id/submenu5"
             style="@style/Main_Menu"
             android:layout_marginLeft="1dp"
-            android:text="소통" />
-        <!--<Button-->
-            <!--android:id="@+id/submenu6"-->
-            <!--style="@style/Main_Menu"-->
-            <!--android:layout_marginLeft="1dp"-->
-            <!--android:text="투표" />-->
+            android:text="문자" />
+        <Button
+            android:id="@+id/submenu6"
+            style="@style/Main_Menu"
+            android:layout_marginLeft="1dp"
+            android:text="쪽지" />
         <Button
             android:id="@+id/submenu7"
             style="@style/Main_Menu"
@@ -105,9 +105,7 @@
 
     <FrameLayout
         android:id="@+id/container"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1">
     </FrameLayout>
 
     <LinearLayout
@@ -138,7 +136,7 @@
             android:id="@+id/menu5"
             android:layout_marginLeft="1dp"
             style="@style/Main_Menu"
-            android:text="환경설정" />
+            android:text="불편신고" />
     </LinearLayout>
 
 </LinearLayout>

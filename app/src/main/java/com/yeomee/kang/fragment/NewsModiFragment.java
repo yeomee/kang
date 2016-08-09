@@ -60,8 +60,6 @@ public class NewsModiFragment extends Fragment {
     Button mMenu2;
     @Bind(R.id.menu3)
     Button mMenu3;
-    @Bind(R.id.menu4)
-    Button mMenu4;
 
     @Bind(R.id.sc_help1)
     TextView help1;
@@ -132,7 +130,6 @@ public class NewsModiFragment extends Fragment {
         mMenu1.setOnClickListener(mMenuClick);
         mMenu2.setOnClickListener(mMenuClick);
         mMenu3.setOnClickListener(mMenuClick);
-        mMenu4.setOnClickListener(mMenuClick);
 
         return mView;
     }
@@ -388,7 +385,7 @@ public class NewsModiFragment extends Fragment {
                     Log.d("LDK", object.toString(1));
                     //데이터 존재하지 않음
                     if (object.getInt("result") == 0) {
-                        Util.showToast(getActivity(), "공지글이 삭제 되었습니다");
+                        Util.showToast(getActivity(), "의결내용이 삭제 되었습니다");
                         getActivity().onBackPressed();
                     } else {
                         if (object.getInt("result") == 1 && object.getInt("Err_msg") == 126) {
@@ -410,7 +407,6 @@ public class NewsModiFragment extends Fragment {
             mMenu1.setSelected(false);
             mMenu2.setSelected(false);
             mMenu3.setSelected(false);
-            mMenu4.setSelected(false);
 
             Fragment mFragment;
 
@@ -425,29 +421,21 @@ public class NewsModiFragment extends Fragment {
                 case R.id.menu2:
                     if ("n".equals(mMoimVo.getAdm_yn())) {
                         Util.showToast(getActivity(), "모임의 관리자만 등록이 가능합니다.");
-                        mMenu1.setSelected(true);
+                        mMenu2.setSelected(true);
                         return;
                     }
                     mMenu2.setSelected(true);
-//                    Util.showToast(getActivity(), "공지사항을 등록하는 화면입니다.");
+                    Util.showToast(getActivity(), "공지사항을 등록하는 화면입니다.");
                     mFragment = new NewsAddFragment(mMoimVo);
                     getFragmentManager().beginTransaction().replace(R.id.container, mFragment)
                             .addToBackStack(null)
                             .commitAllowingStateLoss();
                     break;
                 case R.id.menu3:
-                    mFragment = new FrboardListFragment(mMoimVo);
-                    getFragmentManager().beginTransaction().replace(R.id.container, mFragment)
-                            .addToBackStack(null)
-                            .commitAllowingStateLoss();
-                    break;
-                case R.id.menu4:
-                    mMenu4.setSelected(true);
-                    Util.showToast(getActivity(), "자유롭게 글을 쓰는 화면입니다.");
-                    mFragment = new FrboardAddFragment(mMoimVo);
-                    getFragmentManager().beginTransaction().replace(R.id.container, mFragment)
-                            .addToBackStack(null)
-                            .commitAllowingStateLoss();
+//                    mFragment = new NewsAddFragment(mMoimVO);
+//                    getFragmentManager().beginTransaction().replace(R.id.container, mFragment)
+//                            .addToBackStack(null)
+//                            .commitAllowingStateLoss();
                     break;
                 default:
                     break;

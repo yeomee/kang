@@ -3,7 +3,7 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/sub_menu_member" />
+    <include layout="@layout/sub_menu" />
 
     <TextView
         android:id="@+id/title"
@@ -16,8 +16,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/listView" />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#aad6d6d6"/>
+
 </LinearLayout>

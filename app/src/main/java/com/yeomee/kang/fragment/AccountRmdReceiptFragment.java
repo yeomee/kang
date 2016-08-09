@@ -76,7 +76,7 @@ public class AccountRmdReceiptFragment extends Fragment {
     @Bind(R.id.menu1) Button mMenu1;//잔고
     @Bind(R.id.menu2) Button mMenu2;//수입
 //    @Bind(R.id.menu3) Button mMenu3;//비용
-    @Bind(R.id.menu4) Button mMenu4;//전표등록
+    @Bind(R.id.menu4) Button mMenu4;//전표입력
     @Bind(R.id.menu5) Button mMenu5;//보고서
 
     @Bind(R.id.sc_help1) TextView sc_help1;//상단 도움말
@@ -210,7 +210,6 @@ public class AccountRmdReceiptFragment extends Fragment {
         params.put("paid", Util.getAndroidId(getActivity())); //안드로이드 아이디
         params.put("token", PreferenceUtil.getInstance(getActivity()).getToken()); //폰모델
         params.put("m_id", mMoimVo.getM_id());
-        params.put("adm_yn", mMoimVo.getAdm_yn());
 //        params.put("r_ymd", mAccountYmdVO.getYmd());
         if (!TextUtils.isEmpty(mR_ymd)) {
             params.put("r_ymd", mR_ymd);
@@ -596,11 +595,6 @@ public class AccountRmdReceiptFragment extends Fragment {
                             .commitAllowingStateLoss();
                     break;
                 case R.id.menu4:
-                    if("n".equals(mMoimVo.getAdm_yn())) {
-                        Util.showToast(getActivity(), "모임의 관리자만 등록이 가능합니다.");
-                        mMenu2.setSelected(true);
-                        return;
-                    }
                     mMenu4.setSelected(true);
                     mFragment = new AccountInputSelFragment(mMoimVo);
                     getFragmentManager().beginTransaction().replace(R.id.container, mFragment)

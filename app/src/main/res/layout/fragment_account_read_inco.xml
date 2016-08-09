@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <include layout="@layout/sub_menu_account" />
-    <!--< 2016.7.28.modify by lmg >-->
+<!--< 2016.7.28.modify by lmg >-->
     <TextView
         android:id="@+id/sc_help1"
         android:layout_width="match_parent"
